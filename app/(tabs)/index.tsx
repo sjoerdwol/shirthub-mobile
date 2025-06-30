@@ -1,15 +1,24 @@
+import StatBox from "@/components/home/statBox";
 import { Text, View } from "react-native";
 
 export default function Index() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text className=''>Edit app/index.tsx to edit this screen.</Text>
+    <View className="flex-1 bg-dark-background-400">
+      <View className="h-12 bg-dark-accent">
+        {/* TODO: HEADER IMAGE */}
+      </View>
+      <View className="p-5">
+        <View>
+          <View className="flex-row justify-between">
+            <StatBox title="Total Value" value={1500} />
+            <StatBox title="Total Shirts" value={10} />
+          </View>
+          <StatBox title="Average Value per Shirt" value={150} size="large" />
+        </View>
+        <View>
+          <Text className="text-dark-text">Recently Added</Text>
+        </View>
+      </View>
     </View>
   );
 }
