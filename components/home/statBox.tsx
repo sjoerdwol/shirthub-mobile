@@ -1,11 +1,5 @@
 import { Text, View } from 'react-native';
 
-interface StatBoxProps {
-  title: string;
-  value: string | number;
-  size?: 'small' | 'large';
-}
-
 export default function StatBox({ title, value, size = 'small' }: StatBoxProps) {
   const boxWidth = size === 'large' ? 'w-full' : 'w-[48%]';
 
