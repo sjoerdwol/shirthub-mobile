@@ -13,7 +13,7 @@ export default function RootLayout() {
       router.replace("/(tabs)");
     }
     if (!authenticated && segments[0] !== "(authentication)") {
-      router.replace("/(authentication)/login");
+      router.replace("/(authentication)");
     }
   }, [authenticated, segments]);
 
