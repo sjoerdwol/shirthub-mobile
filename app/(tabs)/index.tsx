@@ -16,7 +16,7 @@ export default function Index() {
           <StatBox title="Average Value per Shirt" value={150} size="large" />
         </View>
         <View>
-          <Text className="text-dark-text">Recently Added</Text>
+          <Text className="text-dark-text-400">Recently Added</Text>
         </View>
       </View>
     </View>

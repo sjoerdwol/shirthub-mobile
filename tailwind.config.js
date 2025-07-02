@@ -15,12 +15,16 @@ module.exports = {
         dark: {
           accent: '#3673c4',
           background: {
+            200: '#3b4047',
             300: '#23272e',
             400: '#14191f',
           },
           primary: '#94b5e1',
           secondary: '#1e406b',
-          text: '#e0e5eb',
+          text: {
+            400: '#e0e5eb',
+            500: '#aeb3b8'
+          }
         }
       }
     },
