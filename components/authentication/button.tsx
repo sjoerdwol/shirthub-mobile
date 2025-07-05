@@ -1,9 +1,18 @@
-import { Text, TouchableOpacity, TouchableOpacityProps } from "react-native";
+import { AuthButtonProps } from "@/types/authButtonProps";
+import { ActivityIndicator, Text, TouchableOpacity, TouchableOpacityProps } from "react-native";
 
-export default function AuthButton({ children, onPress }: TouchableOpacityProps) {
+export default function AuthButton({ children, loading, onPress }: AuthButtonProps) {
   return (
-    <TouchableOpacity className="w-full bg-dark-accent rounded-lg py-3 mb-4" onPress={onPress}>
-      <Text className="text-center text-dark-text-400 text-lg font-bold">{children}</Text>
+    <TouchableOpacity
+      className="w-full bg-dark-accent rounded-lg py-3 mb-4"
+      disabled={loading}
+      onPress={onPress}
+    >
+      {loading ? (
+        <ActivityIndicator color="#e0e5eb" size="small" />
+      ) : (
+        <Text className="text-center text-dark-text-400 text-lg font-bold">{children}</Text>
+      )}
     </TouchableOpacity>
   );
 }

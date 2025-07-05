@@ -1,6 +1,10 @@
+import AuthButton from "@/components/authentication/button";
+import { useAuth } from "@/contexts/authContext";
 import { Text, View } from "react-native";
 
 export default function Index() {
+  const { loading, signOut } = useAuth();
+
   return (
     <View
       style={{
@@ -10,6 +14,7 @@ export default function Index() {
       }}
     >
       <Text className=''>Profile Screen</Text>
+      <AuthButton loading={loading} onPress={() => signOut()}>Logout</AuthButton>
     </View>
   );
 }

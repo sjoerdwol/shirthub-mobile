@@ -1,11 +1,13 @@
 import AuthButton from '@/components/authentication/button';
 import AuthInput from '@/components/authentication/input';
+import { useAuth } from '@/contexts/authContext';
 import { useState } from 'react';
 import { Text, View } from 'react-native';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { loading, signIn } = useAuth();
 
   return (
     <View className='justify-center items-center'>
@@ -24,7 +26,7 @@ export default function LoginScreen() {
           value={password}
         />
       </View>
-      <AuthButton onPress={() => { }}>Login</AuthButton>
+      <AuthButton loading={loading} onPress={() => signIn(email, password)}>Login</AuthButton>
     </View>
   );
 } 
