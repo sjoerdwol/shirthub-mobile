@@ -55,6 +55,7 @@ export default function Index() {
                 team={item.team}
                 season={item.season}
                 type={item.type}
+                size="small"
               />
             )}
             showsHorizontalScrollIndicator={false}

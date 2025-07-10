@@ -2,7 +2,7 @@ import AuthButton from "@/components/authentication/button";
 import { useAuth } from "@/contexts/authContext";
 import { Text, View } from "react-native";
 
-export default function Index() {
+export default function Profile() {
   const { loading, signOut } = useAuth();
 
   return (

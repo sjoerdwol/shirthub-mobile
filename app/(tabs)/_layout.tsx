@@ -31,7 +31,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="collection"
         options={{
-          title: "Collection",
+          title: "My Collection",
           tabBarIcon: ({ color, size }) => <TabBarIcon name='shirt' color={color} size={size} />
         }}
       />
@@ -45,7 +45,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="profile"
         options={{
-          title: "Profile",
+          title: "My Profile",
           tabBarIcon: ({ color, size }) => <TabBarIcon name='person' color={color} size={size} />
         }}
       />

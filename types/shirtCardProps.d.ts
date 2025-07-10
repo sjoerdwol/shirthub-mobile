@@ -5,4 +5,5 @@ interface ShirtCardProps {
   team: string;
   season: string;
   type: string;
+  size: 'small' | 'large';
 }
