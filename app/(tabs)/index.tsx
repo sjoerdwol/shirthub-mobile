@@ -1,5 +1,33 @@
 import StatBox from "@/components/home/statBox";
-import { Text, View } from "react-native";
+import ShirtCard from "@/components/ui/shirtCard";
+import { FlatList, Text, View } from "react-native";
+
+const testdata = [
+  {
+    imageSrc: '../../assets/images/exampleshirt.png',
+    team: 'Arsenal',
+    season: '2022/2023',
+    type: 'Home'
+  },
+  {
+    imageSrc: '../../assets/images/exampleshirt.png',
+    team: 'Arsenal',
+    season: '2022/2023',
+    type: 'Home'
+  },
+  {
+    imageSrc: '../../assets/images/exampleshirt.png',
+    team: 'Arsenal',
+    season: '2022/2023',
+    type: 'Home'
+  },
+  {
+    imageSrc: '../../assets/images/exampleshirt.png',
+    team: 'Arsenal',
+    season: '2022/2023',
+    type: 'Home'
+  }
+]
 
 export default function Index() {
   return (
@@ -7,7 +35,7 @@ export default function Index() {
       <View className="h-12 bg-dark-accent">
         {/* TODO: HEADER IMAGE */}
       </View>
-      <View className="p-5">
+      <View className="p-4">
         <View>
           <View className="flex-row justify-between">
             <StatBox title="Total Value" value={1500} />
@@ -16,7 +44,22 @@ export default function Index() {
           <StatBox title="Average Value per Shirt" value={150} size="large" />
         </View>
         <View>
-          <Text className="text-dark-text-400">Recently Added</Text>
+          <Text className="font-bold text-xl my-5 text-dark-text-400">Recently Added</Text>
+          <FlatList
+            data={testdata}
+            horizontal
+            keyExtractor={(_, index) => index.toString()}
+            renderItem={({ item }) => (
+              <ShirtCard
+                imageSrc={require('../../assets/images/exampleshirt.png')}
+                team={item.team}
+                season={item.season}
+                type={item.type}
+              />
+            )}
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ paddingRight: 4, gap: 12 }}
+          />
         </View>
       </View>
     </View>
