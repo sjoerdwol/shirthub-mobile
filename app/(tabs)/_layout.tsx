@@ -10,8 +10,7 @@ export default function TabsLayout() {
       headerTitleStyle: {
         color: '#e0e5eb',
       },
-      tabBarActiveTintColor: '#006dff',
-      tabBarInactiveTintColor: '#94b5e1',
+      tabBarActiveTintColor: '#3673c4',
       tabBarItemStyle: {
         marginTop: 5
       },

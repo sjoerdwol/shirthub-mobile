@@ -12,7 +12,7 @@ export default function AuthenticationLayout() {
         color: '#e0e5eb',
       },
     }}>
-      <Stack.Screen name="index" options={{ title: "Authentication" }} />
+      <Stack.Screen name="index" />
     </Stack>
   );
 } 

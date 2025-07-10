@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
-import { OpaqueColorValue } from "react-native";
+import React from "react";
 
-export default function TabBarIcon({ name, color, size }: { name: any, color: string | OpaqueColorValue, size: number }) {
+export default function TabBarIcon({ name, color, size }: React.ComponentProps<typeof Ionicons>) {
   return (
     <Ionicons
       name={name}
