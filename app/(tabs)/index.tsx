@@ -1,35 +1,11 @@
 import StatBox from "@/components/home/statBox";
 import ShirtCard from "@/components/ui/shirtCard";
+import { useShirtStore } from "@/stores/shirtStore";
 import { FlatList, Text, View } from "react-native";
 
-const testdata = [
-  {
-    imageSrc: '../../assets/images/exampleshirt.png',
-    team: 'Arsenal',
-    season: '2022/2023',
-    type: 'Home'
-  },
-  {
-    imageSrc: '../../assets/images/exampleshirt.png',
-    team: 'Arsenal',
-    season: '2022/2023',
-    type: 'Home'
-  },
-  {
-    imageSrc: '../../assets/images/exampleshirt.png',
-    team: 'Arsenal',
-    season: '2022/2023',
-    type: 'Home'
-  },
-  {
-    imageSrc: '../../assets/images/exampleshirt.png',
-    team: 'Arsenal',
-    season: '2022/2023',
-    type: 'Home'
-  }
-]
-
 export default function Index() {
+  const shirts = useShirtStore((state) => state.shirts);
+
   return (
     <View className="flex-1 bg-dark-background-400">
       <View className="h-12 bg-dark-accent">
@@ -46,7 +22,7 @@ export default function Index() {
         <View>
           <Text className="font-bold text-xl my-5 text-dark-text-400">Recently Added</Text>
           <FlatList
-            data={testdata}
+            data={shirts}
             horizontal
             keyExtractor={(_, index) => index.toString()}
             renderItem={({ item }) => (
