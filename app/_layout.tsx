@@ -23,6 +23,8 @@ const Root = () => {
       {session ? (
         <Stack screenOptions={{ headerShown: false }}>
           <Stack.Screen name="(tabs)" />
+          <Stack.Screen name="shirts/[id]" />
+          <Stack.Screen name="shirts/edit" />
         </Stack>
       ) : (
         <Stack screenOptions={{ headerShown: false }}>
