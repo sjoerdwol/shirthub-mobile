@@ -1,9 +1,9 @@
 import DetailsItem from '@/components/details/detailsItem';
+import DetailsRow from '@/components/details/detailsRow';
 import ShirtImage from '@/components/ui/shirtImage';
 import { useShirtStore } from '@/stores/shirtStore';
 import { useLocalSearchParams } from 'expo-router';
 import { Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function ShirtDetails() {
   const { id } = useLocalSearchParams();
@@ -11,7 +11,7 @@ export default function ShirtDetails() {
   const shirt = shirts.find((currShirt) => currShirt.id === id);
 
   return (
-    <SafeAreaView className="bg-dark-background-400 flex-1 p-4">
+    <View className="bg-dark-background-400 flex-1 p-4">
       {shirt
         ? (
           <>
@@ -24,7 +24,7 @@ export default function ShirtDetails() {
             <View className='p-4'>
               <Text className='font-bold mb-4 text-dark-text-400 text-2xl'>{`${shirt.team} - ${shirt.season} - ${shirt.type}`}</Text>
               <View className='px-1'>
-                <View className='flex-row gap-x-4'>
+                <DetailsRow>
                   <DetailsItem
                     title='Team'
                     content={shirt.team}
@@ -33,8 +33,8 @@ export default function ShirtDetails() {
                     title='Season'
                     content={shirt.season}
                   />
-                </View>
-                <View className='flex-row gap-x-4'>
+                </DetailsRow>
+                <DetailsRow>
                   <DetailsItem
                     title='Condition'
                     content={shirt.condition}
@@ -43,8 +43,8 @@ export default function ShirtDetails() {
                     title='Type'
                     content={shirt.type}
                   />
-                </View>
-                <View className='flex-row gap-x-4'>
+                </DetailsRow>
+                <DetailsRow>
                   <DetailsItem
                     title='Print Name'
                     content={shirt.print_name}
@@ -53,8 +53,8 @@ export default function ShirtDetails() {
                     title='Print Number'
                     content={shirt.print_number}
                   />
-                </View>
-                <View className='flex-row gap-x-4'>
+                </DetailsRow>
+                <DetailsRow>
                   <DetailsItem
                     title='Size'
                     content={shirt.size}
@@ -63,7 +63,7 @@ export default function ShirtDetails() {
                     title='Value'
                     content={shirt.value}
                   />
-                </View>
+                </DetailsRow>
               </View>
             </View>
           </>
@@ -73,6 +73,6 @@ export default function ShirtDetails() {
           </View>
         )
       }
-    </SafeAreaView>
+    </View>
   );
 }

@@ -1,5 +1,6 @@
+import HeaderIcon from "@/components/ui/headerIcon";
 import TabBarIcon from "@/components/ui/tabBarIcon";
-import { Tabs } from "expo-router";
+import { Tabs, router } from "expo-router";
 
 export default function TabsLayout() {
   return (
@@ -32,7 +33,8 @@ export default function TabsLayout() {
         name="collection"
         options={{
           title: "My Collection",
-          tabBarIcon: ({ color, size }) => <TabBarIcon name='shirt' color={color} size={size} />
+          tabBarIcon: ({ color, size }) => <TabBarIcon name='shirt' color={color} size={size} />,
+          headerRight: () => <HeaderIcon name='add' size={28} color='#e0e5eb' onPress={() => router.navigate('/shirts/manage')} />
         }}
       />
       <Tabs.Screen

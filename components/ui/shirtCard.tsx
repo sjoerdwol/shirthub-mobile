@@ -1,11 +1,9 @@
 import { ShirtCardProps } from '@/types/shirtCardProps';
-import { useRouter } from 'expo-router';
+import { router } from 'expo-router';
 import { Pressable, Text, View } from 'react-native';
 import ShirtImage from './shirtImage';
 
 export default function ShirtCard({ imageSize, shirt }: ShirtCardProps) {
-  const router = useRouter();
-
   return (
     <View className='justify-center items-start'>
       <Pressable onPress={() => router.navigate(`/shirts/${shirt.id}`)}>
