@@ -1,9 +1,6 @@
 import { ImageSourcePropType } from "react-native";
 
 interface ShirtCardProps {
-  imageSrc: ImageSourcePropType;
-  team: string;
-  season: string;
-  type: string;
-  size: 'small' | 'large';
+  imageSize: 'small' | 'large';
+  shirt: Shirt;
 }

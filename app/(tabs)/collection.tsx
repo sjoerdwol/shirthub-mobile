@@ -1,7 +1,7 @@
 import ShirtCard from "@/components/ui/shirtCard";
 import { useShirtStore } from "@/stores/shirtStore";
 import { useRouter } from "expo-router";
-import { Button, FlatList, View } from "react-native";
+import { FlatList, View } from "react-native";
 
 export default function Collection() {
   const router = useRouter();
@@ -14,11 +14,8 @@ export default function Collection() {
         keyExtractor={(_, index) => index.toString()}
         renderItem={({ item }) => (
           <ShirtCard
-            imageSrc={require('../../assets/images/exampleshirt.png')}
-            team={item.team}
-            season={item.season}
-            type={item.type}
-            size="large"
+            imageSize='large'
+            shirt={item}
           />
         )}
         showsVerticalScrollIndicator={false}
@@ -26,9 +23,6 @@ export default function Collection() {
         contentContainerStyle={{ gap: 20 }}
         columnWrapperStyle={{ gap: 10 }}
       />
-
-      <Button title="Detail" onPress={() => router.navigate('/shirts/1')} />
-      <Button title="Edit" onPress={() => router.navigate('/shirts/edit')} />
     </View>
   );
 }

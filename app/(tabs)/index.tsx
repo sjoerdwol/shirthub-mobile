@@ -27,11 +27,8 @@ export default function Index() {
             keyExtractor={(_, index) => index.toString()}
             renderItem={({ item }) => (
               <ShirtCard
-                imageSrc={require('../../assets/images/exampleshirt.png')}
-                team={item.team}
-                season={item.season}
-                type={item.type}
-                size="small"
+                imageSize='small'
+                shirt={item}
               />
             )}
             showsHorizontalScrollIndicator={false}
