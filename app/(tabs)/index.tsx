@@ -32,7 +32,7 @@ export default function Index() {
               />
             )}
             showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ paddingRight: 4, gap: 12 }}
+            contentContainerStyle={{ paddingRight: 4, gap: 10 }}
           />
         </View>
       </View>
