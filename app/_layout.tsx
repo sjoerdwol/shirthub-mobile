@@ -6,6 +6,13 @@ import { useEffect } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import './globals.css';
 
+// Create a global setter for menu visibility
+let setMenuVisible: ((visible: boolean) => void) | null = null;
+
+export const setMenuVisibleGlobal = (setter: (visible: boolean) => void) => {
+  setMenuVisible = setter;
+};
+
 const Root = () => {
   const { session } = useAuth();
   const segments = useSegments();
@@ -42,7 +49,8 @@ const Root = () => {
             name="shirts/[id]"
             options={{
               title: '',
-              headerLeft: () => <HeaderIcon name='chevron-back' size={28} color='#e0e5eb' onPress={() => router.back()} />
+              headerLeft: () => <HeaderIcon name='chevron-back' size={28} color='#e0e5eb' onPress={() => router.back()} />,
+              headerRight: () => <HeaderIcon name='ellipsis-horizontal' size={28} color='#e0e5eb' onPress={() => setMenuVisible?.(true)} />
             }}
           />
           <Stack.Screen

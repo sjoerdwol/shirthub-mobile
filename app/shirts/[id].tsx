@@ -1,14 +1,34 @@
 import DetailsItem from '@/components/details/detailsItem';
 import DetailsRow from '@/components/details/detailsRow';
+import MenuOverlay from '@/components/menuOverlay/menuOverlay';
 import ShirtImage from '@/components/ui/shirtImage';
 import { useShirtStore } from '@/stores/shirtStore';
-import { useLocalSearchParams } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
+import { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
+import { setMenuVisibleGlobal } from '../_layout';
 
 export default function ShirtDetails() {
   const { id } = useLocalSearchParams();
+  const [menuVisible, setMenuVisible] = useState(false);
   const shirts = useShirtStore((state) => state.shirts);
   const shirt = shirts.find((currShirt) => currShirt.id === id);
+  const deleteShirt = useShirtStore((state) => state.removeShirt);
+
+  useEffect(() => {
+    setMenuVisibleGlobal(setMenuVisible);
+  }, []);
+
+  const handleEdit = () => {
+    setMenuVisible(false);
+    router.navigate('/shirts/manage');
+  };
+
+  const handleDelete = () => {
+    deleteShirt(id as string);
+    setMenuVisible(false);
+    router.back();
+  };
 
   return (
     <View className="bg-dark-background-400 flex-1 p-4">
@@ -66,6 +86,13 @@ export default function ShirtDetails() {
                 </DetailsRow>
               </View>
             </View>
+
+            <MenuOverlay
+              onDelete={handleDelete}
+              onClose={() => setMenuVisible(false)}
+              onEdit={handleEdit}
+              visible={menuVisible}
+            />
           </>
         )
         : (
