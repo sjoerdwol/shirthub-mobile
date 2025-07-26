@@ -1,10 +1,8 @@
 import ShirtCard from "@/components/ui/shirtCard";
 import { useShirtStore } from "@/stores/shirtStore";
-import { useRouter } from "expo-router";
 import { FlatList, View } from "react-native";
 
 export default function Collection() {
-  const router = useRouter();
   const shirts = useShirtStore((state) => state.shirts);
 
   return (

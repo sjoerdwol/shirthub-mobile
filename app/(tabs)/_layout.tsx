@@ -34,7 +34,7 @@ export default function TabsLayout() {
         options={{
           title: "My Collection",
           tabBarIcon: ({ color, size }) => <TabBarIcon name='shirt' color={color} size={size} />,
-          headerRight: () => <HeaderIcon name='add' size={28} color='#e0e5eb' onPress={() => router.navigate('/shirts/manage')} />
+          headerRight: () => <HeaderIcon name='add' size={28} color='#e0e5eb' className='mr-6' onPress={() => router.navigate('/shirts/manage')} />
         }}
       />
       <Tabs.Screen

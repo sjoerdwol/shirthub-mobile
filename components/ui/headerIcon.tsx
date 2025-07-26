@@ -1,9 +1,9 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Pressable } from "react-native";
 
-export default function HeaderIcon({ name, color, size, onPress }: React.ComponentProps<typeof Ionicons>) {
+export default function HeaderIcon({ name, color, size, className, onPress }: React.ComponentProps<typeof Ionicons>) {
   return (
-    <Pressable className="mr-6" onPress={onPress}>
+    <Pressable className={className} onPress={onPress}>
       <Ionicons
         name={name}
         color={color}
