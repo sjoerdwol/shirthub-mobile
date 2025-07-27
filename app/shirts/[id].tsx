@@ -21,7 +21,10 @@ export default function ShirtDetails() {
 
   const handleEdit = () => {
     setMenuVisible(false);
-    router.navigate('/shirts/manage');
+    router.navigate({
+      pathname: '/shirts/manage',
+      params: { mode: 'edit', shirt: JSON.stringify(shirt) }
+    });
   };
 
   const handleDelete = () => {
