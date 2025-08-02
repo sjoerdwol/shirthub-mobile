@@ -9,7 +9,7 @@ export default function DetailsInput({ keyboardType, onChangeText, placeholder, 
           autoCapitalize="none"
           className="flex-1 font-semibold text-dark-text-400 text-lg"
           onChangeText={onChangeText}
-          placeholder={'Enter ' + placeholder}
+          placeholder={placeholder}
           placeholderTextColor="#aeb3b8"
           keyboardType={keyboardType}
           value={value}
