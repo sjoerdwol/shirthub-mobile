@@ -59,12 +59,12 @@ export default function ShirtDetails() {
                 </DetailsRow>
                 <DetailsRow>
                   <DetailsItem
-                    title='Condition'
-                    content={shirt.condition}
-                  />
-                  <DetailsItem
                     title='Type'
                     content={shirt.type}
+                  />
+                  <DetailsItem
+                    title='Condition'
+                    content={shirt.condition}
                   />
                 </DetailsRow>
                 <DetailsRow>

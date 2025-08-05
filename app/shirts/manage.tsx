@@ -4,8 +4,8 @@ import DetailsRow from '@/components/details/detailsRow';
 import ShirtImage from '@/components/ui/shirtImage';
 import { useShirtStore } from '@/stores/shirtStore';
 import formatInputWithSlash from '@/utils/formatInputWithSlash';
+import { useForm } from '@tanstack/react-form';
 import { useLocalSearchParams } from 'expo-router';
-import { useState } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, Text, View } from 'react-native';
 
 export default function ManageShirt() {
@@ -16,37 +16,37 @@ export default function ManageShirt() {
   if (typeof shirt === 'string') shirtObj = JSON.parse(shirt);
   else if (Array.isArray(shirt) && shirt.length > 0) shirtObj = JSON.parse(shirt[0]);
 
-  // Form state
-  const [team, setTeam] = useState(shirtObj?.team || '');
-  const [season, setSeason] = useState(shirtObj?.season || '');
-  const [type, setType] = useState(shirtObj?.type || '');
-  const [condition, setCondition] = useState(shirtObj?.condition || '');
-  const [printName, setPrintName] = useState(shirtObj?.print_name || '');
-  const [printNumber, setPrintNumber] = useState(shirtObj?.print_number ? String(shirtObj.print_number) : '');
-  const [size, setSize] = useState(shirtObj?.size || '');
-  const [value, setValue] = useState(shirtObj?.value ? String(shirtObj.value) : '');
-
-  const handleSave = () => {
-    if (mode === 'add') {
+  const shirtForm = useForm({
+    defaultValues: {
+      team: shirtObj?.team || '',
+      season: shirtObj?.season || '',
+      type: shirtObj?.type || '',
+      condition: shirtObj?.condition || '',
+      printName: shirtObj?.print_name || '',
+      printNumber: shirtObj?.print_number ? String(shirtObj.print_number) : '',
+      size: shirtObj?.size || '',
+      value: shirtObj?.value ? String(shirtObj.value) : ''
+    },
+    onSubmit: async ({ value }) => {
       const shirt: Shirt = {
         id: Math.floor((Math.random() * 1000)).toString(),
-        team: team,
-        season: season,
-        type: type,
-        condition: condition,
-        print_name: printName,
-        print_number: parseInt(printNumber) || 0,
-        size: size,
-        value: parseFloat(value.replace(',', '.')) || 0,
+        team: value.team,
+        season: value.season,
+        type: value.type,
+        condition: value.condition || null,
+        print_name: value.printName || null,
+        print_number: parseInt(value.printNumber) || null,
+        size: value.size || null,
+        value: parseFloat(value.value.replace(',', '.')) || null,
         imageSrc: '',
         created_at: new Date(),
         updated_at: new Date()
       }
-      addShirt(shirt);
-    } else {
 
+      if (mode === 'add') addShirt(shirt)
+      else return; // IMPLEMENT UPDATE
     }
-  }
+  });
 
   return (
     <KeyboardAvoidingView
@@ -70,60 +70,152 @@ export default function ManageShirt() {
             <Text className='font-bold mb-4 text-dark-text-400 text-2xl'>{mode === 'edit' ? 'Edit Shirt' : 'Add Shirt'}</Text>
             <View className='px-1'>
               <DetailsRow>
-                <DetailsInput
-                  title='Team'
-                  placeholder='Real Madrid'
-                  value={team}
-                  onChangeText={setTeam} />
-                <DetailsInput
-                  title='Season'
-                  placeholder='2024 or 2024/2025'
-                  value={season}
-                  onChangeText={(newText) => setSeason(formatInputWithSlash(newText, season))}
-                  keyboardType='numeric' />
+                <shirtForm.Field
+                  name='team'
+                  validators={{
+                    onChange: ({ value }) => !value ? 'A team name is required!' : undefined
+                  }}
+                >
+                  {(field) => (
+                    <DetailsInput
+                      title='Team'
+                      placeholder='Real Madrid'
+                      value={field.state.value}
+                      onChangeText={field.handleChange}
+                      isValid={field.state.meta.isValid}
+                      errorMessage={field.state.meta.errors.join(', ')}
+                      maxLength={30}
+                    />
+                  )}
+                </shirtForm.Field>
+                <shirtForm.Field
+                  name='season'
+                  validators={{
+                    onChange: ({ value }) => !value ? 'A season is required!' : undefined
+                  }}
+                >
+                  {(field) => (
+                    <DetailsInput
+                      title='Season'
+                      placeholder='2024 or 2024/2025'
+                      value={field.state.value}
+                      onChangeText={(newText) => field.handleChange(formatInputWithSlash(newText, field.state.value))}
+                      isValid={field.state.meta.isValid}
+                      errorMessage={field.state.meta.errors.join(', ')}
+                      keyboardType='numeric'
+                      maxLength={9}
+                    />
+                  )}
+                </shirtForm.Field>
               </DetailsRow>
               <DetailsRow>
-                <DetailsInput
-                  title='Condition'
-                  placeholder='New, Used etc.'
-                  value={condition}
-                  onChangeText={setCondition} />
-                <DetailsInput
-                  title='Type'
-                  placeholder='Home, Away etc.'
-                  value={type}
-                  onChangeText={setType} />
+                <shirtForm.Field
+                  name='type'
+                  validators={{
+                    onChange: ({ value }) =>
+                      !value ? 'A type is required!' :
+                        !['Home', 'Away', 'Third', 'Special'].includes(value) ? 'Must be Home, Away, Third or Special' : undefined
+                  }}
+                >
+                  {(field) => (
+                    <DetailsInput
+                      title='Type'
+                      placeholder='Home, Away etc.'
+                      value={field.state.value}
+                      onChangeText={field.handleChange}
+                      isValid={field.state.meta.isValid}
+                      errorMessage={field.state.meta.errors.join(', ')}
+                    />
+                  )}
+                </shirtForm.Field>
+                <shirtForm.Field
+                  name='condition'
+                  validators={{}}
+                >
+                  {(field) => (
+                    <DetailsInput
+                      title='Condition'
+                      placeholder='New, Used etc.'
+                      value={field.state.value}
+                      onChangeText={field.handleChange}
+                      isValid={field.state.meta.isValid}
+                      errorMessage={field.state.meta.errors.join(', ')}
+                    />
+                  )}
+                </shirtForm.Field>
               </DetailsRow>
               <DetailsRow>
-                <DetailsInput
-                  title='Print Name'
-                  placeholder='e. g. Ronaldo'
-                  value={printName}
-                  onChangeText={setPrintName} />
-                <DetailsInput
-                  title='Print Number'
-                  placeholder='e. g. 7'
-                  value={printNumber}
-                  onChangeText={setPrintNumber}
-                  keyboardType='numeric' />
+                <shirtForm.Field
+                  name='printName'
+                  validators={{}}
+                >
+                  {(field) => (
+                    <DetailsInput
+                      title='Print Name'
+                      placeholder='e. g. Ronaldo'
+                      value={field.state.value}
+                      onChangeText={field.handleChange}
+                      isValid={field.state.meta.isValid}
+                      errorMessage={field.state.meta.errors.join(', ')}
+                    />
+
+                  )}
+                </shirtForm.Field>
+                <shirtForm.Field
+                  name='printNumber'
+                  validators={{}}
+                >
+                  {(field) => (
+                    <DetailsInput
+                      title='Print Number'
+                      placeholder='e. g. 7'
+                      value={field.state.value}
+                      onChangeText={field.handleChange}
+                      isValid={field.state.meta.isValid}
+                      errorMessage={field.state.meta.errors.join(', ')}
+                      keyboardType='numeric'
+                    />
+                  )}
+                </shirtForm.Field>
               </DetailsRow>
               <DetailsRow>
-                <DetailsInput
-                  title='Size'
-                  placeholder='S, M, L etc.'
-                  value={size}
-                  onChangeText={setSize} />
-                <DetailsInput
-                  title='Value'
-                  placeholder='e. g. 69,99'
-                  value={value}
-                  onChangeText={setValue}
-                  keyboardType='numeric' />
+                <shirtForm.Field
+                  name='size'
+                  validators={{}}
+                >
+                  {(field) => (
+                    <DetailsInput
+                      title='Size'
+                      placeholder='S, M, L etc.'
+                      value={field.state.value}
+                      onChangeText={field.handleChange}
+                      isValid={field.state.meta.isValid}
+                      errorMessage={field.state.meta.errors.join(', ')}
+                    />
+
+                  )}
+                </shirtForm.Field>
+                <shirtForm.Field
+                  name='value'
+                  validators={{}}
+                >
+                  {(field) => (
+                    <DetailsInput
+                      title='Value'
+                      placeholder='e. g. 69,99'
+                      value={field.state.value}
+                      onChangeText={field.handleChange}
+                      isValid={field.state.meta.isValid}
+                      errorMessage={field.state.meta.errors.join(', ')}
+                      keyboardType='numeric'
+                    />
+                  )}
+                </shirtForm.Field>
               </DetailsRow>
             </View>
           </View>
           <View className='px-8 mb-10'>
-            <AuthButton loading={false} onPress={handleSave} >
+            <AuthButton loading={false} onPress={shirtForm.handleSubmit} >
               <Text>{mode === 'edit' ? 'Save Changes' : 'Add Shirt'}</Text>
             </AuthButton>
           </View>
