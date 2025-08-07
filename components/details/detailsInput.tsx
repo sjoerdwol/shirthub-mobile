@@ -18,9 +18,11 @@ export default function DetailsInput(
           value={value}
         />
       </View>
+
       {!isValid && (
         <Text className='font-medium mt-2 text-lg text-red-500'>{errorMessage}</Text>
       )}
+
     </View>
   );
 }

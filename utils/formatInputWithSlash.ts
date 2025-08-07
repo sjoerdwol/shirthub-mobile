@@ -7,8 +7,8 @@ export default function formatInputWithSlash(text: string, previousText: string)
   // Remove any existing slashes first
   const cleanText = text.replace(/\//g, '');
 
-  // If we have 4 or more digits, add slash after the 4th digit
-  if (cleanText.length >= 4) {
+  // If we have more than 4 digits, add slash after the 4th digit
+  if (cleanText.length > 4) {
     return cleanText.slice(0, 4) + '/' + cleanText.slice(4);
   }
 

@@ -1,4 +1,5 @@
 import AuthButton from '@/components/authentication/button';
+import DetailsDropdown from '@/components/details/detailsDropdown';
 import DetailsInput from '@/components/details/detailsInput';
 import DetailsRow from '@/components/details/detailsRow';
 import ShirtImage from '@/components/ui/shirtImage';
@@ -113,18 +114,18 @@ export default function ManageShirt() {
                   name='type'
                   validators={{
                     onChange: ({ value }) =>
-                      !value ? 'A type is required!' :
-                        !['Home', 'Away', 'Third', 'Special'].includes(value) ? 'Must be Home, Away, Third or Special' : undefined
+                      !value ? 'A type is required!' : undefined
                   }}
                 >
                   {(field) => (
-                    <DetailsInput
+                    <DetailsDropdown
                       title='Type'
-                      placeholder='Home, Away etc.'
+                      placeholder='Select a type'
                       value={field.state.value}
-                      onChangeText={field.handleChange}
+                      onSelection={field.handleChange}
                       isValid={field.state.meta.isValid}
                       errorMessage={field.state.meta.errors.join(', ')}
+                      options={['Home', 'Away', 'Third', 'Special']}
                     />
                   )}
                 </shirtForm.Field>
@@ -133,13 +134,14 @@ export default function ManageShirt() {
                   validators={{}}
                 >
                   {(field) => (
-                    <DetailsInput
+                    <DetailsDropdown
                       title='Condition'
-                      placeholder='New, Used etc.'
+                      placeholder='Select a condition'
                       value={field.state.value}
-                      onChangeText={field.handleChange}
+                      onSelection={field.handleChange}
                       isValid={field.state.meta.isValid}
                       errorMessage={field.state.meta.errors.join(', ')}
+                      options={['Brand new', 'As good as new', 'Slightly used', 'Heavily used', 'Damaged']}
                     />
                   )}
                 </shirtForm.Field>
@@ -174,6 +176,7 @@ export default function ManageShirt() {
                       isValid={field.state.meta.isValid}
                       errorMessage={field.state.meta.errors.join(', ')}
                       keyboardType='numeric'
+                      maxLength={2}
                     />
                   )}
                 </shirtForm.Field>
@@ -184,15 +187,15 @@ export default function ManageShirt() {
                   validators={{}}
                 >
                   {(field) => (
-                    <DetailsInput
+                    <DetailsDropdown
                       title='Size'
-                      placeholder='S, M, L etc.'
+                      placeholder='Select a size'
                       value={field.state.value}
-                      onChangeText={field.handleChange}
+                      onSelection={field.handleChange}
                       isValid={field.state.meta.isValid}
                       errorMessage={field.state.meta.errors.join(', ')}
+                      options={['XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL', '4XL', '5XL']}
                     />
-
                   )}
                 </shirtForm.Field>
                 <shirtForm.Field
