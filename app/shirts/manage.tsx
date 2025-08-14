@@ -6,7 +6,7 @@ import ShirtImage from '@/components/ui/shirtImage';
 import { useShirtStore } from '@/stores/shirtStore';
 import formatInputWithSlash from '@/utils/formatInputWithSlash';
 import { useForm } from '@tanstack/react-form';
-import { useLocalSearchParams } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import { KeyboardAvoidingView, Platform, ScrollView, Text, View } from 'react-native';
 
 export default function ManageShirt() {
@@ -46,6 +46,8 @@ export default function ManageShirt() {
 
       if (mode === 'add') addShirt(shirt)
       else return; // IMPLEMENT UPDATE
+
+      router.back();
     }
   });
 
@@ -59,6 +61,7 @@ export default function ManageShirt() {
         className="flex-1"
         contentContainerStyle={{ paddingBottom: 50 }}
         showsVerticalScrollIndicator={false}
+        keyboardDismissMode='interactive'
       >
         <View className="p-4">
           <View className='bg-dark-background-200 mb-4 overflow-hidden h-64 w-full rounded-xl'>
@@ -92,7 +95,8 @@ export default function ManageShirt() {
                 <shirtForm.Field
                   name='season'
                   validators={{
-                    onChange: ({ value }) => !value ? 'A season is required!' : undefined
+                    onChange: ({ value }) => !value ? 'A season is required!' :
+                      !(value.length >= 4) ? 'Season must atleast be 4 characters long' : undefined
                   }}
                 >
                   {(field) => (
@@ -141,7 +145,7 @@ export default function ManageShirt() {
                       onSelection={field.handleChange}
                       isValid={field.state.meta.isValid}
                       errorMessage={field.state.meta.errors.join(', ')}
-                      options={['Brand new', 'As good as new', 'Slightly used', 'Heavily used', 'Damaged']}
+                      options={['Brand New', 'Like New', 'Used', 'Well Worn', 'Worn Out']}
                     />
                   )}
                 </shirtForm.Field>
@@ -159,13 +163,17 @@ export default function ManageShirt() {
                       onChangeText={field.handleChange}
                       isValid={field.state.meta.isValid}
                       errorMessage={field.state.meta.errors.join(', ')}
+                      maxLength={30}
                     />
 
                   )}
                 </shirtForm.Field>
                 <shirtForm.Field
                   name='printNumber'
-                  validators={{}}
+                  validators={{
+                    onChange: ({ value }) => !value ? undefined :
+                      !(parseInt(value) > 0) ? 'Number must atleast be 1' : undefined
+                  }}
                 >
                   {(field) => (
                     <DetailsInput
@@ -200,7 +208,11 @@ export default function ManageShirt() {
                 </shirtForm.Field>
                 <shirtForm.Field
                   name='value'
-                  validators={{}}
+                  validators={{
+                    onChange: ({ value }) => !value ? undefined :
+                      !(parseFloat(value) > 0) ? 'Value must be positive' :
+                        !(parseFloat(value) <= 500) ? 'A value above 500 is not realistic' : undefined
+                  }}
                 >
                   {(field) => (
                     <DetailsInput
