@@ -13,6 +13,7 @@ export default function ManageShirt() {
   const { mode, shirt } = useLocalSearchParams();
   let shirtObj: Shirt | null = null;
   const addShirt = useShirtStore((state) => state.addShirt);
+  const updateShirt = useShirtStore((state) => state.updateShirt);
 
   if (typeof shirt === 'string') shirtObj = JSON.parse(shirt);
   else if (Array.isArray(shirt) && shirt.length > 0) shirtObj = JSON.parse(shirt[0]);
@@ -29,23 +30,35 @@ export default function ManageShirt() {
       value: shirtObj?.value ? String(shirtObj.value) : ''
     },
     onSubmit: async ({ value }) => {
-      const shirt: Shirt = {
-        id: Math.floor((Math.random() * 1000)).toString(),
-        team: value.team,
-        season: value.season,
-        type: value.type,
-        condition: value.condition || null,
-        print_name: value.printName || null,
-        print_number: parseInt(value.printNumber) || null,
-        size: value.size || null,
-        value: parseFloat(value.value.replace(',', '.')) || null,
-        imageSrc: '',
-        created_at: new Date(),
-        updated_at: new Date()
+      if (mode === 'add') {
+        const shirt: Shirt = {
+          id: Math.floor((Math.random() * 1000)).toString(),
+          team: value.team,
+          season: value.season,
+          type: value.type,
+          condition: value.condition || null,
+          print_name: value.printName || null,
+          print_number: parseInt(value.printNumber) || null,
+          size: value.size || null,
+          value: parseFloat(value.value.replace(',', '.')) || null,
+          imageSrc: '',
+          created_at: new Date(),
+          updated_at: new Date()
+        }
+        addShirt(shirt)
+      } else if (mode === 'edit' && shirtObj) {
+        const updatedShirt: Partial<Shirt> = {
+          team: value.team,
+          season: value.season,
+          type: value.type,
+          condition: value.condition || null,
+          print_name: value.printName || null,
+          print_number: parseInt(value.printNumber) || null,
+          size: value.size || null,
+          value: parseFloat(value.value.replace(',', '.')) || null,
+        };
+        updateShirt(shirtObj.id, updatedShirt);
       }
-
-      if (mode === 'add') addShirt(shirt)
-      else return; // IMPLEMENT UPDATE
 
       router.back();
     }

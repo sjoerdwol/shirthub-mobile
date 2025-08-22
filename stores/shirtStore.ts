@@ -62,5 +62,6 @@ const testdata: Array<Shirt> = [
 export const useShirtStore = create<ShirtState>()((set) => ({
   shirts: testdata,
   addShirt: (shirt) => set((state) => ({ shirts: [...state.shirts, shirt] })),
+  updateShirt: (id: string, updatedShirt: Partial<Shirt>) => set((state) => ({ shirts: state.shirts.map(shirt => shirt.id === id ? { ...shirt, ...updatedShirt } : shirt) })),
   removeShirt: (id: string) => set((state) => ({ shirts: state.shirts.filter(shirt => shirt.id !== id) }))
 }));
