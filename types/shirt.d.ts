@@ -16,6 +16,7 @@ interface Shirt {
 interface ShirtState {
   shirts: Array<Shirt>;
   addShirt: (shirt: Shirt) => void;
+  setShirts: (shirts: Array<Shirt>) => void;
   updateShirt: (id: string, updateShirt: Partial<Shirt>) => void;
   removeShirt: (id: string) => void;
 }
