@@ -5,12 +5,12 @@ export default function convertShirtResponse(shirtResponseArray: Array<ShirtResp
     season: shirtResponse.season,
     type: shirtResponse.type,
     condition: shirtResponse.condition,
-    print_name: shirtResponse.print_name,
-    print_number: shirtResponse.print_number,
+    print_name: shirtResponse.printName,
+    print_number: shirtResponse.printNumber,
     size: shirtResponse.size,
     value: shirtResponse.value,
-    created_at: shirtResponse.created_at,
-    updated_at: shirtResponse.updated_at,
+    created_at: shirtResponse.createdAt,
+    updated_at: shirtResponse.updatedAt,
     imageSrc: '../../assets/images/exampleshirt.png', // Default image for now
   }));
 

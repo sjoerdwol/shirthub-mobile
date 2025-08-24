@@ -22,7 +22,7 @@ export default function Index() {
         const convertedShirts = convertShirtResponse(shirtResponses);
         setShirts(convertedShirts);
       } catch (error) {
-        console.error('Failed to fetch shirts:', error);
+        console.error('Failed to fetch shirts: ', error);
       } finally {
         setLoading(false);
       }

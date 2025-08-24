@@ -3,16 +3,19 @@ import DetailsDropdown from '@/components/details/detailsDropdown';
 import DetailsInput from '@/components/details/detailsInput';
 import DetailsRow from '@/components/details/detailsRow';
 import ShirtImage from '@/components/ui/shirtImage';
+import { useAuth } from '@/contexts/authContext';
 import { useShirtStore } from '@/stores/shirtStore';
 import formatInputWithSlash from '@/utils/formatInputWithSlash';
+import handleShirtAddition from '@/utils/handleShirtAddition';
 import { useForm } from '@tanstack/react-form';
 import { router, useLocalSearchParams } from 'expo-router';
 import { KeyboardAvoidingView, Platform, ScrollView, Text, View } from 'react-native';
 
 export default function ManageShirt() {
   const { mode, shirt } = useLocalSearchParams();
+  const { session } = useAuth();
   let shirtObj: Shirt | null = null;
-  const addShirt = useShirtStore((state) => state.addShirt);
+  const addShirtToStore = useShirtStore((state) => state.addShirt);
   const updateShirt = useShirtStore((state) => state.updateShirt);
 
   if (typeof shirt === 'string') shirtObj = JSON.parse(shirt);
@@ -30,35 +33,19 @@ export default function ManageShirt() {
       value: shirtObj?.value ? String(shirtObj.value) : ''
     },
     onSubmit: async ({ value }) => {
-      if (mode === 'add') {
-        const shirt: Shirt = {
-          id: Math.floor((Math.random() * 1000)).toString(),
-          team: value.team,
-          season: value.season,
-          type: value.type,
-          condition: value.condition || null,
-          print_name: value.printName || null,
-          print_number: parseInt(value.printNumber) || null,
-          size: value.size || null,
-          value: parseFloat(value.value.replace(',', '.')) || null,
-          imageSrc: '',
-          created_at: new Date(),
-          updated_at: new Date()
-        }
-        addShirt(shirt)
-      } else if (mode === 'edit' && shirtObj) {
-        const updatedShirt: Partial<Shirt> = {
-          team: value.team,
-          season: value.season,
-          type: value.type,
-          condition: value.condition || null,
-          print_name: value.printName || null,
-          print_number: parseInt(value.printNumber) || null,
-          size: value.size || null,
-          value: parseFloat(value.value.replace(',', '.')) || null,
-        };
-        updateShirt(shirtObj.id, updatedShirt);
+      const shirt: Partial<Shirt> = {
+        team: value.team,
+        season: value.season,
+        type: value.type,
+        condition: value.condition || null,
+        print_name: value.printName || null,
+        print_number: parseInt(value.printNumber) || null,
+        size: value.size || null,
+        value: parseFloat(value.value.replace(',', '.')) || null
       }
+
+      if (mode === 'add') await handleShirtAddition(session!, shirt, addShirtToStore);
+      else if (mode === 'edit' && shirtObj) updateShirt(shirtObj.id, shirt);
 
       router.back();
     }
