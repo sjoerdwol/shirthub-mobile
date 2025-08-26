@@ -6,7 +6,7 @@ import ShirtImage from '@/components/ui/shirtImage';
 import { useAuth } from '@/contexts/authContext';
 import { useShirtStore } from '@/stores/shirtStore';
 import formatInputWithSlash from '@/utils/formatInputWithSlash';
-import handleShirtAddition from '@/utils/handleShirtAddition';
+import { handleShirtAddition, handleShirtUpdate } from '@/utils/handleShirtOperations';
 import { useForm } from '@tanstack/react-form';
 import { router, useLocalSearchParams } from 'expo-router';
 import { KeyboardAvoidingView, Platform, ScrollView, Text, View } from 'react-native';
@@ -44,7 +44,7 @@ export default function ManageShirt() {
       }
 
       if (mode === 'add') await handleShirtAddition(session!, shirt, addShirt);
-      else if (mode === 'edit' && shirtObj) updateShirt(shirtObj.id, shirt);
+      else if (mode === 'edit' && shirtObj) await handleShirtUpdate(session!, shirtObj.id, shirt, updateShirt);
 
       router.back();
     }

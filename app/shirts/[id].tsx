@@ -4,7 +4,7 @@ import MenuOverlay from '@/components/menuOverlay/menuOverlay';
 import ShirtImage from '@/components/ui/shirtImage';
 import { useAuth } from '@/contexts/authContext';
 import { useShirtStore } from '@/stores/shirtStore';
-import handleShirtDeletion from '@/utils/handleShirtDeletion';
+import { handleShirtDeletion } from '@/utils/handleShirtOperations';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';

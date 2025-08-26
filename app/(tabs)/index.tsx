@@ -1,31 +1,21 @@
 import StatBox from "@/components/home/statBox";
 import ShirtCard from "@/components/ui/shirtCard";
 import { useAuth } from "@/contexts/authContext";
-import { getShirts } from "@/services/shirthub_backend";
 import { useShirtStore } from "@/stores/shirtStore";
-import convertShirtResponse from "@/utils/convertShirtResponse";
+import { handleShirtInitialFetch } from "@/utils/handleShirtOperations";
 import { useEffect, useState } from "react";
 import { FlatList, Text, View } from "react-native";
 
 export default function Index() {
   const { session } = useAuth();
-  const shirts = useShirtStore((state) => state.shirts);
-  const setShirts = useShirtStore((state) => state.setShirts);
+  const { shirts, setShirts } = useShirtStore((state) => state);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchShirts = async () => {
-      try {
-        setLoading(true);
-        // Session has to be defined otherwise index would not be displayed in the first place
-        const shirtResponses: ShirtResponse[] = await getShirts(session!);
-        const convertedShirts = convertShirtResponse(shirtResponses);
-        setShirts(convertedShirts);
-      } catch (error) {
-        console.error('Failed to fetch shirts: ', error);
-      } finally {
-        setLoading(false);
-      }
+      setLoading(true);
+      await handleShirtInitialFetch(session!, setShirts);
+      setLoading(false);
     };
 
     fetchShirts();

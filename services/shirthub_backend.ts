@@ -1,28 +1,5 @@
 import { Session } from '@supabase/supabase-js';
 
-export const getShirts = async (session: Session): Promise<ShirtResponse[]> => {
-  try {
-    if (!session?.access_token) throw new Error('No valid session found. Please log in again.');
-
-    // GET request to /shirts with the JWT token
-    const response = await fetch(`${process.env.EXPO_PUBLIC_BACKEND_URL}/shirts`, {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${session.access_token}`,
-        'Content-Type': 'application/json',
-      },
-    });
-
-    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-
-    const shirts: ShirtResponse[] = await response.json();
-    return shirts;
-  } catch (error) {
-    console.error('Error fetching shirts: ', error);
-    throw error;
-  }
-};
-
 export const addShirt = async (session: Session, shirt: Partial<Shirt>): Promise<ShirtResponse> => {
   try {
     if (!session?.access_token) throw new Error('No valid session found. Please log in again.');
@@ -62,6 +39,52 @@ export const deleteShirt = async (session: Session, shirtId: string): Promise<vo
     if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
   } catch (error) {
     console.error('Error deleting shirt: ', error);
+    throw error;
+  }
+}
+
+export const getShirts = async (session: Session): Promise<ShirtResponse[]> => {
+  try {
+    if (!session?.access_token) throw new Error('No valid session found. Please log in again.');
+
+    // GET request to /shirts with the JWT token
+    const response = await fetch(`${process.env.EXPO_PUBLIC_BACKEND_URL}/shirts`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${session.access_token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
+    const shirts: ShirtResponse[] = await response.json();
+    return shirts;
+  } catch (error) {
+    console.error('Error fetching shirts: ', error);
+    throw error;
+  }
+}
+
+export const updateShirt = async (session: Session, shirtId: string, updatedShirt: Partial<Shirt>): Promise<ShirtResponse> => {
+  try {
+    if (!session?.access_token) throw new Error('No valid session found. Please log in again.');
+
+    const response = await fetch(`${process.env.EXPO_PUBLIC_BACKEND_URL}/shirts/${shirtId}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${session.access_token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedShirt)
+    });
+
+    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
+    const updatedShirtResponse: ShirtResponse = await response.json();
+    return updatedShirtResponse;
+  } catch (error) {
+    console.error('Error updating shirt: ', error);
     throw error;
   }
 }
