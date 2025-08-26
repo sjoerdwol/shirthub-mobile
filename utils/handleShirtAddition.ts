@@ -6,7 +6,6 @@ export default async function handleShirtAddition(session: Session, newShirt: Pa
   try {
     const response = await addShirt(session, newShirt);
     const newShirtStore = convertShirtResponse([response])[0];
-    console.log(newShirtStore);
     addShirtToStore(newShirtStore);
   } catch (error) {
     console.error('Error creating shirt: ', error);

@@ -2,18 +2,20 @@ import DetailsItem from '@/components/details/detailsItem';
 import DetailsRow from '@/components/details/detailsRow';
 import MenuOverlay from '@/components/menuOverlay/menuOverlay';
 import ShirtImage from '@/components/ui/shirtImage';
+import { useAuth } from '@/contexts/authContext';
 import { useShirtStore } from '@/stores/shirtStore';
+import handleShirtDeletion from '@/utils/handleShirtDeletion';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
 import { setMenuVisibleGlobal } from '../_layout';
 
 export default function ShirtDetails() {
+  const { session } = useAuth();
   const { id } = useLocalSearchParams();
+  const { shirts, removeShirt } = useShirtStore((state) => state);
   const [menuVisible, setMenuVisible] = useState(false);
-  const shirts = useShirtStore((state) => state.shirts);
   const shirt = shirts.find((currShirt) => currShirt.id === id);
-  const deleteShirt = useShirtStore((state) => state.removeShirt);
 
   useEffect(() => {
     setMenuVisibleGlobal(setMenuVisible);
@@ -27,8 +29,8 @@ export default function ShirtDetails() {
     });
   };
 
-  const handleDelete = () => {
-    deleteShirt(id as string);
+  const handleDelete = async () => {
+    await handleShirtDeletion(session!, id as string, removeShirt);
     setMenuVisible(false);
     router.back();
   };

@@ -12,11 +12,10 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { KeyboardAvoidingView, Platform, ScrollView, Text, View } from 'react-native';
 
 export default function ManageShirt() {
-  const { mode, shirt } = useLocalSearchParams();
   const { session } = useAuth();
+  const { mode, shirt } = useLocalSearchParams();
+  const { addShirt, updateShirt } = useShirtStore((state) => state);
   let shirtObj: Shirt | null = null;
-  const addShirtToStore = useShirtStore((state) => state.addShirt);
-  const updateShirt = useShirtStore((state) => state.updateShirt);
 
   if (typeof shirt === 'string') shirtObj = JSON.parse(shirt);
   else if (Array.isArray(shirt) && shirt.length > 0) shirtObj = JSON.parse(shirt[0]);
@@ -44,7 +43,7 @@ export default function ManageShirt() {
         value: parseFloat(value.value.replace(',', '.')) || null
       }
 
-      if (mode === 'add') await handleShirtAddition(session!, shirt, addShirtToStore);
+      if (mode === 'add') await handleShirtAddition(session!, shirt, addShirt);
       else if (mode === 'edit' && shirtObj) updateShirt(shirtObj.id, shirt);
 
       router.back();
