@@ -35,7 +35,7 @@ export default function AuthIndex() {
           exiting={SlideOutLeft.duration(500)}
         >
           <TouchableOpacity onPress={() => setMode('register')}>
-            <Text className="text-dark-primary text-base">Don't have an account yet? Sign up!</Text>
+            <Text className="text-dark-primary text-base">No account yet? Sign up!</Text>
           </TouchableOpacity>
         </Animated.View>
         : <Animated.View

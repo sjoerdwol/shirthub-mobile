@@ -26,7 +26,7 @@ export default function LoginScreen() {
           value={password}
         />
       </View>
-      <AuthButton loading={loading} onPress={() => signIn(email, password)}>Login</AuthButton>
+      <AuthButton loading={loading} onPress={() => signIn(email, password)}>Log In</AuthButton>
     </View>
   );
 } 

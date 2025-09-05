@@ -70,7 +70,7 @@ export default function ManageShirt() {
             />
           </View>
           <View className='p-4'>
-            <Text className='font-bold mb-4 text-dark-text-400 text-2xl'>{mode === 'edit' ? 'Edit Shirt' : 'Add Shirt'}</Text>
+            <Text className='font-bold mb-4 text-dark-text-400 text-2xl' testID='manage_shirt_header'>{mode === 'edit' ? 'Edit Shirt' : 'Add Shirt'}</Text>
             <View className='px-1'>
               <DetailsRow>
                 <shirtForm.Field

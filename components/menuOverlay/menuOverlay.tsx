@@ -12,6 +12,7 @@ export default function MenuOverlay({ visible, onClose, onEdit, onDelete }: Menu
       <Pressable
         className='bg-[rgba(0,0,0,0.5)] flex-1'
         onPress={onClose}
+        testID='pressable_background_close_menu'
       >
         <View className='absolute bg-dark-background-300 elevation-md min-w-32 p-2 right-4 rounded-lg shadow-black shadow top-20'>
           <MenuOverlayEntry

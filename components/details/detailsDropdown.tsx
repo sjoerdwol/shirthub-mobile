@@ -38,7 +38,7 @@ export default function DetailsDropdown({ title, placeholder, value, onSelection
           <View className="bg-dark-background-200 rounded-t-3xl max-h-96 pb-16">
             <View className="flex-row items-center justify-between px-6 py-4 border-b border-dark-background-250">
               <Text className="text-dark-text-400 text-lg font-bold">{title}</Text>
-              <TouchableOpacity onPress={() => setIsModalVisible(false)}>
+              <TouchableOpacity onPress={() => setIsModalVisible(false)} testID='close_details_dropdown_modal'>
                 <Ionicons name="close" size={24} color="#aeb3b8" />
               </TouchableOpacity>
             </View>

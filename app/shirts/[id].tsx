@@ -13,9 +13,14 @@ import { setMenuVisibleGlobal } from '../_layout';
 export default function ShirtDetails() {
   const { session } = useAuth();
   const { id } = useLocalSearchParams();
+  let shirtId: string | null = null;
+
+  if (typeof id === 'string') shirtId = id;
+  else if (Array.isArray(id) && id.length > 0) shirtId = id[0];
+
   const { shirts, removeShirt } = useShirtStore((state) => state);
   const [menuVisible, setMenuVisible] = useState(false);
-  const shirt = shirts.find((currShirt) => currShirt.id === id);
+  const shirt = shirts.find((currShirt) => currShirt.id === shirtId);
 
   useEffect(() => {
     setMenuVisibleGlobal(setMenuVisible);
@@ -30,7 +35,7 @@ export default function ShirtDetails() {
   };
 
   const handleDelete = async () => {
-    await handleShirtDeletion(session!, id as string, removeShirt);
+    await handleShirtDeletion(session!, shirtId!, removeShirt);
     setMenuVisible(false);
     router.back();
   };

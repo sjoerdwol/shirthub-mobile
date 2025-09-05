@@ -6,7 +6,7 @@ export default function Collection() {
   const shirts = useShirtStore((state) => state.shirts);
 
   return (
-    <View className="flex-1 bg-dark-background-400 p-4 items-center">
+    <View className="flex-1 bg-dark-background-400 p-4 items-center" testID="collection-container">
       <FlatList
         data={shirts}
         keyExtractor={(_, index) => index.toString()}
@@ -20,6 +20,7 @@ export default function Collection() {
         numColumns={2}
         contentContainerStyle={{ gap: 20 }}
         columnWrapperStyle={{ gap: 10 }}
+        testID="collection-flatlist"
       />
     </View>
   );

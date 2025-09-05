@@ -6,7 +6,7 @@ import ShirtImage from './shirtImage';
 export default function ShirtCard({ imageSize, shirt }: ShirtCardProps) {
   return (
     <View className='justify-center items-start'>
-      <Pressable onPress={() => router.navigate(`/shirts/${shirt.id}`)}>
+      <Pressable onPress={() => router.navigate(`/shirts/${shirt.id}`)} testID='pressable_navigate_to_detail'>
         <ShirtImage imageSrc={require('../../assets/images/exampleshirt.png')} size={imageSize} />
       </Pressable>
       <View className='mt-3 px-2'>
