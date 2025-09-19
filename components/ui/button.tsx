@@ -1,7 +1,7 @@
-import { AuthButtonProps } from "@/types/authButtonProps";
+import { ButtonProps } from "@/types/buttonProps";
 import { ActivityIndicator, Text, TouchableOpacity } from "react-native";
 
-export default function AuthButton({ children, loading, onPress }: AuthButtonProps) {
+export default function Button({ children, loading, onPress }: ButtonProps) {
   return (
     <TouchableOpacity
       className="w-full bg-dark-accent rounded-lg py-3 mb-4"

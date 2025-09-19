@@ -1,7 +1,7 @@
-import AuthButton from '@/components/authentication/button';
 import DetailsDropdown from '@/components/details/detailsDropdown';
 import DetailsInput from '@/components/details/detailsInput';
 import DetailsRow from '@/components/details/detailsRow';
+import Button from '@/components/ui/button';
 import ShirtImage from '@/components/ui/shirtImage';
 import { useAuth } from '@/contexts/authContext';
 import { useShirtStore } from '@/stores/shirtStore';
@@ -229,9 +229,9 @@ export default function ManageShirt() {
             </View>
           </View>
           <View className='px-8 mb-10'>
-            <AuthButton loading={false} onPress={shirtForm.handleSubmit} >
+            <Button loading={false} onPress={shirtForm.handleSubmit} >
               <Text>{mode === 'edit' ? 'Save Changes' : 'Add Shirt'}</Text>
-            </AuthButton>
+            </Button>
           </View>
         </View>
       </ScrollView>

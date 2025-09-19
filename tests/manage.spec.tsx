@@ -40,7 +40,7 @@ jest.mock('expo-router', () => ({
 // Mock the components
 jest.mock('@/components/authentication/button', () => {
   const { TouchableOpacity, Text } = require('react-native');
-  return function MockAuthButton({ children, onPress, loading }: any) {
+  return function MockButton({ children, onPress, loading }: any) {
     return (
       <TouchableOpacity testID="auth-button" onPress={onPress} disabled={loading}>
         <Text>{children}</Text>

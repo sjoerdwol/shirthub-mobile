@@ -1,7 +1,7 @@
 import AuthIndex from "@/app/(authentication)/index";
 import LoginScreen from "@/app/(authentication)/login";
 import RegisterScreen from "@/app/(authentication)/register";
-import AuthButton from "@/components/authentication/button";
+import Button from "@/components/ui/button";
 import AuthInput from "@/components/authentication/input";
 import { useAuth } from "@/contexts/authContext";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react-native";
@@ -17,9 +17,9 @@ describe("Auth Button", () => {
   it("renders children text when not loading and fires onPress", () => {
     const onPress = jest.fn();
     render(
-      <AuthButton loading={false} onPress={onPress}>
+      <Button loading={false} onPress={onPress}>
         Sign In
-      </AuthButton>
+      </Button>
     );
 
     screen.getByText("Sign In");
@@ -30,9 +30,9 @@ describe("Auth Button", () => {
   it("shows ActivityIndicator and disables button when loading", () => {
     const onPress = jest.fn();
     render(
-      <AuthButton loading onPress={onPress}>
+      <Button loading onPress={onPress}>
         Loading
-      </AuthButton>
+      </Button>
     );
 
     expect(screen.queryByText("Loading")).toBeNull();
