@@ -2,7 +2,7 @@
   "expo": {
     "name": "shirthub-mobile",
     "slug": "shirthub-mobile",
-    "version": "0.1.0-alpha",
+    "version": "0.1.1-alpha",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "shirthubmobile",
@@ -37,6 +37,12 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "933a6733-3bc3-4132-bc2e-371b5cb9e87f"
+      }
     }
   }
 }
