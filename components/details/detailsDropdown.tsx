@@ -35,7 +35,7 @@ export default function DetailsDropdown({ title, placeholder, value, onSelection
         onRequestClose={() => setIsModalVisible(false)}
       >
         <View className="flex-1 justify-end bg-black/50">
-          <View className="bg-dark-background-200 rounded-t-3xl max-h-96 pb-16">
+          <View className="bg-dark-background-200 rounded-t-3xl h-[65%] pb-16">
             <View className="flex-row items-center justify-between px-6 py-4 border-b border-dark-background-250">
               <Text className="text-dark-text-400 text-lg font-bold">{title}</Text>
               <TouchableOpacity onPress={() => setIsModalVisible(false)} testID='close_details_dropdown_modal'>
