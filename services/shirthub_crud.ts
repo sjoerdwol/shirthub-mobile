@@ -3,10 +3,12 @@ import { Session } from '@supabase/supabase-js';
 // Add a shirt to the users collection
 export const addShirt = async (session: Session, shirt: Partial<Shirt>): Promise<ShirtResponse> => {
   try {
+    const backendUrl = process.env.EXPO_PUBLIC_BACKEND_URL;
     if (!session?.access_token) throw new Error('No valid session found. Please log in again.');
+    if (!backendUrl) throw new Error('Missing EXPO_PUBLIC_BACKEND_URL environment variable!');
 
     // POST request to /shirts with the JWT token and the new shirt data
-    const response = await fetch(`${process.env.EXPO_PUBLIC_BACKEND_URL}/shirts`, {
+    const response = await fetch(`${backendUrl}/shirts`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${session.access_token}`,
@@ -28,10 +30,12 @@ export const addShirt = async (session: Session, shirt: Partial<Shirt>): Promise
 // Delete a shirt from the users collection
 export const deleteShirt = async (session: Session, shirtId: string): Promise<void> => {
   try {
+    const backendUrl = process.env.EXPO_PUBLIC_BACKEND_URL;
     if (!session?.access_token) throw new Error('No valid session found. Please log in again.');
+    if (!backendUrl) throw new Error('Missing EXPO_PUBLIC_BACKEND_URL environment variable!');
 
     // DELETE request to /shirts/id with the JWT token
-    const response = await fetch(`${process.env.EXPO_PUBLIC_BACKEND_URL}/shirts/${shirtId}`, {
+    const response = await fetch(`${backendUrl}/shirts/${shirtId}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${session.access_token}`,
@@ -49,10 +53,12 @@ export const deleteShirt = async (session: Session, shirtId: string): Promise<vo
 // Retrieve all shirts from the users collection
 export const getShirts = async (session: Session): Promise<ShirtResponse[]> => {
   try {
+    const backendUrl = process.env.EXPO_PUBLIC_BACKEND_URL;
     if (!session?.access_token) throw new Error('No valid session found. Please log in again.');
+    if (!backendUrl) throw new Error('Missing EXPO_PUBLIC_BACKEND_URL environment variable!');
 
     // GET request to /shirts with the JWT token
-    const response = await fetch(`${process.env.EXPO_PUBLIC_BACKEND_URL}/shirts`, {
+    const response = await fetch(`${backendUrl}/shirts`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${session.access_token}`,
@@ -73,10 +79,12 @@ export const getShirts = async (session: Session): Promise<ShirtResponse[]> => {
 // Update a shirt in the users collection
 export const updateShirt = async (session: Session, shirtId: string, updatedShirt: Partial<Shirt>): Promise<ShirtResponse> => {
   try {
+    const backendUrl = process.env.EXPO_PUBLIC_BACKEND_URL;
     if (!session?.access_token) throw new Error('No valid session found. Please log in again.');
+    if (!backendUrl) throw new Error('Missing EXPO_PUBLIC_BACKEND_URL environment variable!');
 
     // PUT request to /shirts/id with the JWT token and the updated shirt data
-    const response = await fetch(`${process.env.EXPO_PUBLIC_BACKEND_URL}/shirts/${shirtId}`, {
+    const response = await fetch(`${backendUrl}/shirts/${shirtId}`, {
       method: 'PUT',
       headers: {
         'Authorization': `Bearer ${session.access_token}`,
