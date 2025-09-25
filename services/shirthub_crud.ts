@@ -1,5 +1,6 @@
 import { Session } from '@supabase/supabase-js';
 
+// Add a shirt to the users collection
 export const addShirt = async (session: Session, shirt: Partial<Shirt>): Promise<ShirtResponse> => {
   try {
     if (!session?.access_token) throw new Error('No valid session found. Please log in again.');
@@ -24,10 +25,12 @@ export const addShirt = async (session: Session, shirt: Partial<Shirt>): Promise
   }
 }
 
+// Delete a shirt from the users collection
 export const deleteShirt = async (session: Session, shirtId: string): Promise<void> => {
   try {
     if (!session?.access_token) throw new Error('No valid session found. Please log in again.');
 
+    // DELETE request to /shirts/id with the JWT token
     const response = await fetch(`${process.env.EXPO_PUBLIC_BACKEND_URL}/shirts/${shirtId}`, {
       method: 'DELETE',
       headers: {
@@ -43,6 +46,7 @@ export const deleteShirt = async (session: Session, shirtId: string): Promise<vo
   }
 }
 
+// Retrieve all shirts from the users collection
 export const getShirts = async (session: Session): Promise<ShirtResponse[]> => {
   try {
     if (!session?.access_token) throw new Error('No valid session found. Please log in again.');
@@ -66,10 +70,12 @@ export const getShirts = async (session: Session): Promise<ShirtResponse[]> => {
   }
 }
 
+// Update a shirt in the users collection
 export const updateShirt = async (session: Session, shirtId: string, updatedShirt: Partial<Shirt>): Promise<ShirtResponse> => {
   try {
     if (!session?.access_token) throw new Error('No valid session found. Please log in again.');
 
+    // PUT request to /shirts/id with the JWT token and the updated shirt data
     const response = await fetch(`${process.env.EXPO_PUBLIC_BACKEND_URL}/shirts/${shirtId}`, {
       method: 'PUT',
       headers: {
