@@ -20,7 +20,8 @@ const config: Config = {
     "!**/services/**",
     "!**/profile.tsx",
     "!**/statistics.tsx",
-    "!**/jest.config.ts"
+    "!**/jest.config.ts",
+    "!./app.config.ts"
   ],
   coverageThreshold: {
     global: {

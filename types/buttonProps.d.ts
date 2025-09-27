@@ -1,5 +1,5 @@
 import { TouchableOpacityProps } from "react-native";
 
-interface AuthButtonProps extends TouchableOpacityProps {
+interface ButtonProps extends TouchableOpacityProps {
   loading: boolean;
 }

@@ -1,20 +1,25 @@
-import AuthButton from '@/components/authentication/button';
 import DetailsDropdown from '@/components/details/detailsDropdown';
+import DetailsDropdownSearch from '@/components/details/detailsDropdownSearch';
 import DetailsInput from '@/components/details/detailsInput';
 import DetailsRow from '@/components/details/detailsRow';
+import Button from '@/components/ui/button';
 import ShirtImage from '@/components/ui/shirtImage';
 import { useAuth } from '@/contexts/authContext';
+import { fetchReferenceTeams } from '@/services/shirthub_ref_data';
+import { useReferenceTeamStore } from '@/stores/referenceDataStore';
 import { useShirtStore } from '@/stores/shirtStore';
 import formatInputWithSlash from '@/utils/formatInputWithSlash';
 import { handleShirtAddition, handleShirtUpdate } from '@/utils/handleShirtOperations';
 import { useForm } from '@tanstack/react-form';
 import { router, useLocalSearchParams } from 'expo-router';
+import { useEffect } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, Text, View } from 'react-native';
 
 export default function ManageShirt() {
   const { session } = useAuth();
   const { mode, shirt } = useLocalSearchParams();
   const { addShirt, updateShirt } = useShirtStore((state) => state);
+  const { teams, setTeams } = useReferenceTeamStore((state) => state);
   let shirtObj: Shirt | null = null;
 
   if (typeof shirt === 'string') shirtObj = JSON.parse(shirt);
@@ -34,6 +39,7 @@ export default function ManageShirt() {
     onSubmit: async ({ value }) => {
       const shirt: Partial<Shirt> = {
         team: value.team,
+        team_key: teams.find((team) => value.team === team.name)?.key,
         season: value.season,
         type: value.type,
         condition: value.condition || null,
@@ -49,6 +55,27 @@ export default function ManageShirt() {
       router.back();
     }
   });
+
+  useEffect(() => {
+    let isActive = true;
+
+    const loadReferenceTeams = async () => {
+      try {
+        if (teams.length > 0) return;
+        if (!isActive) return;
+        const fetchedTeams = await fetchReferenceTeams(session!);
+        setTeams(fetchedTeams);
+      } catch (error) {
+        console.error('Failed to load reference teams: ', error);
+      }
+    };
+
+    loadReferenceTeams();
+
+    return () => {
+      isActive = false;
+    };
+  }, [session, teams.length, setTeams]);
 
   return (
     <KeyboardAvoidingView
@@ -80,14 +107,14 @@ export default function ManageShirt() {
                   }}
                 >
                   {(field) => (
-                    <DetailsInput
+                    <DetailsDropdownSearch
                       title='Team'
-                      placeholder='Real Madrid'
+                      placeholder='Select a team'
                       value={field.state.value}
-                      onChangeText={field.handleChange}
+                      onSelection={field.handleChange}
                       isValid={field.state.meta.isValid}
                       errorMessage={field.state.meta.errors.join(', ')}
-                      maxLength={30}
+                      options={teams.map((team) => team.name).sort()}
                     />
                   )}
                 </shirtForm.Field>
@@ -229,9 +256,9 @@ export default function ManageShirt() {
             </View>
           </View>
           <View className='px-8 mb-10'>
-            <AuthButton loading={false} onPress={shirtForm.handleSubmit} >
+            <Button loading={false} onPress={shirtForm.handleSubmit} >
               <Text>{mode === 'edit' ? 'Save Changes' : 'Add Shirt'}</Text>
-            </AuthButton>
+            </Button>
           </View>
         </View>
       </ScrollView>

@@ -1,6 +1,7 @@
 interface Shirt {
   id: string;
   team: string;
+  team_key: string;
   season: string;
   type: string;
   condition: string | null;

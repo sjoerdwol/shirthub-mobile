@@ -1,5 +1,5 @@
-import AuthButton from '@/components/authentication/button';
 import AuthInput from '@/components/authentication/input';
+import Button from '@/components/ui/button';
 import { useAuth } from '@/contexts/authContext';
 import { useState } from 'react';
 import { Text, View } from 'react-native';
@@ -32,7 +32,7 @@ export default function RegisterScreen() {
           value={password}
         />
       </View>
-      <AuthButton loading={loading} onPress={() => signUp(email, password, username)}>Register</AuthButton>
+      <Button loading={loading} onPress={() => signUp(email, password, username)}>Register</Button>
     </View>
   );
 } 

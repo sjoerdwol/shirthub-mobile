@@ -1,9 +1,10 @@
 import ManageShirt from '@/app/shirts/manage';
 import { useAuth } from '@/contexts/authContext';
+import { useReferenceTeamStore } from '@/stores/referenceDataStore';
 import { useShirtStore } from '@/stores/shirtStore';
 import formatInputWithSlash from '@/utils/formatInputWithSlash';
 import { handleShirtAddition, handleShirtUpdate } from '@/utils/handleShirtOperations';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react-native';
 import { router } from 'expo-router';
 import React from 'react';
 
@@ -15,6 +16,11 @@ jest.mock('@/contexts/authContext', () => ({
 // Mock the shirt store
 jest.mock('@/stores/shirtStore', () => ({
   useShirtStore: jest.fn(),
+}));
+
+// Mock the reference team store
+jest.mock('@/stores/referenceDataStore', () => ({
+  useReferenceTeamStore: jest.fn(),
 }));
 
 // Mock the shirt operations utility
@@ -38,9 +44,9 @@ jest.mock('expo-router', () => ({
 }));
 
 // Mock the components
-jest.mock('@/components/authentication/button', () => {
+jest.mock('@/components/ui/button', () => {
   const { TouchableOpacity, Text } = require('react-native');
-  return function MockAuthButton({ children, onPress, loading }: any) {
+  return function MockButton({ children, onPress, loading }: any) {
     return (
       <TouchableOpacity testID="auth-button" onPress={onPress} disabled={loading}>
         <Text>{children}</Text>
@@ -57,6 +63,29 @@ jest.mock('@/components/details/detailsDropdown', () => {
         <Text>{title}</Text>
         <Text>{placeholder}</Text>
         <Text>{value}</Text>
+        {options?.map((option: string) => (
+          <TouchableOpacity
+            key={option}
+            testID={`option-${option}`}
+            onPress={() => onSelection(option)}
+          >
+            <Text>{option}</Text>
+          </TouchableOpacity>
+        ))}
+        {!isValid && errorMessage && <Text testID={`error-${title.toLowerCase()}`}>{errorMessage}</Text>}
+      </View>
+    );
+  };
+});
+
+jest.mock('@/components/details/detailsDropdownSearch', () => {
+  const { TouchableOpacity, Text, View } = require('react-native');
+  return function MockDetailsDropdownSearch({ title, placeholder, value, onSelection, isValid, errorMessage, options }: any) {
+    return (
+      <View testID={`dropdown-search-${title.toLowerCase()}`}>
+        <Text>{title}</Text>
+        <Text>{placeholder}</Text>
+        <Text testID={`${title}-value`}>{value}</Text>
         {options?.map((option: string) => (
           <TouchableOpacity
             key={option}
@@ -110,6 +139,7 @@ jest.mock('@/components/ui/shirtImage', () => {
 
 const mockUseAuth = useAuth as jest.MockedFunction<typeof useAuth>;
 const mockUseShirtStore = useShirtStore as jest.MockedFunction<typeof useShirtStore>;
+const mockUseReferenceStore = useReferenceTeamStore as jest.MockedFunction<typeof useReferenceTeamStore>;
 const mockHandleShirtAddition = handleShirtAddition as jest.MockedFunction<typeof handleShirtAddition>;
 const mockHandleShirtUpdate = handleShirtUpdate as jest.MockedFunction<typeof handleShirtUpdate>;
 const mockFormatInputWithSlash = formatInputWithSlash as jest.MockedFunction<typeof formatInputWithSlash>;
@@ -141,6 +171,7 @@ const mockSession = {
 const mockShirt: Shirt = {
   id: '1',
   team: 'Real Madrid',
+  team_key: 'real-madrid',
   season: '2024',
   type: 'Home',
   condition: 'Brand New',
@@ -167,6 +198,10 @@ describe('Manage Shirt Component', () => {
       setShirts: jest.fn(),
       removeShirt: jest.fn()
     });
+    mockUseReferenceStore.mockReturnValue({
+      teams: [{ name: 'Real Madrid' }, { name: 'Barcelona' }],
+      setTeams: jest.fn()
+    });
     mockFormatInputWithSlash.mockImplementation((text) => text);
   });
 
@@ -185,7 +220,8 @@ describe('Manage Shirt Component', () => {
     it('renders all form fields with correct placeholders', () => {
       render(<ManageShirt />);
 
-      screen.getByTestId('input-team');
+      screen.getByTestId('dropdown-search-team');
+
       screen.getByTestId('input-season');
       screen.getByTestId('input-print name');
       screen.getByTestId('input-print number');
@@ -205,10 +241,9 @@ describe('Manage Shirt Component', () => {
     it('calls handleShirtAddition and navigates back after successful submission', async () => {
       render(<ManageShirt />);
 
-      const teamInput = screen.getByTestId('text-input-team');
       const seasonInput = screen.getByTestId('text-input-season');
 
-      fireEvent.changeText(teamInput, 'Real Madrid');
+      fireEvent.press(screen.getByTestId('option-Real Madrid'));
       fireEvent.changeText(seasonInput, '2024');
       fireEvent.press(screen.getByTestId('option-Home'));
       fireEvent.press(screen.getByTestId('auth-button'));
@@ -248,10 +283,10 @@ describe('Manage Shirt Component', () => {
     it('pre-fills form fields with existing shirt data', () => {
       render(<ManageShirt />);
 
-      const teamInput = screen.getByTestId('text-input-team');
+      const teamDropdownValue = screen.getByTestId('Team-value');
       const seasonInput = screen.getByTestId('text-input-season');
 
-      expect(teamInput.props.value).toBe('Real Madrid');
+      expect(teamDropdownValue).toHaveTextContent('Real Madrid');
       expect(seasonInput.props.value).toBe('2024');
     });
 
@@ -264,8 +299,7 @@ describe('Manage Shirt Component', () => {
     it('calls handleShirtUpdate when form is submitted', async () => {
       render(<ManageShirt />);
 
-      const teamInput = screen.getByTestId('text-input-team');
-      fireEvent.changeText(teamInput, 'Barcelona');
+      fireEvent.press(screen.getByTestId('option-Barcelona'));
       fireEvent.press(screen.getByTestId('auth-button'));
 
       await waitFor(() => {
@@ -288,8 +322,8 @@ describe('Manage Shirt Component', () => {
 
       render(<ManageShirt />);
 
-      const teamInput = screen.getByTestId('text-input-team');
-      expect(teamInput.props.value).toBe('Real Madrid');
+      const teamDropdownValue = screen.getByTestId('Team-value');
+      expect(teamDropdownValue).toHaveTextContent('Real Madrid');
     });
   });
 
@@ -301,8 +335,6 @@ describe('Manage Shirt Component', () => {
     it('shows validation error for empty team field', async () => {
       render(<ManageShirt />);
 
-      const teamInput = screen.getByTestId('text-input-team');
-      fireEvent.changeText(teamInput, '');
       fireEvent.press(screen.getByTestId('auth-button'));
 
       await waitFor(() => {
@@ -384,15 +416,6 @@ describe('Manage Shirt Component', () => {
   describe('Form Field Interactions', () => {
     beforeEach(() => {
       mockUseLocalSearchParams.mockReturnValue({ mode: 'add' });
-    });
-
-    it('updates team field when user types', () => {
-      render(<ManageShirt />);
-
-      const teamInput = screen.getByTestId('text-input-team');
-      fireEvent.changeText(teamInput, 'Barcelona');
-
-      expect(teamInput.props.value).toBe('Barcelona');
     });
 
     it('calls formatInputWithSlash for season field', () => {
@@ -487,7 +510,7 @@ describe('Manage Shirt Component', () => {
     it('processes form data correctly for submission', async () => {
       render(<ManageShirt />);
 
-      fireEvent.changeText(screen.getByTestId('text-input-team'), 'Real Madrid');
+      fireEvent.press(screen.getByTestId('option-Real Madrid'));
       fireEvent.changeText(screen.getByTestId('text-input-season'), '2024');
       fireEvent.press(screen.getByTestId('option-Home'));
       fireEvent.press(screen.getByTestId('option-Brand New'));
@@ -519,7 +542,7 @@ describe('Manage Shirt Component', () => {
     it('handles null values correctly', async () => {
       render(<ManageShirt />);
 
-      fireEvent.changeText(screen.getByTestId('text-input-team'), 'Real Madrid');
+      fireEvent.press(screen.getByTestId('option-Real Madrid'));
       fireEvent.changeText(screen.getByTestId('text-input-season'), '2024');
       fireEvent.press(screen.getByTestId('option-Home'));
 
@@ -546,7 +569,7 @@ describe('Manage Shirt Component', () => {
     it('handles comma in value field', async () => {
       render(<ManageShirt />);
 
-      fireEvent.changeText(screen.getByTestId('text-input-team'), 'Real Madrid');
+      fireEvent.press(screen.getByTestId('option-Real Madrid'));
       fireEvent.changeText(screen.getByTestId('text-input-season'), '2024');
       fireEvent.press(screen.getByTestId('option-Home'));
       fireEvent.changeText(screen.getByTestId('text-input-value'), '99,99');

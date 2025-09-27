@@ -1,5 +1,5 @@
-import AuthButton from '@/components/authentication/button';
 import AuthInput from '@/components/authentication/input';
+import Button from '@/components/ui/button';
 import { useAuth } from '@/contexts/authContext';
 import { useState } from 'react';
 import { Text, View } from 'react-native';
@@ -26,7 +26,7 @@ export default function LoginScreen() {
           value={password}
         />
       </View>
-      <AuthButton loading={loading} onPress={() => signIn(email, password)}>Log In</AuthButton>
+      <Button loading={loading} onPress={() => signIn(email, password)}>Log In</Button>
     </View>
   );
 } 

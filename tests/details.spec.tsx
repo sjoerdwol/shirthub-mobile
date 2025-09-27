@@ -1,5 +1,6 @@
 import DetailsDropdown from "@/components/details/detailsDropdown";
 import DetailsDropdownItem from "@/components/details/detailsDropdownItem";
+import DetailsDropdownSearch from "@/components/details/detailsDropdownSearch";
 import DetailsInput from "@/components/details/detailsInput";
 import DetailsItem from "@/components/details/detailsItem";
 import DetailsRow from "@/components/details/detailsRow";
@@ -108,6 +109,53 @@ describe("Details Dropdown", () => {
 
   it("shows error when invalid", () => {
     render(<DetailsDropdown {...baseProps} isValid={false} />);
+    screen.getByText("Type is required");
+  });
+});
+
+describe("Details Dropdown Search", () => {
+  const baseProps = {
+    title: "Type",
+    placeholder: "Select type",
+    value: "",
+    onSelection: jest.fn(),
+    isValid: true,
+    errorMessage: "Type is required",
+    options: ["Home", "Away", "Third"],
+  };
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it("renders title and placeholder; opens and closes modal with x button", () => {
+    render(<DetailsDropdownSearch {...baseProps} />);
+
+    screen.getByText("Type");
+    screen.getByText("Select type");
+
+    fireEvent.press(screen.getByText("Select type").parent);
+    screen.getByText("Home");
+    screen.getByText("Away");
+    screen.getByText("Third");
+
+    fireEvent.press(screen.getByTestId("close_details_dropdown_search_modal"));
+    expect(screen.queryByText("Home")).toBeNull();
+    expect(screen.queryByText("Away")).toBeNull();
+    expect(screen.queryByText("Third")).toBeNull();
+  });
+
+  it("selects an option and calls onSelection, then closes modal", () => {
+    const onSelection = jest.fn();
+    render(<DetailsDropdownSearch {...baseProps} onSelection={onSelection} />);
+
+    fireEvent.press(screen.getByText("Select type").parent);
+    fireEvent.press(screen.getByText("Third").parent);
+    expect(onSelection).toHaveBeenCalledWith("Third");
+  });
+
+  it("shows error when invalid", () => {
+    render(<DetailsDropdownSearch {...baseProps} isValid={false} />);
     screen.getByText("Type is required");
   });
 });

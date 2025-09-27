@@ -1,4 +1,4 @@
-import { addShirt, deleteShirt, getShirts, updateShirt } from '@/services/shirthub_backend';
+import { addShirt, deleteShirt, getShirts, updateShirt } from '@/services/shirthub_crud';
 import { Session } from '@supabase/supabase-js';
 import convertShirtResponse from './convertShirtResponse';
 

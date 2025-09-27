@@ -1,4 +1,4 @@
-import AuthButton from "@/components/authentication/button";
+import Button from "@/components/ui/button";
 import { useAuth } from "@/contexts/authContext";
 import { Text, View } from "react-native";
 
@@ -14,7 +14,7 @@ export default function Profile() {
       }}
     >
       <Text className=''>Profile Screen</Text>
-      <AuthButton loading={loading} onPress={() => signOut()}>Logout</AuthButton>
+      <Button loading={loading} onPress={() => signOut()}>Logout</Button>
     </View>
   );
 }
