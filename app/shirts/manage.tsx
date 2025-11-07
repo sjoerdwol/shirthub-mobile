@@ -40,6 +40,7 @@ export default function ManageShirt() {
       const shirt: Partial<Shirt> = {
         team: value.team,
         team_key: teams.find((team) => value.team === team.name)?.key,
+        league_key: teams.find((team) => value.team === team.name)?.leagueKey,
         season: value.season,
         type: value.type,
         condition: value.condition || null,
