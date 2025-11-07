@@ -1,4 +1,4 @@
-import StatBox from '@/components/home/statBox';
+import StatBox from '@/components/statistics/statBox';
 import { render, screen } from '@testing-library/react-native';
 
 it('renders small statbox correctly', () => {

@@ -1,4 +1,4 @@
-import StatBox from "@/components/home/statBox";
+import StatBox from "@/components/statistics/statBox";
 import ShirtCard from "@/components/ui/shirtCard";
 import { useAuth } from "@/contexts/authContext";
 import { useShirtStore } from "@/stores/shirtStore";
