@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-export const useReferenceTeamStore = create<ReferenceTeamState>()((set) => ({
-  teams: [],
-  setTeams: (teams) => set({ teams })
+export const useReferenceDataStore = create<ReferenceDataState>()((set) => ({
+  data: null,
+  setReferenceData: (data) => set({ data })
 }));
