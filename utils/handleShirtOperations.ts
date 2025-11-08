@@ -2,20 +2,22 @@ import { addShirt, deleteShirt, getShirts, updateShirt } from '@/services/shirth
 import { Session } from '@supabase/supabase-js';
 import convertShirtResponse from './convertShirtResponse';
 
-export async function handleShirtAddition(session: Session, newShirt: Partial<Shirt>, addShirtToStore: (shirt: Shirt) => void): Promise<void> {
+export async function handleShirtAddition(session: Session, newShirt: Partial<Shirt>, addShirtToStore: (shirt: Shirt) => void, setHasChanged: (hasChanged: boolean) => void): Promise<void> {
   try {
     const response = await addShirt(session, newShirt);
     const newShirtStore = convertShirtResponse([response])[0];
     addShirtToStore(newShirtStore);
+    setHasChanged(true);
   } catch (error) {
     console.error('Error creating shirt: ', error);
   }
 }
 
-export async function handleShirtDeletion(session: Session, shirtId: string, deleteShirtFromStore: (id: string) => void): Promise<void> {
+export async function handleShirtDeletion(session: Session, shirtId: string, deleteShirtFromStore: (id: string) => void, setHasChanged: (hasChanged: boolean) => void): Promise<void> {
   try {
     await deleteShirt(session, shirtId);
     deleteShirtFromStore(shirtId);
+    setHasChanged(true);
   } catch (error) {
     console.error('Error deleting shirt: ', error);
   }
@@ -31,11 +33,12 @@ export async function handleShirtInitialFetch(session: Session, setInitialShirts
   }
 }
 
-export async function handleShirtUpdate(session: Session, shirtId: string, updatedShirt: Partial<Shirt>, updateShirtInStore: (shirtId: string, updatedShirt: Partial<Shirt>) => void): Promise<void> {
+export async function handleShirtUpdate(session: Session, shirtId: string, updatedShirt: Partial<Shirt>, updateShirtInStore: (shirtId: string, updatedShirt: Partial<Shirt>) => void, setHasChanged: (hasChanged: boolean) => void): Promise<void> {
   try {
     const response = await updateShirt(session, shirtId, updatedShirt);
     const updatedShirtStore = convertShirtResponse([response])[0];
     updateShirtInStore(shirtId, updatedShirtStore);
+    setHasChanged(true);
   } catch (error) {
     console.error('Error creating shirt: ', error);
   }

@@ -4,6 +4,7 @@ import MenuOverlay from '@/components/menuOverlay/menuOverlay';
 import ShirtImage from '@/components/ui/shirtImage';
 import { useAuth } from '@/contexts/authContext';
 import { useShirtStore } from '@/stores/shirtStore';
+import { useUserStatisticsStore } from '@/stores/statisticsStore';
 import { handleShirtDeletion } from '@/utils/handleShirtOperations';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
@@ -19,6 +20,7 @@ export default function ShirtDetails() {
   else if (Array.isArray(id) && id.length > 0) shirtId = id[0];
 
   const { shirts, removeShirt } = useShirtStore((state) => state);
+  const { setHasChanged } = useUserStatisticsStore((state) => state);
   const [menuVisible, setMenuVisible] = useState(false);
   const shirt = shirts.find((currShirt) => currShirt.id === shirtId);
 
@@ -35,7 +37,7 @@ export default function ShirtDetails() {
   };
 
   const handleDelete = async () => {
-    await handleShirtDeletion(session!, shirtId!, removeShirt);
+    await handleShirtDeletion(session!, shirtId!, removeShirt, setHasChanged);
     setMenuVisible(false);
     router.back();
   };
