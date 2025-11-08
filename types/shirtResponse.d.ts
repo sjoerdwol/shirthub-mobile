@@ -2,6 +2,8 @@ interface ShirtResponse {
   id: string;
   ownerId: string;
   team: string;
+  teamKey: string;
+  leagueKey: string;
   season: string;
   type: string;
   condition: string | null;
