@@ -2,7 +2,7 @@ import Index from '@/app/(tabs)/index';
 import { useAuth } from '@/contexts/authContext';
 import { useShirtStore } from '@/stores/shirtStore';
 import { handleShirtInitialFetch } from '@/utils/handleShirtOperations';
-import { act, render, screen, waitFor } from '@testing-library/react-native';
+import { render, screen, waitFor } from '@testing-library/react-native';
 
 // Mock the auth context
 jest.mock('@/contexts/authContext', () => ({
@@ -18,20 +18,6 @@ jest.mock('@/stores/shirtStore', () => ({
 jest.mock('@/utils/handleShirtOperations', () => ({
   handleShirtInitialFetch: jest.fn(),
 }));
-
-// Mock the StatBox component
-jest.mock('@/components/home/statBox', () => {
-  const { View, Text } = require('react-native');
-  return function MockStatBox({ title, value, size }: StatBoxProps) {
-    return (
-      <View testID={`stat-box-${title.toLowerCase().replace(/\s+/g, '-')}`}>
-        <Text>{title}</Text>
-        <Text>{value}</Text>
-        <Text>{size || 'small'}</Text>
-      </View>
-    );
-  };
-});
 
 // Mock the ShirtCard component
 jest.mock('@/components/ui/shirtCard', () => {
@@ -54,6 +40,8 @@ const testShirts: Shirt[] = [
   {
     id: '1',
     team: 'SC Freiburg',
+    team_key: 'sc-freiburg',
+    league_key: 'bundesliga',
     season: '2024',
     type: 'Home',
     condition: 'Excellent',
@@ -68,6 +56,8 @@ const testShirts: Shirt[] = [
   {
     id: '2',
     team: 'Bayern Munich',
+    team_key: 'bayern-munich',
+    league_key: 'bundesliga',
     season: '2023',
     type: 'Away',
     condition: 'Good',
@@ -82,6 +72,8 @@ const testShirts: Shirt[] = [
   {
     id: '3',
     team: 'Borussia Dortmund',
+    team_key: 'borussia-dortmund',
+    league_key: 'bundesliga',
     season: '2024',
     type: 'Third',
     condition: 'Fair',
@@ -155,49 +147,7 @@ describe('Index Component', () => {
 
     screen.getByTestId('main-container');
     screen.getByTestId('header-section');
-    screen.getByTestId('stats-section');
     screen.getByTestId('recently-added-section');
-  });
-
-  it('renders all StatBox components with correct values', async () => {
-    mockUseAuth.mockReturnValue({ session: mockSession, loading: false, user: null, signIn: jest.fn(), signOut: jest.fn(), signUp: jest.fn() });
-    mockUseShirtStore.mockReturnValue({ shirts: testShirts, setShirts: jest.fn() });
-
-    render(<Index />);
-
-    await waitFor(() => {
-      expect(screen.queryByText('Loading...')).toBeNull();
-    });
-
-    const totalValueBox = screen.getByTestId('stat-box-total-value');
-    expect(totalValueBox).toBeTruthy();
-    screen.getByText('Total Value');
-    screen.getByText('1500');
-
-    const totalShirtsBox = screen.getByTestId('stat-box-total-shirts');
-    expect(totalShirtsBox).toBeTruthy();
-    screen.getByText('Total Shirts');
-    screen.getByText('3');
-
-    // Check Average Value StatBox
-    const avgValueBox = screen.getByTestId('stat-box-average-value-per-shirt');
-    expect(avgValueBox).toBeTruthy();
-    screen.getByText('Average Value per Shirt');
-    screen.getByText('150');
-  });
-
-  it('calculates average value correctly when shirts are present', async () => {
-    mockUseAuth.mockReturnValue({ session: mockSession, loading: false, user: null, signIn: jest.fn(), signOut: jest.fn(), signUp: jest.fn() });
-    mockUseShirtStore.mockReturnValue({ shirts: testShirts, setShirts: jest.fn() });
-
-    render(<Index />);
-
-    await waitFor(() => {
-      expect(screen.queryByText('Loading...')).toBeNull();
-    });
-
-    // TODO: Adjust after actually implementing value calculation
-    screen.getByText('150');
   });
 
   it('renders Recently Added section with correct title', async () => {
@@ -210,7 +160,7 @@ describe('Index Component', () => {
       expect(screen.queryByText('Loading...')).toBeNull();
     });
 
-    screen.getByText('Recently Added');
+    screen.getByText('Your Most Recent');
   });
 
   it('renders all shirts in the recently added FlatList', async () => {
@@ -241,9 +191,6 @@ describe('Index Component', () => {
     await waitFor(() => {
       expect(screen.queryByText('Loading...')).toBeNull();
     });
-
-    expect(screen.getByTestId('stat-box-average-value-per-shirt')).toHaveTextContent('0', { exact: false });
-    expect(screen.getByTestId('stat-box-total-shirts')).toHaveTextContent('0', { exact: false });
 
     const flatList = screen.getByTestId('recently-added-flatlist');
     expect(flatList).toBeTruthy();

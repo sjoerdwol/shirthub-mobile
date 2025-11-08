@@ -26,6 +26,8 @@ const testShirts: Shirt[] = [
   {
     id: '1',
     team: 'SC Freiburg',
+    team_key: 'sc-freiburg',
+    league_key: 'bundesliga',
     season: '2024',
     type: 'Home',
     condition: 'Excellent',
@@ -40,6 +42,8 @@ const testShirts: Shirt[] = [
   {
     id: '2',
     team: 'Bayern Munich',
+    team_key: 'bayern-munich',
+    league_key: 'bundesliga',
     season: '2023',
     type: 'Away',
     condition: 'Good',
@@ -54,6 +58,8 @@ const testShirts: Shirt[] = [
   {
     id: '3',
     team: 'Borussia Dortmund',
+    team_key: 'borussia-dortmund',
+    league_key: 'bundesliga',
     season: '2024',
     type: 'Third',
     condition: 'Fair',
