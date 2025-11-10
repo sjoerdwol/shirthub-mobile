@@ -10,6 +10,8 @@ jest.mock('expo-router', () => ({
 const testShirt: Shirt = {
   id: 'TESTID',
   team: 'SC Freiburg',
+  team_key: 'sc-freiburg',
+  league_key: 'bundesliga',
   season: '2024',
   type: 'Home',
   condition: null,

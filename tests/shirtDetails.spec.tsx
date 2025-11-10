@@ -112,6 +112,8 @@ const mockSession = {
 const mockShirt: Shirt = {
   id: '1',
   team: 'Real Madrid',
+  team_key: 'real-madrid',
+  league_key: 'la-liga',
   season: '2024',
   type: 'Home',
   condition: 'Brand New',
@@ -247,6 +249,8 @@ describe('Shirt Details Component', () => {
     const shirtWithNulls: Shirt = {
       id: '2',
       team: 'Barcelona',
+      team_key: 'barcelona',
+      league_key: 'la-liga',
       season: '2023',
       type: 'Away',
       condition: null,

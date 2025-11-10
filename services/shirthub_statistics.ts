@@ -1,14 +1,14 @@
-import { Session } from "@supabase/supabase-js";
+import { Session } from '@supabase/supabase-js';
 
-// Retrieve all supported teams and leagues
-export const fetchReferenceData = async (session: Session): Promise<ReferenceData> => {
+// Retrieve user statistics
+export const getUserStatistics = async (session: Session): Promise<UserStatistics> => {
   try {
     const backendUrl = process.env.EXPO_PUBLIC_BACKEND_URL;
     if (!session?.access_token) throw new Error('No valid session found. Please log in again.');
     if (!backendUrl) throw new Error('Missing EXPO_PUBLIC_BACKEND_URL environment variable!');
 
-    // GET request to /shirts with the JWT token
-    const response = await fetch(`${backendUrl}/reference_data`, {
+    // GET request to /statistics with the JWT token
+    const response = await fetch(`${backendUrl}/stats`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${session.access_token}`,
@@ -18,10 +18,10 @@ export const fetchReferenceData = async (session: Session): Promise<ReferenceDat
 
     if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
-    const data: ReferenceData = await response.json();
-    return data;
+    const userStatistics: UserStatistics = await response.json();
+    return userStatistics;
   } catch (error) {
-    console.error('Error fetching reference teams: ' + error);
+    console.error('Error fetching user statistics: ', error);
     throw error;
   }
 }

@@ -5,6 +5,8 @@ it('correctly converts backend shirt response', () => {
     id: 'TEST-ID',
     ownerId: 'TEST-OWNER-ID',
     team: 'TEST-TEAM',
+    teamKey: 'TEST-TEAM-KEY',
+    leagueKey: 'TEST-LEAGUE-KEY',
     season: '2025',
     type: 'Home',
     condition: 'Used',
@@ -19,6 +21,8 @@ it('correctly converts backend shirt response', () => {
   const expectedShirt: Shirt = {
     id: 'TEST-ID',
     team: 'TEST-TEAM',
+    team_key: 'TEST-TEAM-KEY',
+    league_key: 'TEST-LEAGUE-KEY',
     season: '2025',
     type: 'Home',
     condition: 'Used',

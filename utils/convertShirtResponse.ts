@@ -2,6 +2,8 @@ export default function convertShirtResponse(shirtResponseArray: Array<ShirtResp
   const convertedShirts = shirtResponseArray.map((shirtResponse): Shirt => ({
     id: shirtResponse.id,
     team: shirtResponse.team,
+    team_key: shirtResponse.teamKey,
+    league_key: shirtResponse.leagueKey,
     season: shirtResponse.season,
     type: shirtResponse.type,
     condition: shirtResponse.condition,

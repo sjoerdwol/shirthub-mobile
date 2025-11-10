@@ -1,7 +1,8 @@
 import ManageShirt from '@/app/shirts/manage';
 import { useAuth } from '@/contexts/authContext';
-import { useReferenceTeamStore } from '@/stores/referenceDataStore';
+import { useReferenceDataStore } from '@/stores/referenceDataStore';
 import { useShirtStore } from '@/stores/shirtStore';
+import { useUserStatisticsStore } from '@/stores/statisticsStore';
 import formatInputWithSlash from '@/utils/formatInputWithSlash';
 import { handleShirtAddition, handleShirtUpdate } from '@/utils/handleShirtOperations';
 import { fireEvent, render, screen, waitFor, within } from '@testing-library/react-native';
@@ -20,7 +21,12 @@ jest.mock('@/stores/shirtStore', () => ({
 
 // Mock the reference team store
 jest.mock('@/stores/referenceDataStore', () => ({
-  useReferenceTeamStore: jest.fn(),
+  useReferenceDataStore: jest.fn(),
+}));
+
+// Mock the statistics store
+jest.mock('@/stores/statisticsStore', () => ({
+  useUserStatisticsStore: jest.fn(),
 }));
 
 // Mock the shirt operations utility
@@ -139,7 +145,8 @@ jest.mock('@/components/ui/shirtImage', () => {
 
 const mockUseAuth = useAuth as jest.MockedFunction<typeof useAuth>;
 const mockUseShirtStore = useShirtStore as jest.MockedFunction<typeof useShirtStore>;
-const mockUseReferenceStore = useReferenceTeamStore as jest.MockedFunction<typeof useReferenceTeamStore>;
+const mockUseReferenceStore = useReferenceDataStore as jest.MockedFunction<typeof useReferenceDataStore>;
+const mockUseUserStatisticsStore = useUserStatisticsStore as jest.MockedFunction<typeof useUserStatisticsStore>;
 const mockHandleShirtAddition = handleShirtAddition as jest.MockedFunction<typeof handleShirtAddition>;
 const mockHandleShirtUpdate = handleShirtUpdate as jest.MockedFunction<typeof handleShirtUpdate>;
 const mockFormatInputWithSlash = formatInputWithSlash as jest.MockedFunction<typeof formatInputWithSlash>;
@@ -172,6 +179,7 @@ const mockShirt: Shirt = {
   id: '1',
   team: 'Real Madrid',
   team_key: 'real-madrid',
+  league_key: 'la-liga',
   season: '2024',
   type: 'Home',
   condition: 'Brand New',
@@ -187,6 +195,7 @@ const mockShirt: Shirt = {
 describe('Manage Shirt Component', () => {
   const mockAddShirt = jest.fn();
   const mockUpdateShirt = jest.fn();
+  const mockSetHasChanged = jest.fn();
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -199,8 +208,20 @@ describe('Manage Shirt Component', () => {
       removeShirt: jest.fn()
     });
     mockUseReferenceStore.mockReturnValue({
-      teams: [{ name: 'Real Madrid' }, { name: 'Barcelona' }],
-      setTeams: jest.fn()
+      data: {
+        teams: [
+          { name: 'Real Madrid', key: 'real-madrid', leagueKey: 'la-liga', nameShort: 'RM', createdAt: new Date(), updatedAt: new Date() },
+          { name: 'Barcelona', key: 'barcelona', leagueKey: 'la-liga', nameShort: 'BAR', createdAt: new Date(), updatedAt: new Date() }
+        ],
+        leagues: []
+      },
+      setReferenceData: jest.fn()
+    });
+    mockUseUserStatisticsStore.mockReturnValue({
+      hasChanged: false,
+      userStatistics: null,
+      setHasChanged: mockSetHasChanged,
+      setUserStatistics: jest.fn()
     });
     mockFormatInputWithSlash.mockImplementation((text) => text);
   });
@@ -256,7 +277,8 @@ describe('Manage Shirt Component', () => {
             season: '2024',
             type: 'Home'
           }),
-          mockAddShirt
+          mockAddShirt,
+          mockSetHasChanged
         );
       });
 
@@ -309,7 +331,8 @@ describe('Manage Shirt Component', () => {
           expect.objectContaining({
             team: 'Barcelona'
           }),
-          mockUpdateShirt
+          mockUpdateShirt,
+          mockSetHasChanged
         );
       });
     });
@@ -534,7 +557,8 @@ describe('Manage Shirt Component', () => {
             size: 'M',
             value: 120
           }),
-          mockAddShirt
+          mockAddShirt,
+          mockSetHasChanged
         );
       });
     });
@@ -561,7 +585,8 @@ describe('Manage Shirt Component', () => {
             size: null,
             value: null
           }),
-          mockAddShirt
+          mockAddShirt,
+          mockSetHasChanged
         );
       });
     });
@@ -582,7 +607,8 @@ describe('Manage Shirt Component', () => {
           expect.objectContaining({
             value: 99.99
           }),
-          mockAddShirt
+          mockAddShirt,
+          mockSetHasChanged
         );
       });
     });
@@ -597,6 +623,17 @@ describe('Manage Shirt Component', () => {
       mockUseAuth.mockReturnValue({ session: null, loading: false, user: null, signIn: jest.fn(), signOut: jest.fn(), signUp: jest.fn() });
 
       expect(() => render(<ManageShirt />)).not.toThrow();
+    });
+
+    it('displays error message when reference data is null', () => {
+      mockUseReferenceStore.mockReturnValue({
+        data: null,
+        setReferenceData: jest.fn()
+      });
+
+      render(<ManageShirt />);
+
+      expect(screen.getByText('Failed to load reference data. Please try again later.')).toBeTruthy();
     });
 
     it('handles invalid shirt JSON gracefully', () => {
