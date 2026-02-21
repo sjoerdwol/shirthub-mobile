@@ -6,10 +6,17 @@ export default function TabsLayout() {
   return (
     <Tabs screenOptions={{
       headerStyle: {
-        backgroundColor: '#23272e',
+        backgroundColor: 'rgb(240,234,210 / 0.9)',
+        borderBottomColor: '#6C584C',
+        borderBottomWidth: 0.2
       },
       headerTitleStyle: {
-        color: '#e0e5eb',
+        color: '#6C584C',
+        lineHeight: 36,
+        fontFamily: 'Lexend',
+        fontSize: 28,
+        fontStyle: "italic",
+        fontWeight: 'bold'
       },
       tabBarActiveTintColor: '#3673c4',
       tabBarItemStyle: {
@@ -25,7 +32,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
+          title: "ShirtHub",
           tabBarIcon: ({ color, size }) => <TabBarIcon name='home' color={color} size={size} />
         }}
       />

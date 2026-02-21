@@ -1,5 +1,6 @@
 import HeaderIcon from "@/components/ui/headerIcon";
 import { AuthContextProvider, useAuth } from "@/contexts/authContext";
+import { useFonts } from "expo-font";
 import { Stack, router, useSegments } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
@@ -70,10 +71,23 @@ const Root = () => {
 };
 
 export default function RootLayout() {
+  const [loaded] = useFonts({
+    "Lexend": require("../assets/fonts/Lexend-Regular.ttf"),
+    "Lexend-Medium": require("../assets/fonts/Lexend-Medium.ttf"),
+    "Lexend-SemiBold": require("../assets/fonts/Lexend-SemiBold.ttf"),
+    "Lexend-Bold": require("../assets/fonts/Lexend-Bold.ttf"),
+    "Lexend-BoldItalic": require("../assets/fonts/Lexend-BoldItalic.ttf"),
+    "Lexend-ExtraBold": require("../assets/fonts/Lexend-ExtraBold.ttf"),
+    "Lexend-Black": require("../assets/fonts/Lexend-Black.ttf"),
+    "Lexend-Light": require("../assets/fonts/Lexend-Light.ttf"),
+    "Lexend-ExtraLight": require("../assets/fonts/Lexend-ExtraLight.ttf"),
+    "Lexend-Thin": require("../assets/fonts/Lexend-Thin.ttf")
+  });
+
   return (
     <SafeAreaProvider>
       <AuthContextProvider>
-        <StatusBar style="light" />
+        <StatusBar style="dark" />
         <Root />
       </AuthContextProvider>
     </SafeAreaProvider>
