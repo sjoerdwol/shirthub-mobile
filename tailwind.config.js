@@ -8,6 +8,8 @@ module.exports = {
         vanillaCream: '#F0EAD2',
         cream: '#DDE5B6',
         mutedOlive: '#ADC178',
+        oliveLeaf: '#606C38',
+        blackForest: '#283618',
         fadedCopper: '#A98467',
         ashBrown: '#6C584C'
       },
