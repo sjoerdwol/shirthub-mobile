@@ -12,6 +12,7 @@ export default function TabsLayout() {
       },
       headerTitleStyle: {
         color: '#6C584C',
+        letterSpacing: -0.25,
         lineHeight: 36,
         fontFamily: 'Lexend',
         fontSize: 28,
