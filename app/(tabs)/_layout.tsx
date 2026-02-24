@@ -12,13 +12,12 @@ export default function TabsLayout() {
       },
       headerTitleStyle: {
         color: '#6C584C',
-        letterSpacing: -0.25,
-        lineHeight: 36,
         fontFamily: 'Lexend',
         fontSize: 28,
-        fontStyle: "italic",
         fontWeight: 'bold',
-        paddingBottom: 2
+        letterSpacing: -0.25,
+        lineHeight: 36,
+        paddingBottom: 2,
       },
       tabBarActiveTintColor: '#606C38',
       tabBarInactiveTintColor: 'rgb(108,88,76 / 0.4)',
@@ -34,6 +33,16 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="index"
         options={{
+          headerTitleStyle: {
+            color: '#6C584C',
+            fontFamily: 'Lexend',
+            fontSize: 28,
+            fontStyle: 'italic',
+            fontWeight: 'bold',
+            letterSpacing: -0.25,
+            lineHeight: 36,
+            paddingBottom: 2,
+          },
           tabBarLabel: 'Startseite',
           title: "ShirtHub",
           tabBarIcon: ({ color, size }) => <TabBarIcon name='home' color={color} size={size} />
@@ -44,8 +53,7 @@ export default function TabsLayout() {
         options={{
           tabBarLabel: 'Sammlung',
           title: "Meine Sammlung",
-          tabBarIcon: ({ color, size }) => <TabBarIcon name='shirt' color={color} size={size} />,
-          headerRight: () => <HeaderIcon name='add' size={28} color='#e0e5eb' className='mr-6' onPress={() => router.navigate({ pathname: '/shirts/manage', params: { mode: 'add' } })} />
+          tabBarIcon: ({ color, size }) => <TabBarIcon name='shirt' color={color} size={size} />
         }}
       />
       <Tabs.Screen

@@ -16,6 +16,7 @@ export default function Index() {
     return;
   }
 
+  // TODO: Replace this fetch with notification fetch after notifications have been implemented
   useEffect(() => {
     const initialShirtFetch = async () => {
       await handleShirtInitialFetch(session, setShirts);
@@ -23,7 +24,7 @@ export default function Index() {
     };
 
     initialShirtFetch();
-  }, []);
+  }, [session, setShirts]);
 
   return (
     <View className="flex-1 bg-vanillaCream pb-24">
@@ -31,9 +32,10 @@ export default function Index() {
         <Text className="text-ashBrown text-2xl font-bold font-Lexend">Activity Feed</Text>
         <Text className="text-ashBrown/80 text-base font-Lexend">Entdecke was deine Freunde so gemacht haben</Text>
       </View>
-      {loading
-        ? <LoadingView />
-        : <HomepageView />
+      {
+        loading
+          ? <LoadingView />
+          : <HomepageView />
       }
     </View>
   );
