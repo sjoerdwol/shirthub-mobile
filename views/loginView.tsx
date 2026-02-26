@@ -1,0 +1,55 @@
+import { useAuth } from "@/contexts/authContext";
+import PrimaryButton from "@/newComponents/buttons/primaryButton";
+import SingleIconInput from "@/newComponents/inputs/singleIconInput";
+import SingleIconInputWithButton from "@/newComponents/inputs/singleIconInputWithButton";
+import { useState } from "react";
+import { Text, View } from "react-native";
+import Animated, { SlideInLeft, SlideOutLeft } from "react-native-reanimated";
+
+export default function LoginView() {
+  const [securePassword, setSecurePassword] = useState(true);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const { loading, signIn } = useAuth();
+
+  return (
+    <Animated.View
+      className='px-6 w-full'
+      entering={SlideInLeft.duration(500)}
+      exiting={SlideOutLeft.duration(500)}
+    >
+      <Text className="text-ashBrown text-2xl font-LexendBold pb-4">Willkommen zurück</Text>
+      <View className="w-full px-1 mb-5">
+        <Text className="text-ashBrown text-base font-semibold font-Lexend pb-2">Email Adresse</Text>
+        <SingleIconInput
+          firstIcon="mail-outline"
+          keyboardType="email-address"
+          onChangeText={setEmail}
+          placeholder="name@beispiel.de"
+          value={email}
+        />
+      </View>
+      <View className="w-full px-1">
+        <View className="w-full flex-row justify-between items-center pb-2">
+          <Text className="text-ashBrown text-base font-semibold font-Lexend">Passwort</Text>
+          <Text className="text-oliveLeaf text-sm font-LexendBold active:underline">Passwort vergessen?</Text>
+        </View>
+        <SingleIconInputWithButton
+          buttonState={securePassword}
+          firstIcon="lock-closed-outline"
+          keyboardType="default"
+          onChangeText={setPassword}
+          placeholder="Dein Passwort..."
+          secureTextEntry={securePassword}
+          secondIcon={securePassword ? 'eye-outline' : 'eye-off-outline'}
+          setButtonState={setSecurePassword}
+          value={password}
+        />
+      </View>
+      <View className="my-10 px-1">
+        <PrimaryButton text="Anmelden" onPress={() => { }} />
+      </View>
+      <View className="mb-10 mx-1 h-px bg-ashBrown/10" />
+    </Animated.View>
+  );
+}

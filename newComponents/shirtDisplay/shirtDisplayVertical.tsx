@@ -4,7 +4,7 @@ import { Image, Pressable, Text, View } from "react-native";
 
 export default function ShirtDisplayVertical({ shirt }: { shirt: Shirt }) {
   return (
-    <Pressable className="active:scale-95 transition-transform" onPress={() => router.navigate(`/shirts/${shirt.id}`)}>
+    <Pressable className="active:scale-98 transition-transform" onPress={() => router.navigate(`/shirts/${shirt.id}`)}>
       <View className="bg-cream rounded-2xl p-4 gap-5 flex-row shadow-sm border border-blackForest/15">
         <View className="w-24 h-24 rounded-xl overflow-hidden bg-mutedOlive/10">
           <Image
@@ -22,7 +22,8 @@ export default function ShirtDisplayVertical({ shirt }: { shirt: Shirt }) {
               <Ionicons name="heart" color='rgb(108,88,76 / 0.6)' size={18} />
               <Text className="text-sm text-ashBrown/60 font-bold font-Lexend">128 Likes</Text>
             </View>
-            {shirt.size &&
+            {
+              shirt.size &&
               <Text className="text-xs font-bold font-Lexend bg-mutedOlive/20 text-ashBrown px-2.5 py-1 rounded-lg uppercase">Size {shirt.size}</Text>
             }
           </View>

@@ -21,7 +21,7 @@ export default function CollectionView({ shirts }: { shirts: Shirt[] }) {
         contentContainerStyle={{ gap: 16 }}
       />
       <Pressable
-        className="absolute bg-mutedOlive size-14 rounded-2xl shadow-lg items-center justify-center active:scale-95 transition-transform right-4 -bottom-[66px]"
+        className="absolute bg-mutedOlive size-14 rounded-2xl shadow-lg items-center justify-center active:scale-98 transition-transform right-4 -bottom-[66px]"
         onPress={() => router.navigate({ pathname: '/shirts/manage', params: { mode: 'add' } })}
       >
         <Ionicons name="add" color='#FFF' size={30} />

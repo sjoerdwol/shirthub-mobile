@@ -23,6 +23,9 @@ module.exports = {
         LexendExtraLight: ['LexendExtraLight'],
         LexendLight: ['LexendLight'],
         LexendThin: ['LexendThin'],
+      },
+      scale: {
+        98: .98
       }
     },
   },
