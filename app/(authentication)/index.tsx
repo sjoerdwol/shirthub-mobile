@@ -1,9 +1,9 @@
 import LoginView from "@/views/loginView";
+import RegisterView from "@/views/registerView";
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import Animated, { SlideInLeft, SlideInRight, SlideOutLeft, SlideOutRight } from "react-native-reanimated";
-import RegisterScreen from "./register";
 
 export default function AuthIndex() {
   const [mode, setMode] = useState<'login' | 'register'>('login');
@@ -20,14 +20,7 @@ export default function AuthIndex() {
       {
         mode === 'login'
           ? <LoginView />
-          : <Animated.View
-            className='bg-dark-background-300 w-full rounded-2xl shadow-lg p-8'
-            key='register'
-            entering={SlideInRight.duration(500)}
-            exiting={SlideOutRight.duration(500)}
-          >
-            <RegisterScreen />
-          </Animated.View>
+          : <RegisterView />
       }
       {
         mode === 'login'
