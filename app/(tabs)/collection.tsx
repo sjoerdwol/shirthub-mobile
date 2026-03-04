@@ -5,17 +5,13 @@ import CollectionView from "@/views/collectionView";
 import LoadingView from "@/views/loadingView";
 import { Ionicons } from "@expo/vector-icons";
 import { useEffect, useState } from "react";
-import { TextInput, View } from "react-native";
+import { Text, TextInput, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Collection() {
   const { session } = useAuth();
   const { shirts, setShirts } = useShirtStore(state => state);
   const [loading, setLoading] = useState(true);
-
-  if (!session) {
-    /* session cannot be null since root _layout.tsx would redirect to login / signup */
-    return;
-  }
 
   // TODO: Activate this properly after notifications have been implemented on homepage
   useEffect(() => {
@@ -29,21 +25,37 @@ export default function Collection() {
   }, [session, setShirts]);
 
   return (
-    <View className="flex-1 bg-vanillaCream pb-24">
-      <View className="p-4 my-2">
-        <View className="relative">
-          <Ionicons className="absolute left-3 top-1/2 -translate-y-1/2" name="search" size={20} color='#6C584C' />
-          <TextInput
-            className="w-full h-12 pl-12 pr-4 bg-cream/70 border-none rounded-xl text-ashBrown placeholder:text-ashBrown/40 font-Lexend"
-            placeholder="Durchsuche deine Sammlung ..."
-          />
+    <SafeAreaView className="flex-1 bg-vanillaCream pb-14">
+      <View className="flex-row items-center bg-vanillaCream/80 backdrop-blur-md px-4 pb-2 pt-3 justify-between border-b border-ashBrown/15">
+        <View className="size-12 items-center justify-center">
+          <Ionicons name="grid" size={22} color='#6C584C' />
+        </View>
+        <Text className="text-ashBrown text-3xl font-Lexend font-bold tracking-tight text-center">Meine Sammlung</Text>
+        <View className="items-center justify-center size-12">
+          <Ionicons name="settings" size={24} color='#6C584C' />
         </View>
       </View>
-      {
-        loading
-          ? <LoadingView />
-          : <CollectionView shirts={shirts} />
-      }
-    </View>
+      <View className="flex-1">
+        <View className="p-4 my-2">
+          <View className="relative">
+            <Ionicons className="absolute left-3 top-1/2 -translate-y-1/2" name="search" size={20} color='#6C584C' />
+            <TextInput
+              className="w-full h-12 pl-12 pr-4 bg-cream/70 border border-blackForest/10 rounded-xl text-ashBrown placeholder:text-ashBrown/40 font-Lexend"
+              placeholder="Durchsuche deine Sammlung ..."
+            />
+          </View>
+          <View className="flex-row gap-2 overflow-x-auto mt-4">
+            <View className="items-center gap-1 px-4 py-2 bg-mutedOlive rounded-full shadow-sm">
+              <Text className="text-white font-Lexend text-base font-medium whitespace-nowrap">Alle Trikots</Text>
+            </View>
+          </View>
+        </View>
+        {
+          loading
+            ? <LoadingView />
+            : <CollectionView shirts={shirts} />
+        }
+      </View>
+    </SafeAreaView>
   );
 }

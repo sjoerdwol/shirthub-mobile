@@ -23,10 +23,10 @@ export default function RegisterView() {
       <View className="w-full px-1 mb-5">
         <Text className="text-ashBrown text-base font-semibold font-Lexend pb-2">Username</Text>
         <SingleIconInput
-          firstIcon="person"
+          firstIcon="at"
           keyboardType="default"
           onChangeText={setUsername}
-          placeholder="Lege dein Username fest ..."
+          placeholder="Lege deinen Usernamen fest ..."
           value={username}
         />
       </View>
