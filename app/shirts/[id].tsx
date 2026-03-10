@@ -6,10 +6,12 @@ import { useAuth } from '@/contexts/authContext';
 import { useShirtStore } from '@/stores/shirtStore';
 import { useUserStatisticsStore } from '@/stores/statisticsStore';
 import { handleShirtDeletion } from '@/utils/handleShirtOperations';
+import ShirtDetailView from '@/views/shirtDetailView';
+import { Ionicons } from '@expo/vector-icons';
 import { router, useLocalSearchParams } from 'expo-router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Text, View } from 'react-native';
-import { setMenuVisibleGlobal } from '../_layout';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function ShirtDetails() {
   const { session } = useAuth();
@@ -23,10 +25,6 @@ export default function ShirtDetails() {
   const { setHasChanged } = useUserStatisticsStore((state) => state);
   const [menuVisible, setMenuVisible] = useState(false);
   const shirt = shirts.find((currShirt) => currShirt.id === shirtId);
-
-  useEffect(() => {
-    setMenuVisibleGlobal(setMenuVisible);
-  }, []);
 
   const handleEdit = () => {
     setMenuVisible(false);
@@ -43,75 +41,20 @@ export default function ShirtDetails() {
   };
 
   return (
-    <View className="bg-dark-background-400 flex-1 p-4">
-      {shirt
-        ? (
-          <>
-            <View className='bg-dark-background-200 mb-4 overflow-hidden h-64 w-full rounded-xl'>
-              <ShirtImage
-                imageSrc={require('../../assets/images/exampleshirt.png')}
-                size='maxi'
-              />
-            </View>
-            <View className='p-4'>
-              <Text className='font-bold mb-4 text-dark-text-400 text-2xl'>{`${shirt.team} - ${shirt.season} - ${shirt.type}`}</Text>
-              <View className='px-1'>
-                <DetailsRow>
-                  <DetailsItem
-                    title='Team'
-                    content={shirt.team}
-                  />
-                  <DetailsItem
-                    title='Season'
-                    content={shirt.season}
-                  />
-                </DetailsRow>
-                <DetailsRow>
-                  <DetailsItem
-                    title='Type'
-                    content={shirt.type}
-                  />
-                  <DetailsItem
-                    title='Condition'
-                    content={shirt.condition}
-                  />
-                </DetailsRow>
-                <DetailsRow>
-                  <DetailsItem
-                    title='Print Name'
-                    content={shirt.print_name}
-                  />
-                  <DetailsItem
-                    title='Print Number'
-                    content={shirt.print_number}
-                  />
-                </DetailsRow>
-                <DetailsRow>
-                  <DetailsItem
-                    title='Size'
-                    content={shirt.size}
-                  />
-                  <DetailsItem
-                    title='Value'
-                    content={shirt.value}
-                  />
-                </DetailsRow>
-              </View>
-            </View>
-
-            <MenuOverlay
-              onDelete={handleDelete}
-              onClose={() => setMenuVisible(false)}
-              onEdit={handleEdit}
-              visible={menuVisible}
-            />
-          </>
-        )
-        : (
-          <View>
-          </View>
-        )
+    <SafeAreaView className="flex-1 bg-vanillaCream pb-24">
+      <View className="flex-row items-center bg-vanillaCream/80 backdrop-blur-md px-4 pb-2 pt-3 justify-between border-b border-ashBrown/15">
+        <View className="size-12 items-center justify-center">
+          <Ionicons name="arrow-back" size={24} color='#6C584C' />
+        </View>
+        <View className="items-center justify-center size-12">
+          <Ionicons name="ellipsis-vertical" size={24} color='#6C584C' />
+        </View>
+      </View>
+      {
+        shirt
+          ? <ShirtDetailView shirt={shirt} />
+          : <></>
       }
-    </View>
+    </SafeAreaView>
   );
 }

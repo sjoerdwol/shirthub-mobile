@@ -6,13 +6,6 @@ import { useEffect } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import './globals.css';
 
-// Create a global setter for menu visibility
-let setMenuVisible: ((visible: boolean) => void) | null = null;
-
-export const setMenuVisibleGlobal = (setter: (visible: boolean) => void) => {
-  setMenuVisible = setter;
-};
-
 const Root = () => {
   const { loading, session } = useAuth();
   const segments = useSegments();
