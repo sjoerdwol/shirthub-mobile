@@ -1,7 +1,4 @@
-import DetailsItem from '@/components/details/detailsItem';
-import DetailsRow from '@/components/details/detailsRow';
 import MenuOverlay from '@/components/menuOverlay/menuOverlay';
-import ShirtImage from '@/components/ui/shirtImage';
 import { useAuth } from '@/contexts/authContext';
 import { useShirtStore } from '@/stores/shirtStore';
 import { useUserStatisticsStore } from '@/stores/statisticsStore';
@@ -10,7 +7,7 @@ import ShirtDetailView from '@/views/shirtDetailView';
 import { Ionicons } from '@expo/vector-icons';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
-import { Text, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function ShirtDetails() {
@@ -43,13 +40,22 @@ export default function ShirtDetails() {
   return (
     <SafeAreaView className="flex-1 bg-vanillaCream pb-24">
       <View className="flex-row items-center bg-vanillaCream/80 backdrop-blur-md px-4 pb-2 pt-3 justify-between border-b border-ashBrown/15">
-        <View className="size-12 items-center justify-center">
+        <Pressable className="size-12 items-center justify-center" onPress={() => router.back()}>
           <Ionicons name="arrow-back" size={24} color='#6C584C' />
-        </View>
-        <View className="items-center justify-center size-12">
+        </Pressable>
+        <Text className="text-ashBrown text-3xl font-Lexend font-bold tracking-tight text-center">Details</Text>
+        <Pressable className="items-center justify-center size-12" onPress={() => setMenuVisible(!menuVisible)}>
           <Ionicons name="ellipsis-vertical" size={24} color='#6C584C' />
-        </View>
+        </Pressable>
       </View>
+
+      <MenuOverlay
+        onDelete={handleDelete}
+        onClose={() => setMenuVisible(false)}
+        onEdit={handleEdit}
+        visible={menuVisible}
+      />
+
       {
         shirt
           ? <ShirtDetailView shirt={shirt} />

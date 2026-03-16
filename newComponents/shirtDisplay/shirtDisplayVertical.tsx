@@ -6,7 +6,7 @@ export default function ShirtDisplayVertical({ shirt }: { shirt: Shirt }) {
   return (
     <Pressable className="active:scale-98 transition-transform" onPress={() => router.navigate(`/shirts/${shirt.id}`)}>
       <View className="bg-cream rounded-2xl p-4 gap-5 flex-row shadow-sm border border-blackForest/15">
-        <View className="w-24 h-24 rounded-xl overflow-hidden bg-mutedOlive/10">
+        <View className="w-24 h-24 rounded-lg overflow-hidden bg-mutedOlive/10">
           <Image
             source={require('../../assets/images/exampleshirt.png')}
             className="w-full h-full bg-cover bg-center"

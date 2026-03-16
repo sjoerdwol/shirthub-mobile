@@ -10,20 +10,19 @@ export default function MenuOverlay({ visible, onClose, onEdit, onDelete }: Menu
       visible={visible}
     >
       <Pressable
-        className='bg-[rgba(0,0,0,0.5)] flex-1'
+        className='bg-[rgba(0,0,0,0.2)] flex-1'
         onPress={onClose}
-        testID='pressable_background_close_menu'
       >
-        <View className='absolute bg-dark-background-300 elevation-md min-w-32 p-2 right-4 rounded-lg shadow-black shadow top-20'>
+        <View className='absolute bg-vanillaCream elevation-md min-w-32 p-2 right-9 rounded-lg shadow-black shadow top-32 border border-ashBrown/50'>
           <MenuOverlayEntry
-            color='#e0e5eb'
+            color='#000'
             iconName='create-outline'
             onPress={onEdit}
             size={20}
             text='Edit'
           />
           <MenuOverlayEntry
-            color='#ff6b6b'
+            color='#dc2626'
             iconName='trash'
             onPress={onDelete}
             size={20}
