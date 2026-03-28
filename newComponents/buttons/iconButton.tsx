@@ -7,16 +7,16 @@ export default function IconButton({ deleteButton, icon, onPress }: { deleteButt
       {
         deleteButton
           ? <Pressable
-            className="bg-red-600 rounded-full w-[4.5rem] h-[4.5rem] items-center justify-center"
+            className="bg-red-600 rounded-full w-14 h-14 items-center justify-center"
             onPress={onPress}
           >
-            <FontAwesome6 name={icon} size={28} color='#fff' />
+            <FontAwesome6 name={icon} size={24} color='#fff' />
           </Pressable>
           : <Pressable
-            className="bg-mutedOlive rounded-full w-[4.5rem] h-[4.5rem] items-center justify-center"
+            className="bg-dark-highlight rounded-full w-14 h-14 items-center justify-center"
             onPress={onPress}
           >
-            <FontAwesome6 name={icon} size={28} color='#fff' />
+            <FontAwesome6 name={icon} size={24} color='#fff' />
           </Pressable>
       }
     </>

@@ -25,27 +25,27 @@ export default function Collection() {
   }, [session, setShirts]);
 
   return (
-    <SafeAreaView className="flex-1 bg-vanillaCream pb-14">
-      <View className="flex-row items-center bg-vanillaCream/80 backdrop-blur-md px-4 pb-2 pt-3 justify-between border-b border-ashBrown/15">
+    <SafeAreaView className="flex-1 bg-dark-background pb-14">
+      <View className="flex-row items-center backdrop-blur-md px-4 pb-2 pt-3 justify-between border-b border-dark-border">
         <View className="size-12 items-center justify-center">
-          <Ionicons name="grid" size={22} color='#6C584C' />
+          <Ionicons name="grid" size={22} color='rgb(141, 157, 180)' />
         </View>
-        <Text className="text-ashBrown text-3xl font-Lexend font-bold tracking-tight text-center">Meine Sammlung</Text>
+        <Text className="text-white/80 text-3xl font-Lexend font-bold tracking-tight text-center">Meine Sammlung</Text>
         <View className="items-center justify-center size-12">
-          <Ionicons name="settings" size={24} color='#6C584C' />
+          <Ionicons name="settings" size={24} color='rgb(141, 157, 180)' />
         </View>
       </View>
       <View className="flex-1">
         <View className="p-4 my-2">
           <View className="relative">
-            <Ionicons className="absolute left-3 top-1/2 -translate-y-1/2" name="search" size={20} color='#6C584C' />
+            <Ionicons className="absolute left-3 top-1/2 -translate-y-1/2" name="search" size={20} color='#6F839F' />
             <TextInput
-              className="w-full h-12 pl-12 pr-4 bg-cream/70 border border-blackForest/10 rounded-xl text-ashBrown placeholder:text-ashBrown/40 font-Lexend"
+              className="w-full h-12 pl-12 pr-4 bg-dark-secondaryBackground rounded-xl text-white/70 placeholder:text-dark-placeholder font-Lexend"
               placeholder="Durchsuche deine Sammlung ..."
             />
           </View>
           <View className="flex-row gap-2 overflow-x-auto mt-4">
-            <View className="items-center gap-1 px-4 py-2 bg-mutedOlive rounded-full shadow-sm">
+            <View className="items-center gap-1 px-4 py-2 bg-dark-highlight rounded-full shadow-sm">
               <Text className="text-white font-Lexend text-base font-medium whitespace-nowrap">Alle Trikots</Text>
             </View>
           </View>

@@ -34,14 +34,14 @@ export default function ShirtDetails() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-vanillaCream pb-24">
-      <View className="flex-row items-center bg-vanillaCream/80 backdrop-blur-md px-4 pb-2 pt-3 justify-between border-b border-ashBrown/15">
+    <SafeAreaView className="flex-1 bg-dark-background pb-24">
+      <View className="flex-row items-center backdrop-blur-md px-4 pb-2 pt-3 justify-between border-b border-dark-border">
         <Pressable className="size-12 items-center justify-center" onPress={() => router.back()}>
-          <Ionicons name="arrow-back" size={24} color='#6C584C' />
+          <Ionicons name="arrow-back" size={24} color='rgb(141, 157, 180)' />
         </Pressable>
-        <Text className="text-ashBrown text-3xl font-Lexend font-bold tracking-tight text-center">Shirt Details</Text>
+        <Text className="text-white/80 text-3xl font-Lexend font-bold tracking-tight text-center">Shirt Details</Text>
         <Pressable className="items-center justify-center size-12" onPress={() => { }}>
-          <Ionicons name="heart" size={24} color='#6C584C' />
+          <Ionicons name="heart" size={24} color='rgb(141, 157, 180)' />
         </Pressable>
       </View>
 

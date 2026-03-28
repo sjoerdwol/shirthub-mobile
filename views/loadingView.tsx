@@ -7,7 +7,7 @@ export default function LoadingView() {
       className="flex-1 justify-center items-center"
       exiting={FadeOut.duration(500)}
     >
-      <Text className="text-ashBrown font-Lexend">Lade ...</Text>
+      <Text className="text-white/70 font-Lexend">Lade ...</Text>
     </Animated.View>
   );
 }

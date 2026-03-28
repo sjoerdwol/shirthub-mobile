@@ -54,7 +54,7 @@ export default function RootLayout() {
   return (
     <SafeAreaProvider>
       <AuthContextProvider>
-        <StatusBar style="dark" />
+        <StatusBar style="light" />
         <Root />
       </AuthContextProvider>
     </SafeAreaProvider>

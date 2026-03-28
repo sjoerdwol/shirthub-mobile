@@ -5,13 +5,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        vanillaCream: '#F0EAD2',
-        cream: '#DDE5B6',
-        mutedOlive: '#ADC178',
-        oliveLeaf: '#606C38',
-        blackForest: '#283618',
-        fadedCopper: '#A98467',
-        ashBrown: '#6C584C'
+        dark: {
+          background: '#151D28',
+          border: 'rgb(44, 58, 78)',
+          highlight: 'rgb(15, 115, 255)',
+          placeholder: '#6F839F',
+          secondaryBackground: 'rgb(34, 46, 63)',
+          secondaryElements: 'rgb(141, 157, 180)'
+        }
       },
       fontFamily: {
         Lexend: ['Lexend-Regular'],

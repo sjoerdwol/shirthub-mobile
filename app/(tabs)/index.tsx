@@ -25,20 +25,20 @@ export default function Index() {
   }, []);
 
   return (
-    <SafeAreaView className="flex-1 bg-vanillaCream pb-24">
-      <View className="flex-row items-center bg-vanillaCream/80 backdrop-blur-md px-4 pb-2 pt-3 justify-between border-b border-ashBrown/15">
+    <SafeAreaView className="flex-1 bg-dark-background pb-24">
+      <View className="flex-row items-center backdrop-blur-md px-4 pb-2 pt-3 justify-between border-b border-dark-border">
         <View className="size-12 items-center justify-center">
-          <Ionicons name="menu" size={24} color='#6C584C' />
+          <Ionicons name="menu" size={24} color='rgb(141, 157, 180)' />
         </View>
-        <Text className="text-ashBrown text-3xl font-Lexend font-bold tracking-tight text-center italic">ShirtHub</Text>
-        <View className="items-center justify-center rounded-full size-12 bg-mutedOlive/25">
-          <Ionicons name="notifications" size={24} color='#606C38' />
+        <Text className="text-white/80 text-3xl font-Lexend font-bold tracking-tight text-center italic">ShirtHub</Text>
+        <View className="items-center justify-center size-12">
+          <Ionicons name="notifications" size={24} color='rgb(141, 157, 180)' />
         </View>
       </View>
       <View className="flex-1">
         <View className="px-5 py-5">
-          <Text className="text-ashBrown text-2xl font-bold font-Lexend">Activity Feed</Text>
-          <Text className="text-ashBrown/80 text-base font-Lexend">Entdecke was deine Freunde so gemacht haben</Text>
+          <Text className="text-white/80 text-2xl font-bold font-Lexend">Activity Feed</Text>
+          <Text className="text-white/70 text-base font-Lexend">Entdecke was deine Freunde so gemacht haben</Text>
         </View>
         {
           loading

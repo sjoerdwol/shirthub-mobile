@@ -19,9 +19,9 @@ export default function RegisterView() {
       entering={SlideInRight.duration(500)}
       exiting={SlideOutRight.duration(500)}
     >
-      <Text className="text-ashBrown text-2xl font-LexendBold pb-4">Trete uns bei</Text>
+      <Text className="text-white/80 text-2xl font-LexendBold pb-4">Trete uns bei</Text>
       <View className="w-full px-1 mb-5">
-        <Text className="text-ashBrown text-base font-semibold font-Lexend pb-2">Username</Text>
+        <Text className="text-white/50 text-base font-semibold font-Lexend pb-2">Username</Text>
         <SingleIconInput
           firstIcon="at"
           keyboardType="default"
@@ -31,7 +31,7 @@ export default function RegisterView() {
         />
       </View>
       <View className="w-full px-1 mb-5">
-        <Text className="text-ashBrown text-base font-semibold font-Lexend pb-2">Email Adresse</Text>
+        <Text className="text-white/50 text-base font-semibold font-Lexend pb-2">Email Adresse</Text>
         <SingleIconInput
           firstIcon="mail"
           keyboardType="email-address"
@@ -42,7 +42,7 @@ export default function RegisterView() {
       </View>
       <View className="w-full px-1">
         <View className="w-full flex-row justify-between items-center pb-2">
-          <Text className="text-ashBrown text-base font-semibold font-Lexend">Passwort</Text>
+          <Text className="text-white/50 text-base font-semibold font-Lexend">Passwort</Text>
         </View>
         <SingleIconInputWithButton
           buttonState={securePassword}
@@ -59,7 +59,7 @@ export default function RegisterView() {
       <View className="my-10 px-1">
         <PrimaryButton text="Registrieren" onPress={() => signUp(email, password, username)} loading={loading} />
       </View>
-      <View className="mb-10 mx-1 h-px bg-ashBrown/10" />
+      <View className="mb-10 mx-1 h-px bg-dark-border" />
     </Animated.View>
   );
 }
