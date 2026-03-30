@@ -5,7 +5,6 @@ import { handleShirtDeletion } from '@/utils/handleShirtOperations';
 import ShirtDetailView from '@/views/shirtDetailView';
 import { Ionicons } from '@expo/vector-icons';
 import { router, useLocalSearchParams } from 'expo-router';
-import { useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -29,7 +28,8 @@ export default function ShirtDetails() {
   };
 
   const handleDelete = async () => {
-    await handleShirtDeletion(session!, shirtId!, removeShirt, setHasChanged);
+    if (!session || !shirtId) { return; }
+    await handleShirtDeletion(session, shirtId, removeShirt, setHasChanged);
     router.back();
   };
 
@@ -44,7 +44,6 @@ export default function ShirtDetails() {
           <Ionicons name="heart" size={24} color='rgb(141, 157, 180)' />
         </Pressable>
       </View>
-
       {
         shirt
           ? <ShirtDetailView handleDelete={handleDelete} handleEdit={handleEdit} shirt={shirt} />
