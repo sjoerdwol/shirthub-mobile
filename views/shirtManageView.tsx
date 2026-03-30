@@ -1,0 +1,25 @@
+import { useForm } from "@tanstack/react-form";
+import { Image, KeyboardAvoidingView, Platform, ScrollView, View } from "react-native";
+import Animated, { FadeIn } from "react-native-reanimated";
+
+export default function ShirtManageView({ mode, shirt }: { mode: 'add' | 'edit', shirt: Shirt | null }) {
+  return (
+    <Animated.View
+      className="flex-1 p-4 mt-2"
+      entering={FadeIn.duration(500)}
+    >
+      <KeyboardAvoidingView
+        className="flex-1"
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
+      >
+        <View className="overflow-hidden h-72 w-full rounded-xl border border-dark-border">
+          <Image
+            source={require('../assets/images/exampleshirt.png')}
+            className="w-full h-full object-cover"
+          />
+        </View>
+      </KeyboardAvoidingView>
+    </Animated.View>
+  );
+}
