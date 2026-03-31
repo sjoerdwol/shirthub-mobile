@@ -8,7 +8,7 @@ interface InputProps {
   onChangeText: TextInputProps['onChangeText'];
   placeholder: TextInputProps['placeholder'];
   secureTextEntry?: TextInputProps['secureTextEntry'];
-  secondIcon?: React.ComponentProps<typeof Ionicons>["name"];
+  secondIcon?: React.ComponentProps<typeof Ionicons>["name"] | null;
   setButtonState?: React.Dispatch<React.SetStateAction<any>>;
   value: TextInputProps['value'];
 }

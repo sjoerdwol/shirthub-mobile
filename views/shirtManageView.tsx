@@ -1,8 +1,8 @@
-import { useForm } from "@tanstack/react-form";
-import { Image, KeyboardAvoidingView, Platform, ScrollView, View } from "react-native";
+import ShirtManageForm from "@/newComponents/forms/shirtManageForm";
+import { Image, KeyboardAvoidingView, Platform, View } from "react-native";
 import Animated, { FadeIn } from "react-native-reanimated";
 
-export default function ShirtManageView({ mode, shirt }: { mode: 'add' | 'edit', shirt: Shirt | null }) {
+export default function ShirtManageView({ data, mode, shirt }: { data: ReferenceData, mode: 'add' | 'edit', shirt: Shirt | null }) {
   return (
     <Animated.View
       className="flex-1 p-4 mt-2"
@@ -19,6 +19,7 @@ export default function ShirtManageView({ mode, shirt }: { mode: 'add' | 'edit',
             className="w-full h-full object-cover"
           />
         </View>
+        <ShirtManageForm data={data} mode={mode} shirt={shirt} />
       </KeyboardAvoidingView>
     </Animated.View>
   );

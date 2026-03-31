@@ -1,4 +1,4 @@
-interface DetailsDropdownProps {
+interface DropdownProps {
   title: string;
   placeholder: string;
   value: string;

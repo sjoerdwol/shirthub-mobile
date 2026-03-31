@@ -1,6 +1,6 @@
 import { Text, TouchableOpacity } from "react-native";
 
-export default function DetailsDropdownItem(
+export default function DropdownItem(
   { isActive, option, onSelection }: { isActive: boolean, option: string, onSelection: (option: string) => void }) {
 
   return (

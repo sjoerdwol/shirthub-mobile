@@ -15,7 +15,7 @@ export default function SingleIconInputWithButton({ buttonState, firstIcon, keyb
         value={value}
       />
       {
-        secondIcon && secondIcon && setButtonState &&
+        secondIcon && setButtonState &&
         <Pressable className="absolute right-4 top-1/2 items-center justify-center" onPress={() => setButtonState(!buttonState)}>
           <Ionicons className="-translate-y-1/2" name={secondIcon} size={20} color='rgb(141, 157, 180)' />
         </Pressable>

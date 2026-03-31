@@ -51,7 +51,7 @@ export default function ManageShirt() {
         loading
           ? <LoadingView />
           : data
-            ? <ShirtManageView mode={mode} shirt={currentShirt} />
+            ? <ShirtManageView data={data} mode={mode} shirt={currentShirt} />
             : <Text className="text-red-500 text-lg font-medium text-center">Leider ist es aktuell nicht möglich, die nötigen Daten zu laden. Bitte versuche es später nochmal.</Text>
       }
     </SafeAreaView>
