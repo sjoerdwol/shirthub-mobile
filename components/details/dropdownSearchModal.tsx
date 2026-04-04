@@ -1,9 +1,10 @@
+import SingleIconInputWithButton from "@/newComponents/inputs/singleIconInputWithButton";
 import { Ionicons } from "@expo/vector-icons";
 import { Modal, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import DropdownItem from "./dropdownItem";
 
-export default function DropdownModal({ handleSelect, isVisible, options, setIsVisible, title, value }:
-  { handleSelect: (param: string) => void, isVisible: boolean, options: string[], setIsVisible: (param: boolean) => void, title: string, value: string }) {
+export default function DropdownSearchModal({ handleSelect, isVisible, options, query, setIsVisible, setQuery, title, value }:
+  { handleSelect: (param: string) => void, isVisible: boolean, options: string[], query: string, setIsVisible: (param: boolean) => void, setQuery: (param: string) => void, title: string, value: string }) {
 
   return (
     <Modal
@@ -21,7 +22,19 @@ export default function DropdownModal({ handleSelect, isVisible, options, setIsV
             </TouchableOpacity>
           </View>
 
-          <ScrollView className="p-6 pt-0 pb-16">
+          <View className="px-5 w-full">
+            <SingleIconInputWithButton
+              firstIcon="search"
+              keyboardType="default"
+              onChangeText={setQuery}
+              placeholder="Suche nach einem Team ..."
+              secondIcon={query.length > 0 ? 'close-circle' : null}
+              setButtonState={() => setQuery('')}
+              value={query}
+            />
+          </View>
+
+          <ScrollView className="p-6 pt-4 pb-16">
             {options.length === 0 ? (
               <Text className="font-Lexend text-white/70">Keine Ergebnisse ...</Text>
             ) : (

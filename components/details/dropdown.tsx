@@ -2,8 +2,9 @@ import { Ionicons } from '@expo/vector-icons';
 import { useMemo, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import DropdownModal from './dropdownModal';
+import DropdownSearchModal from './dropdownSearchModal';
 
-export default function DropdownSearch({ title, placeholder, value, onSelection, isValid, errorMessage, options }: DropdownProps) {
+export default function Dropdown({ title, placeholder, value, onSelection, isValid, errorMessage, options, withSearch }: DropdownProps) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [query, setQuery] = useState('');
 
@@ -20,7 +21,7 @@ export default function DropdownSearch({ title, placeholder, value, onSelection,
   };
 
   return (
-    <View className="flex-1 gap-3">
+    <View className="flex-1 gap-2">
       <Text className="font-Lexend font-bold text-white/70 ml-1">{title}</Text>
       <TouchableOpacity
         onPress={() => setIsModalVisible(true)}
@@ -33,19 +34,30 @@ export default function DropdownSearch({ title, placeholder, value, onSelection,
       </TouchableOpacity>
 
       {!isValid && (
-        <Text className='font-Lexend font-medium mt-2 text-lg text-red-500'>{errorMessage}</Text>
+        <Text className='font-Lexend font-medium ml-1 text-lg text-red-500'>{errorMessage}</Text>
       )}
 
-      <DropdownModal
-        handleSelect={handleSelectOption}
-        isVisible={isModalVisible}
-        options={filteredOptions}
-        query={query}
-        setIsVisible={setIsModalVisible}
-        setQuery={setQuery}
-        title={title}
-        value={value}
-      />
+      {
+        withSearch
+          ? <DropdownSearchModal
+            handleSelect={handleSelectOption}
+            isVisible={isModalVisible}
+            options={filteredOptions}
+            query={query}
+            setIsVisible={setIsModalVisible}
+            setQuery={setQuery}
+            title={title}
+            value={value}
+          />
+          : <DropdownModal
+            handleSelect={handleSelectOption}
+            isVisible={isModalVisible}
+            options={options}
+            setIsVisible={setIsModalVisible}
+            title={title}
+            value={value}
+          />
+      }
     </View>
   );
 }

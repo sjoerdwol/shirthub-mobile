@@ -1,9 +1,10 @@
 interface DropdownProps {
-  title: string;
-  placeholder: string;
-  value: string;
-  onSelection: (value: string) => void;
-  isValid: boolean;
   errorMessage: string;
+  isValid: boolean;
+  onSelection: (value: string) => void;
   options: string[];
+  placeholder: string;
+  title: string;
+  value: string;
+  withSearch: boolean;
 }

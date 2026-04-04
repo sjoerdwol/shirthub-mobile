@@ -3,7 +3,7 @@ import { TextInputProps } from "react-native";
 
 interface InputProps {
   buttonState?: any;
-  firstIcon: React.ComponentProps<typeof Ionicons>["name"];
+  firstIcon: React.ComponentProps<typeof Ionicons>["name"] | React.ComponentProps<typeof FontAwesome6>["name"];
   keyboardType: TextInputProps['keyboardType'];
   onChangeText: TextInputProps['onChangeText'];
   placeholder: TextInputProps['placeholder'];
