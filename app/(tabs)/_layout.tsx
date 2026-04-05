@@ -1,4 +1,4 @@
-import TabBarIcon from "@/components/ui/tabBarIcon";
+import { Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 
 export default function TabsLayout() {
@@ -22,28 +22,28 @@ export default function TabsLayout() {
         options={{
           headerShown: false,
           title: "Startseite",
-          tabBarIcon: ({ color, focused, size }) => <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} size={size} />
+          tabBarIcon: ({ color, focused, size }) => <Ionicons name={focused ? 'home' : 'home-outline'} color={color} size={size} />
         }}
       />
       <Tabs.Screen
         name="collection"
         options={{
           title: "Sammlung",
-          tabBarIcon: ({ color, focused, size }) => <TabBarIcon name={focused ? 'shirt' : 'shirt-outline'} color={color} size={size} />
+          tabBarIcon: ({ color, focused, size }) => <Ionicons name={focused ? 'shirt' : 'shirt-outline'} color={color} size={size} />
         }}
       />
       <Tabs.Screen
         name="statistics"
         options={{
           title: "Statistiken",
-          tabBarIcon: ({ color, focused, size }) => <TabBarIcon name={focused ? 'stats-chart' : 'stats-chart-outline'} color={color} size={size} />
+          tabBarIcon: ({ color, focused, size }) => <Ionicons name={focused ? 'stats-chart' : 'stats-chart-outline'} color={color} size={size} />
         }}
       />
       <Tabs.Screen
         name="profile"
         options={{
           title: "Profil",
-          tabBarIcon: ({ color, focused, size }) => <TabBarIcon name={focused ? 'person' : 'person-outline'} color={color} size={size} />
+          tabBarIcon: ({ color, focused, size }) => <Ionicons name={focused ? 'person' : 'person-outline'} color={color} size={size} />
         }}
       />
     </Tabs>

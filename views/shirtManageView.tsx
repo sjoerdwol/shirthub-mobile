@@ -1,5 +1,6 @@
+import ShirtImage from "@/components/ui/shirtImage";
 import ShirtManageForm from "@/newComponents/forms/shirtManageForm";
-import { Image, KeyboardAvoidingView, Platform, View } from "react-native";
+import { KeyboardAvoidingView, Platform, ScrollView } from "react-native";
 import Animated, { FadeIn } from "react-native-reanimated";
 
 export default function ShirtManageView({ data, mode, shirt }: { data: ReferenceData, mode: 'add' | 'edit', shirt: Shirt | null }) {
@@ -13,13 +14,16 @@ export default function ShirtManageView({ data, mode, shirt }: { data: Reference
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
       >
-        <View className="overflow-hidden h-72 w-full rounded-xl border border-dark-border">
-          <Image
-            source={require('../assets/images/exampleshirt.png')}
-            className="w-full h-full object-cover"
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          keyboardDismissMode="interactive"
+        >
+          <ShirtImage
+            imageSrc={require('../assets/images/exampleshirt.png')}
+            type="detailAndManage"
           />
-        </View>
-        <ShirtManageForm data={data} mode={mode} shirt={shirt} />
+          <ShirtManageForm data={data} mode={mode} shirt={shirt} />
+        </ScrollView>
       </KeyboardAvoidingView>
     </Animated.View>
   );

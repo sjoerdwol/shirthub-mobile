@@ -25,7 +25,7 @@ export default function Dropdown({ title, placeholder, value, onSelection, isVal
       <Text className="font-Lexend font-bold text-white/70 ml-1">{title}</Text>
       <TouchableOpacity
         onPress={() => setIsModalVisible(true)}
-        className="flex-row items-center justify-between border border-dark-border p-4 rounded-xl"
+        className="flex-row items-center justify-between border border-dark-border p-3.5 rounded-xl"
       >
         <Text className={`flex-1 font-Lexend font-semibold text-lg ${value ? 'text-white/70' : 'text-dark-placeholder'}`}>
           {value || placeholder}

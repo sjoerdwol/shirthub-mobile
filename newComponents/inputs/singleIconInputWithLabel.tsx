@@ -10,7 +10,7 @@ export default function SingleIconInputWithLabel(
       <Text className="font-Lexend font-bold text-white/70 ml-1">{label}</Text>
       <View className="relative">
         {
-          firstIcon === "hashtag"
+          firstIcon === "hashtag" || firstIcon === 'money-bill'
             ? <FontAwesome6 className="absolute left-4 top-1/2 -translate-y-1/2 z-50" name={firstIcon} size={16} color='rgb(141 157 180)' />
             : <Ionicons className="absolute left-4 top-1/2 -translate-y-1/2 z-50" name={firstIcon} size={16} color='rgb(141 157 180)' />
         }

@@ -5,7 +5,7 @@ interface Shirt {
   league_key: string;
   season: string;
   type: string;
-  condition: string | null;
+  condition: number;
   print_name: string | null;
   print_number: number | null;
   size: string | null;

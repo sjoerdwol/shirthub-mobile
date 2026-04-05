@@ -6,7 +6,7 @@ interface ShirtResponse {
   leagueKey: string;
   season: string;
   type: string;
-  condition: string | null;
+  condition: number;
   printName: string | null;
   printNumber: number | null;
   size: string | null;
