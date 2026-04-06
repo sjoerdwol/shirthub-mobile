@@ -2,16 +2,16 @@ import { Text, View } from 'react-native';
 
 export default function StatBox({ currencyVisible, title, value, icon }: StatBoxProps) {
   return (
-    <View className='bg-dark-background-250 rounded-2xl p-6 w-[48%] justify-between h-30'>
-      <View className='flex-row items-center text-center mb-2'>
+    <View className='border border-dark-border flex-1 h-30 justify-between p-6 rounded-2xl'>
+      <View className='flex-row items-center mb-1'>
         <View>
           {icon}
         </View>
-        <Text className="text-dark-text-400 text-base font-medium">{title}</Text>
+        <Text className="font-Lexend font-medium text-white/50">{title}</Text>
       </View>
-      <Text className="text-dark-text-400 text-2xl font-bold">
+      <Text className="font-Lexend font-bold text-white/70 text-2xl">
         {currencyVisible
-          ? Number(value).toLocaleString('de-DE', { style: 'currency', currency: 'EUR', minimumFractionDigits: 0, maximumFractionDigits: 0 })
+          ? Number(value).toLocaleString('de-DE', { style: 'currency', currency: 'EUR', minimumFractionDigits: 2, maximumFractionDigits: 2 })
           : value}
       </Text>
     </View>

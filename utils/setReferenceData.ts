@@ -6,6 +6,6 @@ export async function handleReferenceData(session: Session, setReferenceData: (d
     const response = await fetchReferenceData(session);
     setReferenceData(response);
   } catch (error) {
-    console.error('Error fetching reference data: ', error);
+    throw new Error(`Error while fetching reference data: ${error}`);
   }
 }
