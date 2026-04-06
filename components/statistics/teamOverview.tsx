@@ -9,21 +9,20 @@ export default function TeamOverview({ teamStats }: { teamStats: UserStatistics[
 
   const RenderItem = ({ item, isLast }: { item: UserStatistics['team_stats'][0]; isLast: boolean }) => {
     const team = data?.teams.find(team => team.key === item.teamKey);
-
     if (!team) return null;
 
     return (
-      <View className={isLast ? "mb-0" : "mb-4 border-b border-dark-background-200 pb-4"}>
+      <View className={isLast ? "mb-8" : "border-b border-dark-border mb-4 pb-4"}>
         <View className="flex-row justify-between items-center">
-          <Text className="text-dark-text-400 text-base font-medium">{team.name}</Text>
-          <Text className="text-green-600 text-sm font-bold">{item.shirtsCollected} {item.shirtsCollected === 1 ? 'shirt' : 'shirts'}</Text>
+          <Text className="font-Lexend font-medium text-white/70">{team.name}</Text>
+          <Text className="font-Lexend font-medium text-white/50 text-sm">{item.shirtsCollected} {item.shirtsCollected === 1 ? 'Trikot' : 'Trikots'}</Text>
         </View>
       </View>
     );
   };
 
   return (
-    <View className="p-5 rounded-2xl bg-dark-background-300">
+    <View className="border border-dark-border mt-4 p-5 rounded-2xl">
       {sortedAndLimited.map((item, index) => (
         <RenderItem
           key={sortedAndLimited.indexOf(item)}
@@ -31,6 +30,7 @@ export default function TeamOverview({ teamStats }: { teamStats: UserStatistics[
           isLast={index === sortedAndLimited.length - 1}
         />
       ))}
+      <Text className="font-Lexend font-medium ml-1 text-white/50 text-xs">{teamStats.length} Teams insgesamt</Text>
     </View>
   );
 }

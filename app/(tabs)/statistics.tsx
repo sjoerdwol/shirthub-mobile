@@ -1,5 +1,6 @@
 import { useAuth } from "@/contexts/authContext";
 import { useReferenceDataStore } from "@/stores/referenceDataStore";
+import { useShirtStore } from "@/stores/shirtStore";
 import { useUserStatisticsStore } from "@/stores/statisticsStore";
 import { handleStatisticsFetch } from "@/utils/handleStatisticsOperations";
 import { handleReferenceData } from "@/utils/setReferenceData";
@@ -12,6 +13,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function Statistics() {
   const { session } = useAuth();
   const { data, setReferenceData } = useReferenceDataStore((state) => state);
+  const { shirts } = useShirtStore((state) => state);
   const { hasChanged, userStatistics, setUserStatistics, setHasChanged } = useUserStatisticsStore((state) => state);
   const [loading, setLoading] = useState(true);
 
@@ -42,7 +44,7 @@ export default function Statistics() {
         loading
           ? <LoadingView />
           : data && userStatistics
-            ? <StatisticsView />
+            ? <StatisticsView shirts={shirts} userStatistics={userStatistics} />
             : <Text className="text-red-500 text-lg font-medium text-center">Leider ist es aktuell nicht möglich, die nötigen Daten zu laden. Bitte versuche es später nochmal.</Text>
       }
     </SafeAreaView>
