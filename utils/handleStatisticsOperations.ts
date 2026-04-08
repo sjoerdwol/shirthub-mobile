@@ -2,7 +2,10 @@ import { getUserStatistics } from "@/services/shirthub_statistics";
 import { Session } from "@supabase/supabase-js";
 
 export function calculateAverageCondition(shirts: Array<Shirt>): number {
-  const average = 0;
+  const average = Math.floor(shirts
+    .filter(shirt => shirt.condition)
+    .reduce((count, shirt) => count + shirt.condition, 0)
+    / shirts.filter(shirt => shirt.condition).length);
   return average;
 }
 

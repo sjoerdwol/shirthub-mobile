@@ -1,6 +1,7 @@
 import DistributionSwitch from "@/components/statistics/distributionSwitch";
 import StatBox from "@/components/statistics/statBox";
-import { MaterialIcons } from "@expo/vector-icons";
+import { calculateAverageCondition } from "@/utils/handleStatisticsOperations";
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { View } from "react-native";
 import Animated, { FadeIn } from "react-native-reanimated";
 
@@ -27,6 +28,22 @@ export default function StatisticsView({ shirts, userStatistics }: { shirts: Arr
         />
       </View>
       <DistributionSwitch userStatistics={userStatistics} />
+      <View className="flex-row gap-4">
+        <StatBox
+          currencyVisible={false}
+          icon={<Ionicons name="heart" size={16} color='rgb(141, 157, 180)' />}
+          subtitle="Noch nicht so viel .."
+          title="Anzahl Likes"
+          value={0}
+        />
+        <StatBox
+          currencyVisible={false}
+          icon={<Ionicons name="thumbs-up" size={16} color='rgb(141, 157, 180)' />}
+          subtitle="Nice!"
+          title="Durchsch. Zustand"
+          value={`${calculateAverageCondition(shirts)} / 10`}
+        />
+      </View>
     </Animated.View>
   );
 }
