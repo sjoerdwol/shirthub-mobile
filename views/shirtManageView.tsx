@@ -1,5 +1,5 @@
+import ShirtManageForm from "@/components/forms/shirtManageForm";
 import ShirtImage from "@/components/ui/shirtImage";
-import ShirtManageForm from "@/newComponents/forms/shirtManageForm";
 import { KeyboardAvoidingView, Platform, ScrollView } from "react-native";
 import Animated, { FadeIn } from "react-native-reanimated";
 

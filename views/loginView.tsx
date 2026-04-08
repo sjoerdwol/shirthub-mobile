@@ -1,7 +1,7 @@
+import PrimaryButton from "@/components/buttons/primaryButton";
+import SingleIconInput from "@/components/inputs/singleIconInput";
+import SingleIconInputWithButton from "@/components/inputs/singleIconInputWithButton";
 import { useAuth } from "@/contexts/authContext";
-import PrimaryButton from "@/newComponents/buttons/primaryButton";
-import SingleIconInput from "@/newComponents/inputs/singleIconInput";
-import SingleIconInputWithButton from "@/newComponents/inputs/singleIconInputWithButton";
 import { useState } from "react";
 import { Text, View } from "react-native";
 import Animated, { SlideInLeft, SlideOutLeft } from "react-native-reanimated";

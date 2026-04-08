@@ -1,5 +1,5 @@
+import SingleIconInput from "@/components/inputs/singleIconInput";
 import { useAuth } from "@/contexts/authContext";
-import SingleIconInput from "@/newComponents/inputs/singleIconInput";
 import { useShirtStore } from "@/stores/shirtStore";
 import { handleShirtInitialFetch } from "@/utils/handleShirtOperations";
 import CollectionView from "@/views/collectionView";

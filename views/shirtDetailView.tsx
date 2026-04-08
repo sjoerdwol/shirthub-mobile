@@ -1,6 +1,6 @@
+import IconButton from "@/components/buttons/iconButton";
+import DetailBox from "@/components/details/detailBox";
 import ShirtImage from "@/components/ui/shirtImage";
-import IconButton from "@/newComponents/buttons/iconButton";
-import DetailBox from "@/newComponents/details/detailBox";
 import convertSize from "@/utils/convertSize";
 import { Ionicons } from "@expo/vector-icons";
 import { Text, View } from "react-native";

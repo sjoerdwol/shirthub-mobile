@@ -1,4 +1,4 @@
-import SingleIconInputWithButton from "@/newComponents/inputs/singleIconInputWithButton";
+import SingleIconInputWithButton from "@/components/inputs/singleIconInputWithButton";
 import { Ionicons } from "@expo/vector-icons";
 import { Modal, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import DropdownItem from "./dropdownItem";

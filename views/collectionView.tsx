@@ -1,4 +1,4 @@
-import ShirtDisplayVertical from "@/newComponents/shirtDisplay/shirtDisplayVertical";
+import ShirtDisplayVertical from "@/components/shirtDisplay/shirtDisplayVertical";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { FlatList, Pressable } from "react-native";

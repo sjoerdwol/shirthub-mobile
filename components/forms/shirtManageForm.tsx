@@ -1,4 +1,5 @@
-import Dropdown from "@/components/details/dropdown";
+import PrimaryButton from "@/components/buttons/primaryButton";
+import Dropdown from "@/components/dropdown";
 import { useAuth } from "@/contexts/authContext";
 import { useShirtStore } from "@/stores/shirtStore";
 import { useUserStatisticsStore } from "@/stores/statisticsStore";
@@ -8,7 +9,6 @@ import { useForm } from "@tanstack/react-form";
 import { router } from "expo-router";
 import { useState } from "react";
 import { View } from "react-native";
-import PrimaryButton from "../buttons/primaryButton";
 import SingleIconInputWithLabel from "../inputs/singleIconInputWithLabel";
 import CustomSlider from "../inputs/slider";
 

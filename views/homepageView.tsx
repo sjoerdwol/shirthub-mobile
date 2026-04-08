@@ -1,4 +1,4 @@
-import Notification from "@/newComponents/notifications/notification";
+import Notification from "@/components/notifications/notification";
 import Animated, { FadeIn } from "react-native-reanimated";
 
 export default function HomepageView() {

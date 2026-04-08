@@ -1,4 +1,4 @@
-import SwitchButton from "@/newComponents/buttons/switchButton";
+import SwitchButton from "@/components/buttons/switchButton";
 import { useState } from "react";
 import { Text, View } from "react-native";
 import LeagueOverview from "./leagueOverview";
