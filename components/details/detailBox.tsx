@@ -9,8 +9,8 @@ export default function DetailBox({ icon, tag, value }: { icon: React.ComponentP
           ? <FontAwesome6 className="mb-2" name={icon} size={24} color='rgb(141, 157, 180)' />
           : <Ionicons className="mb-2" name={icon} size={24} color='rgb(141, 157, 180)' />
       }
-      <Text className="font-Lexend font-semibold text-sm text-white/50 uppercase">{tag}</Text>
-      <Text className="font-Lexend font-bold text-base text-white/80">{value}</Text>
+      <Text className="font-Lexend font-semibold text-sm text-white/50 uppercase" testID="detail_box_tag">{tag}</Text>
+      <Text className="font-Lexend font-bold text-base text-white/80" testID="detail_box_value">{value}</Text>
     </View>
   );
 }
