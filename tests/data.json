@@ -1,0 +1,95 @@
+{
+  "session": {
+    "access_token": "mock-access-token",
+    "refresh_token": "mock-refresh-token",
+    "expires_in": 3600,
+    "token_type": "bearer"
+  },
+  "shirt": {
+    "id": "shirt-1",
+    "team": "FC Bayern München",
+    "team_key": "fcbayern",
+    "league_key": "bundesliga",
+    "season": "2023/24",
+    "type": "Home",
+    "condition": 9,
+    "print_name": "Müller",
+    "print_number": 25,
+    "size": "L",
+    "value": 90,
+    "imageSrc": "",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  "shirtWithoutSize": {
+    "id": "shirt-2",
+    "team": "Borussia Dortmund",
+    "team_key": "bvb",
+    "league_key": "bundesliga",
+    "season": "2022/23",
+    "type": "Away",
+    "condition": 8,
+    "print_name": null,
+    "print_number": null,
+    "size": null,
+    "value": null,
+    "imageSrc": "",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  "user": {
+    "id": "mock-user-id",
+    "email": "test@example.com",
+    "app_metadata": {},
+    "user_metadata": {},
+    "aud": "authenticated"
+  },
+  "userStatistics": {
+    "general_stats": {
+      "ownerId": "user-1",
+      "totalShirtsCount": 10,
+      "distinctLeaguesCount": 3,
+      "distinctTeamsCount": 5,
+      "totalValue": 500,
+      "averageValue": 50
+    },
+    "league_stats": [
+      {
+        "ownerId": "user-1",
+        "leagueKey": "bundesliga",
+        "distinctTeamsCollected": 4,
+        "collectedTeamsKeys": [
+          "team-1",
+          "team-2",
+          "team-3",
+          "team-4"
+        ],
+        "percentageCollected": 0.22
+      },
+      {
+        "ownerId": "user-1",
+        "leagueKey": "premier-league",
+        "distinctTeamsCollected": 6,
+        "collectedTeamsKeys": [
+          "team-a",
+          "team-b"
+        ],
+        "percentageCollected": 0.3
+      }
+    ],
+    "team_stats": [
+      {
+        "ownerId": "user-1",
+        "teamKey": "fcbayern",
+        "shirtsCollected": 3,
+        "homeShirtsCollected": 1,
+        "awayShirtsCollected": 1,
+        "thirdShirtsCollected": 1,
+        "keeperShirtsCollected": 0,
+        "specialShirtsCollected": 0,
+        "totalValue": 150,
+        "averageValue": 50
+      }
+    ]
+  }
+}

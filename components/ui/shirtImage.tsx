@@ -22,7 +22,7 @@ export default function ShirtImage({ imageSrc, type }: { imageSrc: ImageSourcePr
   }
 
   return (
-    <View className={className}>
+    <View className={className} testID='image_container'>
       <Image
         className='bg-center bg-cover h-full w-full'
         source={imageSrc}
