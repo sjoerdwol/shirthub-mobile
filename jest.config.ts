@@ -18,7 +18,6 @@ const config: Config = {
     "!**/stores/**",
     "!**/services/**",
     "!**/profile.tsx",
-    "!**/statistics.tsx",
     "!**/jest.config.ts",
     "!./app.config.ts",
 

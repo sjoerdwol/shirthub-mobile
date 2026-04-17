@@ -21,6 +21,7 @@ export default function CollectionView({ shirts }: { shirts: Shirt[] }) {
         contentContainerStyle={{ gap: 14 }}
       />
       <Pressable
+        testID="add_shirt_button"
         className="absolute bg-dark-highlight size-14 rounded-2xl shadow-lg items-center justify-center active:scale-98 transition-transform right-4 -bottom-[66px]"
         onPress={() => router.navigate({ pathname: '/shirts/manage', params: { mode: 'add' } })}
       >
