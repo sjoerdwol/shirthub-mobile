@@ -22,7 +22,7 @@ export default function Index() {
     };
 
     initialShirtFetch();
-  }, []);
+  }, [session, setShirts]);
 
   return (
     <SafeAreaView className="flex-1 bg-dark-background pb-24">

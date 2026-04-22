@@ -33,7 +33,7 @@ export default function Statistics() {
     }
 
     loadData();
-  }, [data, hasChanged, session, userStatistics]);
+  }, [data, hasChanged, session, userStatistics, setHasChanged, setReferenceData, setUserStatistics]);
 
   return (
     <SafeAreaView className="flex-1 bg-dark-background pb-24">

@@ -1,6 +1,6 @@
 import { Pressable, Text, View } from "react-native";
 
-export default function SwitchButton({ activeIndex, options, setActiveIndex }: { activeIndex: number, options: Array<string>, setActiveIndex: React.Dispatch<React.SetStateAction<0 | 1>> }) {
+export default function SwitchButton({ activeIndex, options, setActiveIndex }: { activeIndex: number, options: string[], setActiveIndex: React.Dispatch<React.SetStateAction<0 | 1>> }) {
   return (
     <View className="bg-dark-secondaryBackground flex-row gap-1 p-1 rounded-lg">
       {

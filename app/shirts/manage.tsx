@@ -19,9 +19,6 @@ export default function ManageShirt() {
   if (typeof shirt === 'string') { currentShirt = JSON.parse(shirt); }
   else if (Array.isArray(shirt) && shirt.length > 0) { currentShirt = JSON.parse(shirt[0]); }
 
-  // necessary guard even if this is technically not possible since mode is only strictly set by a previous page
-  if (mode !== 'add' && mode !== 'edit') { return; }
-
   useEffect(() => {
     if (!session || data) {
       setLoading(false);
@@ -35,6 +32,9 @@ export default function ManageShirt() {
 
     loadReferenceData();
   }, [session, data, setReferenceData]);
+
+  // necessary guard even if this is technically not possible since mode is only strictly set by a previous page
+  if (mode !== 'add' && mode !== 'edit') { return; }
 
   return (
     <SafeAreaView className="flex-1 bg-dark-background pb-24">
