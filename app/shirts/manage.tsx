@@ -34,7 +34,7 @@ export default function ManageShirt() {
   }, [session, data, setReferenceData]);
 
   // necessary guard even if this is technically not possible since mode is only strictly set by a previous page
-  if (mode !== 'add' && mode !== 'edit') { return; }
+  if (mode !== 'add' && mode !== 'edit') { return null; }
 
   return (
     <SafeAreaView className="flex-1 bg-dark-background pb-24">

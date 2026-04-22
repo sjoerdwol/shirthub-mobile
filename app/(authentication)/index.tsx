@@ -12,7 +12,7 @@ export default function AuthIndex() {
     <View className="flex-1 bg-dark-background">
       <View className="items-center pt-16 pb-12 px-6">
         <View className="w-20 h-20 bg-dark-secondaryBackground rounded-2xl items-center justify-center mb-6 mt-16">
-          <Ionicons name="football" color='rgb(255 255 255 / 0.7)' size={48} />
+          <Ionicons name="football" color='rgb(255, 255, 255, 0.7)' size={48} />
         </View>
         <Text className="text-white/80 text-4xl font-LexendBold leading-tight tracking-tight">ShirtHub</Text>
         <Text className="text-white/70 mt-2 font-semibold font-Lexend">Die ultimative Community der Trikotsammler!</Text>
