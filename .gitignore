@@ -37,6 +37,6 @@ yarn-error.*
 # typescript
 *.tsbuildinfo
 
-app-example
+archive
 .vscode/
 coverage/

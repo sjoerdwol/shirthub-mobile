@@ -1,59 +1,51 @@
-import ShirtCard from "@/components/ui/shirtCard";
 import { useAuth } from "@/contexts/authContext";
 import { useShirtStore } from "@/stores/shirtStore";
 import { handleShirtInitialFetch } from "@/utils/handleShirtOperations";
+import HomepageView from "@/views/homepageView";
+import LoadingView from "@/views/loadingView";
+import { Ionicons } from "@expo/vector-icons";
 import { useEffect, useState } from "react";
-import { FlatList, Text, View } from "react-native";
+import { Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
   const { session } = useAuth();
-  const { shirts, setShirts } = useShirtStore((state) => state);
+  const { setShirts } = useShirtStore(state => state);
   const [loading, setLoading] = useState(true);
 
+  // TODO: Replace this fetch with notification fetch after notifications have been implemented
   useEffect(() => {
-    const fetchShirts = async () => {
-      await handleShirtInitialFetch(session!, setShirts);
+    if (!session) { return; }
+    const initialShirtFetch = async () => {
+      await handleShirtInitialFetch(session, setShirts);
       setLoading(false);
     };
 
-    fetchShirts();
+    initialShirtFetch();
   }, [session, setShirts]);
 
   return (
-    <>
-      {
-        loading ?
-          (
-            <View className="flex-1 bg-dark-background-400 justify-center items-center" testID="loading-container" >
-              <Text className="text-dark-text-400">Loading...</Text>
-            </View>
-          ) : (
-            <View className="flex-1 bg-dark-background-400" testID="main-container" >
-              <View className="h-12 bg-dark-accent" testID="header-section" >
-                {/* TODO: HEADER IMAGE */}
-              </View>
-              <View className="p-4">
-                <View testID="recently-added-section">
-                  <Text className="font-bold text-xl my-5 text-dark-text-400">Your Most Recent</Text>
-                  <FlatList
-                    data={shirts}
-                    horizontal
-                    keyExtractor={(_, index) => index.toString()}
-                    renderItem={({ item }) => (
-                      <ShirtCard
-                        imageSize='small'
-                        shirt={item}
-                      />
-                    )}
-                    showsHorizontalScrollIndicator={false}
-                    contentContainerStyle={{ paddingRight: 4, gap: 10 }}
-                    testID="recently-added-flatlist"
-                  />
-                </View>
-              </View>
-            </View>
-          )
-      }
-    </>
+    <SafeAreaView className="flex-1 bg-dark-background pb-24">
+      <View className="flex-row items-center backdrop-blur-md px-4 pb-2 pt-3 justify-between border-b border-dark-border">
+        <View className="size-12 items-center justify-center">
+          <Ionicons name="menu" size={24} color='rgb(141, 157, 180)' />
+        </View>
+        <Text className="text-white/80 text-3xl font-Lexend font-bold tracking-tight text-center italic">ShirtHub</Text>
+        <View className="items-center justify-center size-12">
+          <Ionicons name="notifications" size={24} color='rgb(141, 157, 180)' />
+        </View>
+      </View>
+      <View className="flex-1">
+        <View className="px-5 py-5">
+          <Text className="text-white/80 text-2xl font-bold font-Lexend">Activity Feed</Text>
+          <Text className="text-white/70 text-base font-Lexend">Entdecke was deine Freunde so gemacht haben</Text>
+        </View>
+        {
+          loading
+            ? <LoadingView />
+            : <HomepageView />
+        }
+      </View>
+    </SafeAreaView>
   );
 }

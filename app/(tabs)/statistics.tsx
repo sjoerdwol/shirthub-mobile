@@ -1,112 +1,52 @@
-import LeagueOverview from "@/components/statistics/leagueOverview";
-import StatBox from "@/components/statistics/statBox";
-import TeamOverview from "@/components/statistics/teamOverview";
 import { useAuth } from "@/contexts/authContext";
-import { getUserStatistics } from "@/services/shirthub_statistics";
 import { useReferenceDataStore } from "@/stores/referenceDataStore";
+import { useShirtStore } from "@/stores/shirtStore";
 import { useUserStatisticsStore } from "@/stores/statisticsStore";
+import { handleStatisticsFetch } from "@/utils/handleStatisticsOperations";
 import { handleReferenceData } from "@/utils/setReferenceData";
-import { FontAwesome5, Ionicons } from '@expo/vector-icons';
+import LoadingView from "@/views/loadingView";
+import StatisticsView from "@/views/statisticsView";
 import { useEffect, useState } from "react";
-import { ScrollView, Text, View } from "react-native";
+import { Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Statistics() {
   const { session } = useAuth();
+  const { data, setReferenceData } = useReferenceDataStore((state) => state);
+  const { shirts } = useShirtStore((state) => state);
   const { hasChanged, userStatistics, setUserStatistics, setHasChanged } = useUserStatisticsStore((state) => state);
   const [loading, setLoading] = useState(true);
-  const { data, setReferenceData } = useReferenceDataStore((state) => state);
 
   useEffect(() => {
-    const fetchUserStatistics = async () => {
-      if (userStatistics !== null) {
-        if (!hasChanged) {
-          setLoading(false);
-          return;
-        }
+    const loadData = async () => {
+      const tasks = [];
+
+      try {
+        if ((!userStatistics || hasChanged) && session) { tasks.push(handleStatisticsFetch(session, setHasChanged, setUserStatistics)); }
+        if (!data && session) { tasks.push(handleReferenceData(session, setReferenceData)); }
+        await Promise.all(tasks);
+      } catch (error) {
+        console.error('Error while loading necessary data: ', error);
+      } finally {
+        setLoading(false);
       }
-      const userStats = await getUserStatistics(session!);
-      setUserStatistics(userStats);
-      setHasChanged(false);
-      setLoading(false);
     }
 
-    const loadReferenceData = async () => {
-      if (data) return;
-      await handleReferenceData(session!, setReferenceData);
-    };
-
-    fetchUserStatistics();
-    loadReferenceData();
-  }, [session, setUserStatistics, hasChanged]);
+    loadData();
+  }, [data, hasChanged, session, userStatistics, setHasChanged, setReferenceData, setUserStatistics]);
 
   return (
-    <ScrollView className="flex-1 bg-dark-background-400 p-4">
+    <SafeAreaView className="flex-1 bg-dark-background pb-24">
+      <View className="flex-row items-center backdrop-blur-md px-4 pb-3.5 pt-[1.125rem] justify-center border-b border-dark-border">
+        <Text className="text-white/80 text-3xl font-Lexend font-bold tracking-tight text-center">Meine Statistiken</Text>
+      </View>
       {
-        loading ?
-          (
-            <Text className="text-dark-text-400">Loading...</Text>
-          ) : (
-            userStatistics === null ?
-              (
-                <Text className="text-red-500 text-center my-5">Error: Unable to load statistics</Text>
-              ) : (
-                <>
-                  <View className="mb-8" testID="stats-section">
-                    <View className="flex-row justify-between mb-4">
-                      <StatBox
-                        currencyVisible={false}
-                        title="Total Shirts"
-                        value={userStatistics.general_stats.totalShirtsCount}
-                        icon={<Ionicons name="shirt" size={18} color="#ef4444" style={{ margin: 0, padding: 0, marginRight: 8 }} />}
-                      />
-                      <StatBox
-                        currencyVisible={false}
-                        title="Average Condition"
-                        value={`8.6 / 10`}
-                        icon={<Ionicons name="disc" size={18} color="#F59E0B" style={{ margin: 0, padding: 0, marginRight: 8 }} />}
-                      />
-                    </View>
-                    <View className="flex-row justify-between mb-4">
-                      <StatBox
-                        currencyVisible={false}
-                        title="Different Leagues"
-                        value={userStatistics.general_stats.distinctLeaguesCount}
-                        icon={<Ionicons name="checkmark-circle" size={18} color="#60a5fa" style={{ margin: 0, padding: 0, marginRight: 8 }} />}
-                      />
-                      <StatBox
-                        currencyVisible={false}
-                        title="Different Teams"
-                        value={userStatistics.general_stats.distinctTeamsCount}
-                        icon={<Ionicons name="checkmark-circle" size={18} color="#facc15" style={{ margin: 0, padding: 0, marginRight: 8 }} />}
-                      />
-                    </View>
-                    <View className="flex-row justify-between">
-                      <StatBox
-                        currencyVisible
-                        title="Total Value"
-                        value={userStatistics.general_stats.totalValue}
-                        icon={<Ionicons name="cash" size={18} color="#16a34a" style={{ margin: 0, padding: 0, marginRight: 8 }} />}
-                      />
-                      <StatBox
-                        currencyVisible
-                        title="Average Value"
-                        value={userStatistics.general_stats.averageValue}
-                        icon={<FontAwesome5 name="money-bill-wave" size={16} color="#16a34a" style={{ margin: 0, padding: 0, marginRight: 8 }} />}
-                      />
-                    </View>
-                  </View>
-                  <View className="mb-8" testID="league-stats-section">
-                    <Text className="font-bold text-xl text-dark-text-400 mb-5">Top Leagues</Text>
-                    <LeagueOverview leagueStats={userStatistics.league_stats} />
-                  </View>
-                  <View className="mb-8" testID="team-stats-section">
-                    <Text className="font-bold text-xl text-dark-text-400 mb-5">Top Teams</Text>
-                    <TeamOverview teamStats={userStatistics.team_stats} />
-                  </View>
-                </>
-              )
-          )
+        loading
+          ? <LoadingView />
+          : data && userStatistics
+            ? <StatisticsView shirts={shirts} userStatistics={userStatistics} />
+            : <Text className="text-red-500 text-lg font-medium text-center">Leider ist es aktuell nicht möglich, die nötigen Daten zu laden. Bitte versuche es später nochmal.</Text>
       }
-    </ScrollView>
+    </SafeAreaView>
   );
 }

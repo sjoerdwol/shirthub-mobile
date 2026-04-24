@@ -9,18 +9,17 @@ export default function LeagueOverview({ leagueStats }: { leagueStats: UserStati
 
   const RenderItem = ({ item, isLast }: { item: UserStatistics['league_stats'][0]; isLast: boolean }) => {
     const league = data?.leagues.find(league => league.key === item.leagueKey);
-
     if (!league) return null;
 
     return (
-      <View className={isLast ? "mb-0" : "mb-4"}>
+      <View className={isLast ? "mb-8" : "mb-4"}>
         <View className="flex-row justify-between items-center">
-          <Text className="text-dark-text-400 text-base font-medium">{league.name}</Text>
-          <Text className="text-gray-300 text-sm font-medium">{item.distinctTeamsCollected} / {league.teamCount} Teams</Text>
+          <Text className="font-Lexend font-medium text-white/70">{league.name}</Text>
+          <Text className="font-Lexend font-medium text-white/50 text-sm">{item.distinctTeamsCollected} / {league.teamCount} Teams</Text>
         </View>
-        <View className="h-2 rounded overflow-hidden mt-2 bg-dark-background-200">
+        <View className="bg-dark-secondaryBackground h-2 mt-2 overflow-hidden rounded">
           <View
-            className="h-full bg-green-600 rounded"
+            className="bg-dark-highlight h-full rounded"
             style={{ width: `${item.percentageCollected * 100}%` }}
           />
         </View>
@@ -29,7 +28,7 @@ export default function LeagueOverview({ leagueStats }: { leagueStats: UserStati
   };
 
   return (
-    <View className="p-5 rounded-2xl bg-dark-background-300">
+    <View className="border border-dark-border mt-4 p-5 rounded-2xl">
       {sortedAndLimited.map((item, index) => (
         <RenderItem
           key={sortedAndLimited.indexOf(item)}
@@ -37,6 +36,7 @@ export default function LeagueOverview({ leagueStats }: { leagueStats: UserStati
           isLast={index === sortedAndLimited.length - 1}
         />
       ))}
+      <Text className="font-Lexend font-medium ml-1 text-white/50 text-xs">{leagueStats.length} Ligen insgesamt</Text>
     </View>
   );
 }

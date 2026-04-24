@@ -1,54 +1,49 @@
-import HeaderIcon from "@/components/ui/headerIcon";
-import TabBarIcon from "@/components/ui/tabBarIcon";
-import { Tabs, router } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
+import { Tabs } from "expo-router";
 
 export default function TabsLayout() {
   return (
     <Tabs screenOptions={{
-      headerStyle: {
-        backgroundColor: '#23272e',
-      },
-      headerTitleStyle: {
-        color: '#e0e5eb',
-      },
-      tabBarActiveTintColor: '#3673c4',
-      tabBarItemStyle: {
-        marginTop: 5
-      },
+      headerShown: false,
+      tabBarActiveTintColor: 'rgb(255 255 255)',
+      tabBarInactiveTintColor: 'rgb(255 255 255)',
       tabBarShowLabel: false,
       tabBarStyle: {
-        backgroundColor: '#23272e',
-        borderColor: '#23272e',
-        height: 80,
+        backgroundColor: '#151D28',
+        borderColor: 'rgb(44, 58, 78)',
+        borderTopWidth: 1,
+        height: 90,
+        paddingBottom: 10,
+        paddingTop: 10
       },
     }}>
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
-          tabBarIcon: ({ color, size }) => <TabBarIcon name='home' color={color} size={size} />
+          headerShown: false,
+          title: "Startseite",
+          tabBarIcon: ({ color, focused, size }) => <Ionicons name={focused ? 'home' : 'home-outline'} color={color} size={size} />
         }}
       />
       <Tabs.Screen
         name="collection"
         options={{
-          title: "My Collection",
-          tabBarIcon: ({ color, size }) => <TabBarIcon name='shirt' color={color} size={size} />,
-          headerRight: () => <HeaderIcon name='add' size={28} color='#e0e5eb' className='mr-6' onPress={() => router.navigate({ pathname: '/shirts/manage', params: { mode: 'add' } })} />
+          title: "Sammlung",
+          tabBarIcon: ({ color, focused, size }) => <Ionicons name={focused ? 'shirt' : 'shirt-outline'} color={color} size={size} />
         }}
       />
       <Tabs.Screen
         name="statistics"
         options={{
-          title: "Statistics",
-          tabBarIcon: ({ color, size }) => <TabBarIcon name='stats-chart' color={color} size={size} />
+          title: "Statistiken",
+          tabBarIcon: ({ color, focused, size }) => <Ionicons name={focused ? 'stats-chart' : 'stats-chart-outline'} color={color} size={size} />
         }}
       />
       <Tabs.Screen
         name="profile"
         options={{
-          title: "My Profile",
-          tabBarIcon: ({ color, size }) => <TabBarIcon name='person' color={color} size={size} />
+          title: "Profil",
+          tabBarIcon: ({ color, focused, size }) => <Ionicons name={focused ? 'person' : 'person-outline'} color={color} size={size} />
         }}
       />
     </Tabs>

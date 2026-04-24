@@ -15,13 +15,17 @@ const config: Config = {
     "!**/nativewind-env.d.ts",
     "!**/tailwind.config.js",
     "!**/_layout.tsx",
-    "!**/handleShirtOperations.ts",
     "!**/stores/**",
     "!**/services/**",
     "!**/profile.tsx",
-    "!**/statistics.tsx",
     "!**/jest.config.ts",
-    "!./app.config.ts"
+    "!./app.config.ts",
+
+    // utils
+    "!**/handleShirtOperations.ts",
+    "!**/handleStatisticsOperations.ts",
+    "!**/handleSubmits.ts",
+    "!**/setReferenceData.ts"
   ],
   coverageThreshold: {
     global: {
