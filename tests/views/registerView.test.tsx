@@ -22,18 +22,9 @@ it('renders register form correctly', () => {
   render(<RegisterView />);
 
   expect(screen.getByText('Trete uns bei')).toBeVisible();
-  expect(screen.getByText('Username')).toBeVisible();
   expect(screen.getByText('Email Adresse')).toBeVisible();
   expect(screen.getByText('Passwort')).toBeVisible();
   expect(screen.getByTestId('primary_button')).toHaveTextContent('Registrieren');
-});
-
-it('updates username input', () => {
-  render(<RegisterView />);
-
-  fireEvent.changeText(screen.getByPlaceholderText('Lege deinen Usernamen fest ...'), 'johndoe');
-
-  expect(screen.getByDisplayValue('johndoe')).toBeVisible();
 });
 
 it('updates email input', () => {
@@ -63,15 +54,14 @@ it('toggles password visibility when eye button is pressed', () => {
   expect(screen.getByPlaceholderText('Lege dein Passwort fest ...').props.secureTextEntry).toBe(false);
 });
 
-it('calls signUp with username, email and password when register button is pressed', () => {
+it('calls signUp with email and password when register button is pressed', () => {
   render(<RegisterView />);
 
-  fireEvent.changeText(screen.getByPlaceholderText('Lege deinen Usernamen fest ...'), 'johndoe');
   fireEvent.changeText(screen.getByPlaceholderText('name@beispiel.de'), 'john@example.com');
   fireEvent.changeText(screen.getByPlaceholderText('Lege dein Passwort fest ...'), 'password123');
   fireEvent.press(screen.getByTestId('primary_button'));
 
-  expect(mockSignUp).toHaveBeenCalledWith('john@example.com', 'password123', 'johndoe');
+  expect(mockSignUp).toHaveBeenCalledWith('john@example.com', 'password123');
 });
 
 it('renders primary button in loading state when auth is loading', () => {

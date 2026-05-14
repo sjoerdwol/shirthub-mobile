@@ -138,7 +138,7 @@ describe('AuthContextProvider - signUp', () => {
     await waitFor(() => expect(result.current.loading).toBe(false));
 
     await act(async () => {
-      await result.current.signUp('new@example.com', 'password123', 'newuser');
+      await result.current.signUp('new@example.com', 'password123');
     });
 
     expect(result.current.session).toEqual(mockSession);
@@ -156,7 +156,7 @@ describe('AuthContextProvider - signUp', () => {
     await waitFor(() => expect(result.current.loading).toBe(false));
 
     await act(async () => {
-      await result.current.signUp('new@example.com', 'password123', 'newuser');
+      await result.current.signUp('new@example.com', 'password123');
     });
 
     expect(result.current.session).toBeNull();
@@ -173,7 +173,7 @@ describe('AuthContextProvider - signUp', () => {
     await waitFor(() => expect(result.current.loading).toBe(false));
 
     await act(async () => {
-      await result.current.signUp('new@example.com', 'password123', 'newuser');
+      await result.current.signUp('new@example.com', 'password123');
     });
 
     expect(result.current.session).toBeNull();
