@@ -2,11 +2,9 @@ import { getUserStatistics } from "@/services/shirthub_statistics";
 import { Session } from "@supabase/supabase-js";
 
 export function calculateAverageCondition(shirts: Array<Shirt>): number {
-  const average = Math.floor(shirts
-    .filter(shirt => shirt.condition)
-    .reduce((count, shirt) => count + shirt.condition, 0)
-    / shirts.filter(shirt => shirt.condition).length);
-  return average;
+  const filtered = shirts.filter(shirt => shirt.condition);
+  if (filtered.length === 0) { return 0; }
+  return Math.floor(filtered.reduce((count, shirt) => count + shirt.condition, 0) / filtered.length);
 }
 
 export async function handleStatisticsFetch(session: Session, setHasChanged: (hasChanged: boolean) => void, setUserStatistics: (stats: UserStatistics) => void): Promise<void> {
