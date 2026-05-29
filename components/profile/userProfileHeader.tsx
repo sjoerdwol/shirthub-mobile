@@ -3,15 +3,15 @@ import PrimaryButton from "../buttons/primaryButton";
 import SecondaryButton from "../buttons/secondaryButton";
 import ShirtImage from "../ui/shirtImage";
 
-export default function UserProfileHeader() {
+export default function UserProfileHeader({ authLoading, profile, shirtAmount, signOut }: { authLoading: boolean, profile: Profile, shirtAmount: number, signOut: () => Promise<void> }) {
   return (
     <View className="items-center">
       <ShirtImage
         imageSrc={require('../../assets/images/exampleavatar.png')}
         type='profile'
       />
-      <Text className="text-white/80 text-3xl font-bold font-Lexend mb-0.5 mt-4">Name</Text>
-      <Text className="text-white/70 text-base font-Lexend">Mitglied seit XXXX • XY Trikots</Text>
+      <Text className="text-white/80 text-3xl font-bold font-Lexend mb-0.5 mt-4">{profile.username}</Text>
+      <Text className="text-white/70 text-base font-Lexend">Mitglied seit {new Date(profile.createdAt).getFullYear()}  •  {shirtAmount} Trikots</Text>
       <View className="flex-row justify-between mt-6 w-full gap-4">
         <View className="flex-1">
           <SecondaryButton
@@ -22,8 +22,8 @@ export default function UserProfileHeader() {
         </View>
         <View className="flex-1">
           <PrimaryButton
-            loading={false}
-            onPress={() => { }}
+            loading={authLoading}
+            onPress={signOut}
             text="Abmelden"
           />
         </View>

@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Text, View } from "react-native";
 
-export default function UserProfileFavoritePicker() {
+export default function UserProfileFavoritePicker({ profile }: { profile: Profile }) {
   return (
     <View className="rounded-xl p-6 shadow-sm border border-dark-border">
       <Text className="text-white/80 text-2xl font-bold font-Lexend mb-6">Mein Lieblingstrikot</Text>
