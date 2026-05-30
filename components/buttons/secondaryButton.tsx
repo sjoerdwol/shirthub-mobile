@@ -6,7 +6,7 @@ export default function SecondaryButton({ loading, onPress, text }: { loading: b
       className="w-full items-center justify-center rounded-xl h-14 bg-dark-secondaryBackground active:scale-98 transition-transform"
       disabled={loading}
       onPress={onPress}
-      testID="primary_button"
+      testID="secondary_button"
     >
       {
         loading
