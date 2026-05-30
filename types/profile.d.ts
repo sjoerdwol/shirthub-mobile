@@ -1,10 +1,10 @@
 interface Profile {
-  ownerId: string;
+  owner_id: string;
   username: string;
-  avatarUrl: string | null;
-  isPublic: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  avatar_url: string | null;
+  is_public: boolean;
+  created_at: Date;
+  updated_at: Date;
   email: string;
 }
 
