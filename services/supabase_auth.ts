@@ -56,15 +56,10 @@ export const signOutFromSession = async () => {
 }
 
 // Create a new account using the provided email and password
-export const signUpWithEmail = async (email: string, password: string, username: string): Promise<Session | User> => {
+export const signUpWithEmail = async (email: string, password: string): Promise<Session | User> => {
   const { data, error } = await supabase.auth.signUp({
     email: email,
-    password: password,
-    options: {
-      data: {
-        user_name: username,
-      },
-    },
+    password: password
   });
 
   if (error) {

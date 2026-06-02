@@ -5,6 +5,15 @@
     "expires_in": 3600,
     "token_type": "bearer"
   },
+  "profile": {
+    "owner_id": "owner-1",
+    "username": "TestUser",
+    "avatar_url": null,
+    "is_public": true,
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "email": "test@example.com"
+  },
   "shirt": {
     "id": "shirt-1",
     "team": "FC Bayern München",

@@ -29,6 +29,7 @@ const Root = () => {
           <Stack.Screen name="(tabs)" />
           <Stack.Screen name="shirts/[id]" />
           <Stack.Screen name="shirts/manage" />
+          <Stack.Screen name="settings" />
         </>
       ) : (
         <Stack.Screen name="(authentication)" />

@@ -54,10 +54,10 @@ const AuthContextProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
-  const signUp = async (email: string, password: string, username: string) => {
+  const signUp = async (email: string, password: string) => {
     try {
       setLoading(true);
-      const response = await signUpWithEmail(email, password, username);
+      const response = await signUpWithEmail(email, password);
 
       if (isSession(response)) {
         setSession(response);

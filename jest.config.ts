@@ -22,6 +22,7 @@ const config: Config = {
     "!./app.config.ts",
 
     // utils
+    "!**/handleProfileOperations.ts",
     "!**/handleShirtOperations.ts",
     "!**/handleStatisticsOperations.ts",
     "!**/handleSubmits.ts",

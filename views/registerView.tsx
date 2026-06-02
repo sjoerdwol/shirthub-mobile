@@ -10,7 +10,6 @@ export default function RegisterView() {
   const [securePassword, setSecurePassword] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [username, setUsername] = useState('');
   const { loading, signUp } = useAuth();
 
   return (
@@ -20,16 +19,6 @@ export default function RegisterView() {
       exiting={SlideOutRight.duration(500)}
     >
       <Text className="text-white/80 text-2xl font-LexendBold pb-4">Trete uns bei</Text>
-      <View className="w-full px-1 mb-5">
-        <Text className="text-white/50 text-base font-semibold font-Lexend pb-2">Username</Text>
-        <SingleIconInput
-          firstIcon="at"
-          keyboardType="default"
-          onChangeText={setUsername}
-          placeholder="Lege deinen Usernamen fest ..."
-          value={username}
-        />
-      </View>
       <View className="w-full px-1 mb-5">
         <Text className="text-white/50 text-base font-semibold font-Lexend pb-2">Email Adresse</Text>
         <SingleIconInput
@@ -57,7 +46,7 @@ export default function RegisterView() {
         />
       </View>
       <View className="my-10 px-1">
-        <PrimaryButton text="Registrieren" onPress={() => signUp(email, password, username)} loading={loading} />
+        <PrimaryButton text="Registrieren" onPress={() => signUp(email, password)} loading={loading} />
       </View>
       <View className="mb-10 mx-1 h-px bg-dark-border" />
     </Animated.View>

@@ -1,6 +1,6 @@
 import { Image, ImageSourcePropType, View } from 'react-native';
 
-export default function ShirtImage({ imageSrc, type }: { imageSrc: ImageSourcePropType, type: 'avatar' | 'detailAndManage' | 'displayVertical' | 'notification' }) {
+export default function ShirtImage({ imageSrc, type }: { imageSrc: ImageSourcePropType, type: 'avatar' | 'detailAndManage' | 'displayVertical' | 'notification' | 'profile' }) {
   let className: string;
 
   switch (type) {
@@ -15,6 +15,9 @@ export default function ShirtImage({ imageSrc, type }: { imageSrc: ImageSourcePr
       break;
     case 'notification':
       className = 'aspect-video border border-dark-border mt-3 overflow-hidden relative rounded-lg';
+      break;
+    case 'profile':
+      className = 'border-2 border-dark-border h-36 w-36 overflow-hidden rounded-full';
       break;
     default:
       className = ''
