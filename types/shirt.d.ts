@@ -11,6 +11,7 @@ interface Shirt {
   size: string | null;
   value: number | null;
   imageSrc: string;
+  is_favorite: boolean;
   created_at: Date;
   updated_at: Date;
 }

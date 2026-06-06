@@ -11,6 +11,7 @@ export default function convertShirtResponse(shirtResponseArray: Array<ShirtResp
     print_number: shirtResponse.printNumber,
     size: shirtResponse.size,
     value: shirtResponse.value,
+    is_favorite: shirtResponse.isFavorite,
     created_at: shirtResponse.createdAt,
     updated_at: shirtResponse.updatedAt,
     imageSrc: '../../assets/images/exampleshirt.png', // Default image for now
