@@ -14,6 +14,7 @@ it('correctly converts backend shirt response', () => {
     printNumber: 99,
     size: 'XL',
     value: 100,
+    isFavorite: true,
     createdAt: new Date(),
     updatedAt: new Date()
   };
@@ -30,6 +31,7 @@ it('correctly converts backend shirt response', () => {
     print_number: 99,
     size: 'XL',
     value: 100,
+    is_favorite: true,
     created_at: new Date(),
     updated_at: new Date(),
     imageSrc: '../../assets/images/exampleshirt.png'
