@@ -7,7 +7,7 @@ import { Pressable, Text, View } from "react-native";
 import UserFavoriteDisplay from "../shirtDisplay/userFavoriteDisplay";
 import UserProfileFavoritePickerModal from "./userProfileFavoritePickerModal";
 
-export default function UserProfileFavoritePicker({ profile }: { profile: Profile }) {
+export default function UserProfileFavoritePicker() {
   const { session } = useAuth();
   const { shirts, updateShirt } = useShirtStore((state) => state);
   const [modalVisible, setModalVisible] = useState(false);

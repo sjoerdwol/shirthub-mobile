@@ -13,7 +13,7 @@ export default function ProfileView({ authLoading, profile, shirtAmount, signOut
         <UserProfileHeader authLoading={authLoading} profile={profile} shirtAmount={shirtAmount} signOut={signOut} />
       </View>
       <View className="mt-8">
-        <UserProfileFavoritePicker profile={profile} />
+        <UserProfileFavoritePicker />
       </View>
     </Animated.View>
   );
