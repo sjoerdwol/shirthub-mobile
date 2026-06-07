@@ -83,7 +83,7 @@ export const setIsFavorite = async (session: Session, shirtId: string, isFavorit
     if (!session?.access_token) throw new Error('No valid session found. Please log in again.');
     if (!backendUrl) throw new Error('Missing EXPO_PUBLIC_BACKEND_URL environment variable!');
 
-    // PUT request to /shirts/id/favorite with the JWT token
+    // PATCH request to /shirts/id/favorite with the JWT token
     const response = await fetch(`${backendUrl}/shirts/${shirtId}/favorite`, {
       method: 'PATCH',
       headers: {

@@ -39,13 +39,13 @@ beforeEach(() => {
 it('shows the empty add box when there is no favorite', () => {
   setShirts([mockOtherShirt]);
 
-  render(<UserProfileFavoritePicker profile={mockProfile} />);
+  render(<UserProfileFavoritePicker />);
 
   expect(screen.getByText('Trikot hinzufügen')).toBeVisible();
 });
 
 it('shows the favorite shirt instead of the add box when one is set', () => {
-  render(<UserProfileFavoritePicker profile={mockProfile} />);
+  render(<UserProfileFavoritePicker />);
 
   expect(screen.queryByText('Trikot hinzufügen')).toBeNull();
   expect(screen.getAllByText('FC Bayern München').length).toBeGreaterThan(0);
@@ -54,7 +54,7 @@ it('shows the favorite shirt instead of the add box when one is set', () => {
 it('opens the modal via the add box when there is no favorite', () => {
   setShirts([mockOtherShirt]);
 
-  render(<UserProfileFavoritePicker profile={mockProfile} />);
+  render(<UserProfileFavoritePicker />);
 
   fireEvent.press(screen.getByTestId('favorite_picker_trigger'));
 
@@ -62,7 +62,7 @@ it('opens the modal via the add box when there is no favorite', () => {
 });
 
 it('opens the modal via the edit button when a favorite is set', () => {
-  render(<UserProfileFavoritePicker profile={mockProfile} />);
+  render(<UserProfileFavoritePicker />);
 
   fireEvent.press(screen.getByTestId('icon_button_normal'));
 
@@ -70,7 +70,7 @@ it('opens the modal via the edit button when a favorite is set', () => {
 });
 
 it('lists the shirts of the collection in the modal', () => {
-  render(<UserProfileFavoritePicker profile={mockProfile} />);
+  render(<UserProfileFavoritePicker />);
 
   fireEvent.press(screen.getByTestId('icon_button_normal'));
 
@@ -81,7 +81,7 @@ it('lists the shirts of the collection in the modal', () => {
 it('shows an empty hint in the modal when the collection is empty', () => {
   setShirts([]);
 
-  render(<UserProfileFavoritePicker profile={mockProfile} />);
+  render(<UserProfileFavoritePicker />);
 
   fireEvent.press(screen.getByTestId('favorite_picker_trigger'));
 
@@ -89,7 +89,7 @@ it('shows an empty hint in the modal when the collection is empty', () => {
 });
 
 it('closes the modal via the close button', () => {
-  render(<UserProfileFavoritePicker profile={mockProfile} />);
+  render(<UserProfileFavoritePicker />);
 
   fireEvent.press(screen.getByTestId('icon_button_normal'));
   expect(screen.getByText('Lieblingstrikot wählen')).toBeVisible();
@@ -100,7 +100,7 @@ it('closes the modal via the close button', () => {
 });
 
 it('closes the modal on a hardware back request', () => {
-  render(<UserProfileFavoritePicker profile={mockProfile} />);
+  render(<UserProfileFavoritePicker />);
 
   fireEvent.press(screen.getByTestId('icon_button_normal'));
   expect(screen.getByText('Lieblingstrikot wählen')).toBeVisible();
@@ -111,7 +111,7 @@ it('closes the modal on a hardware back request', () => {
 });
 
 it('calls handleSetFavorite with the selected and previous favorite ids', async () => {
-  render(<UserProfileFavoritePicker profile={mockProfile} />);
+  render(<UserProfileFavoritePicker />);
 
   fireEvent.press(screen.getByTestId('icon_button_normal'));
   await act(async () => {
@@ -124,7 +124,7 @@ it('calls handleSetFavorite with the selected and previous favorite ids', async 
 it('passes null as previous favorite when none is set', async () => {
   setShirts([mockOtherShirt]);
 
-  render(<UserProfileFavoritePicker profile={mockProfile} />);
+  render(<UserProfileFavoritePicker />);
 
   fireEvent.press(screen.getByTestId('favorite_picker_trigger'));
   await act(async () => {
@@ -135,7 +135,7 @@ it('passes null as previous favorite when none is set', async () => {
 });
 
 it('closes the modal after a shirt is selected', async () => {
-  render(<UserProfileFavoritePicker profile={mockProfile} />);
+  render(<UserProfileFavoritePicker />);
 
   fireEvent.press(screen.getByTestId('icon_button_normal'));
   await act(async () => {
@@ -148,7 +148,7 @@ it('closes the modal after a shirt is selected', async () => {
 it('does not call handleSetFavorite when there is no session', async () => {
   (useAuth as jest.Mock).mockReturnValue({ session: null });
 
-  render(<UserProfileFavoritePicker profile={mockProfile} />);
+  render(<UserProfileFavoritePicker />);
 
   fireEvent.press(screen.getByTestId('icon_button_normal'));
   await act(async () => {
@@ -159,7 +159,7 @@ it('does not call handleSetFavorite when there is no session', async () => {
 });
 
 it('calls handleDeleteFavorite when the delete button is pressed', async () => {
-  render(<UserProfileFavoritePicker profile={mockProfile} />);
+  render(<UserProfileFavoritePicker />);
 
   await act(async () => {
     fireEvent.press(screen.getByTestId('icon_button_delete'));
@@ -171,7 +171,7 @@ it('calls handleDeleteFavorite when the delete button is pressed', async () => {
 it('does not call handleDeleteFavorite when there is no session', async () => {
   (useAuth as jest.Mock).mockReturnValue({ session: null });
 
-  render(<UserProfileFavoritePicker profile={mockProfile} />);
+  render(<UserProfileFavoritePicker />);
 
   await act(async () => {
     fireEvent.press(screen.getByTestId('icon_button_delete'));
