@@ -13,7 +13,13 @@ export default function ShirtDisplayVertical({ shirt }: { shirt: Shirt }) {
         />
         <View className="flex-1 justify-between py-0.5">
           <View>
-            <Text className="font-bold text-lg text-white/80 leading-tight font-Lexend">{shirt.team}</Text>
+            <View className="flex-row items-center justify-between">
+              <Text className="font-bold text-lg text-white/80 leading-tight font-Lexend">{shirt.team}</Text>
+              {
+                shirt.is_favorite &&
+                <Ionicons name="star" color='rgb(15, 115, 255)' size={18} testID="favorite_star" />
+              }
+            </View>
             <Text className="text-base font-medium text-white/70 font-Lexend">{shirt.season} • {shirt.type}</Text>
           </View>
           <View className="flex-row items-center justify-between">

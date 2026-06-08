@@ -11,6 +11,7 @@ interface ShirtResponse {
   printNumber: number | null;
   size: string | null;
   value: number | null;
+  isFavorite: boolean;
   createdAt: Date;
   updatedAt: Date;
 }

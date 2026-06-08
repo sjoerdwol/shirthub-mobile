@@ -27,6 +27,7 @@
     "size": "L",
     "value": 90,
     "imageSrc": "",
+    "is_favorite": true,
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
   },
@@ -43,6 +44,7 @@
     "size": null,
     "value": null,
     "imageSrc": "",
+    "is_favorite": false,
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
   },

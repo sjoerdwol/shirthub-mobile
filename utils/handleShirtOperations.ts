@@ -1,6 +1,31 @@
-import { addShirt, deleteShirt, getShirts, updateShirt } from '@/services/shirthub_crud';
+import { addShirt, deleteShirt, getShirts, setIsFavorite, updateShirt } from '@/services/shirthub_crud';
 import { Session } from '@supabase/supabase-js';
 import convertShirtResponse from './convertShirtResponse';
+
+export async function handleDeleteFavorite(session: Session, shirtId: string, updateShirtInStore: (shirtId: string, updatedShirt: Partial<Shirt>) => void): Promise<void> {
+  try {
+    const response = await setIsFavorite(session, shirtId, false);
+    const removedFavorite = convertShirtResponse([response])[0];
+    updateShirtInStore(shirtId, removedFavorite);
+  } catch (error) {
+    console.error('Error removing favorite shirt: ', error);
+  }
+}
+
+export async function handleSetFavorite(session: Session, shirtId: string, previousFavoriteId: string | null, updateShirtInStore: (shirtId: string, updatedShirt: Partial<Shirt>) => void): Promise<void> {
+  try {
+    const response = await setIsFavorite(session, shirtId, true);
+    const newFavorite = convertShirtResponse([response])[0];
+    // Only after a successful backend call: clear the previous favorite in the store
+    if (previousFavoriteId && previousFavoriteId !== shirtId) {
+      updateShirtInStore(previousFavoriteId, { is_favorite: false });
+    }
+    // Apply the new favorite returned by the backend
+    updateShirtInStore(newFavorite.id, newFavorite);
+  } catch (error) {
+    console.error('Error setting favorite shirt: ', error);
+  }
+}
 
 export async function handleShirtAddition(session: Session, newShirt: Partial<Shirt>, addShirtToStore: (shirt: Shirt) => void, setHasChanged: (hasChanged: boolean) => void): Promise<void> {
   try {

@@ -76,6 +76,33 @@ export const getShirts = async (session: Session): Promise<ShirtResponse[]> => {
   }
 }
 
+// Set a shirt as the users favorite. Backend marks this shirt as favorite, removes any previous favorite and returns the new favorite
+export const setIsFavorite = async (session: Session, shirtId: string, isFavorite: boolean): Promise<ShirtResponse> => {
+  try {
+    const backendUrl = process.env.EXPO_PUBLIC_BACKEND_URL;
+    if (!session?.access_token) throw new Error('No valid session found. Please log in again.');
+    if (!backendUrl) throw new Error('Missing EXPO_PUBLIC_BACKEND_URL environment variable!');
+
+    // PATCH request to /shirts/id/favorite with the JWT token
+    const response = await fetch(`${backendUrl}/shirts/${shirtId}/favorite`, {
+      method: 'PATCH',
+      headers: {
+        'Authorization': `Bearer ${session.access_token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ is_favorite: isFavorite })
+    });
+
+    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
+    const favoriteShirt: ShirtResponse = await response.json();
+    return favoriteShirt;
+  } catch (error) {
+    console.error('Error setting favorite shirt: ', error);
+    throw error;
+  }
+}
+
 // Update a shirt in the users collection
 export const updateShirt = async (session: Session, shirtId: string, updatedShirt: Partial<Shirt>): Promise<ShirtResponse> => {
   try {

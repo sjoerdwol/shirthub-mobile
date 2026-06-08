@@ -41,6 +41,18 @@ it('does not render the size badge when size is null', () => {
   expect(screen.queryByText(/Size/)).toBeNull();
 });
 
+it('renders the favorite star when the shirt is a favorite', () => {
+  render(<ShirtDisplayVertical shirt={mockShirt} />);
+
+  expect(screen.getByTestId('favorite_star')).toBeVisible();
+});
+
+it('does not render the favorite star when the shirt is not a favorite', () => {
+  render(<ShirtDisplayVertical shirt={mockShirtWithoutSize} />);
+
+  expect(screen.queryByTestId('favorite_star')).toBeNull();
+});
+
 it('navigates to the shirt detail screen on press', () => {
   render(<ShirtDisplayVertical shirt={mockShirt} />);
 
