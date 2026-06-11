@@ -33,6 +33,13 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Erlaube ShirtHub den Zugriff auf deine Fotos, um ein Profilbild auszuwählen.",
+          "cameraPermission": "Erlaube ShirtHub den Zugriff auf deine Kamera, um ein Profilbild aufzunehmen."
+        }
       ]
     ],
     "experiments": {
