@@ -50,3 +50,54 @@ export const updateProfile = async (session: Session, updatedProfile: Partial<Pr
     throw error;
   }
 }
+
+// Tell the backend to persist the (server-derived) avatar URL after the image
+// has been uploaded directly to Supabase Storage.
+export const updateAvatar = async (session: Session): Promise<ProfileResponse> => {
+  try {
+    const backendUrl = process.env.EXPO_PUBLIC_BACKEND_URL;
+    if (!session.access_token) throw new Error('No valid session found. Please log in again.');
+    if (!backendUrl) throw new Error('Missing EXPO_PUBLIC_BACKEND_URL environment variable!');
+
+    const response = await fetch(`${backendUrl}/profile/avatar`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${session.access_token}`,
+        'Content-Type': 'application/json',
+      }
+    });
+
+    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
+    const userProfile: ProfileResponse = await response.json();
+    return userProfile;
+  } catch (error) {
+    console.error('Error updating the avatar: ', error);
+    throw error;
+  }
+}
+
+// Clear the avatar reference on the profile.
+export const removeAvatar = async (session: Session): Promise<ProfileResponse> => {
+  try {
+    const backendUrl = process.env.EXPO_PUBLIC_BACKEND_URL;
+    if (!session.access_token) throw new Error('No valid session found. Please log in again.');
+    if (!backendUrl) throw new Error('Missing EXPO_PUBLIC_BACKEND_URL environment variable!');
+
+    const response = await fetch(`${backendUrl}/profile/avatar`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${session.access_token}`,
+        'Content-Type': 'application/json',
+      }
+    });
+
+    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
+    const userProfile: ProfileResponse = await response.json();
+    return userProfile;
+  } catch (error) {
+    console.error('Error removing the avatar: ', error);
+    throw error;
+  }
+}
