@@ -34,8 +34,8 @@ export async function handleAvatarUpload(session: Session, updateProfileInStore:
 }
 
 export async function handleAvatarRemove(session: Session, updateProfileInStore: (profile: Profile) => void) {
-  await removeAvatarImage(session);
   const response = await removeAvatar(session);
+  await removeAvatarImage(session);
   const profile = convertProfileResponse(response);
   updateProfileInStore(profile);
 }
