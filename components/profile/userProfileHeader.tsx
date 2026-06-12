@@ -1,3 +1,4 @@
+import getAvatarSource from "@/utils/getAvatarSource";
 import { router } from "expo-router";
 import { Text, View } from "react-native";
 import PrimaryButton from "../buttons/primaryButton";
@@ -8,7 +9,7 @@ export default function UserProfileHeader({ authLoading, profile, shirtAmount, s
   return (
     <View className="items-center">
       <ShirtImage
-        imageSrc={require('../../assets/images/exampleavatar.png')}
+        imageSrc={getAvatarSource(profile)}
         type='profile'
       />
       <Text className="text-white/80 text-3xl font-bold font-Lexend mb-0.5 mt-4">{profile.username}</Text>

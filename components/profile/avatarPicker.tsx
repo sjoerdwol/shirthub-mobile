@@ -1,4 +1,5 @@
 import ShirtImage from "@/components/ui/shirtImage";
+import getAvatarSource from "@/utils/getAvatarSource";
 import { ActivityIndicator, Pressable, Text, View } from "react-native";
 
 export default function AvatarPicker({ loading, profile, showOptions }: { loading: boolean, profile: Profile, showOptions: () => void }) {
@@ -6,7 +7,7 @@ export default function AvatarPicker({ loading, profile, showOptions }: { loadin
     <View className="items-center mb-8">
       <Pressable disabled={loading} onPress={showOptions} testID="avatar_picker">
         <ShirtImage
-          imageSrc={profile.avatar_url ? { uri: profile.avatar_url } : require('../../assets/images/exampleavatar.png')}
+          imageSrc={getAvatarSource(profile)}
           type="profile"
         />
         {loading && (
