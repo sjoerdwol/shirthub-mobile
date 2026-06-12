@@ -2,7 +2,7 @@
   "expo": {
     "name": "shirthub-mobile",
     "slug": "shirthub-mobile",
-    "version": "0.2.1-alpha",
+    "version": "0.3.0-alpha",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "shirthubmobile",
@@ -32,6 +32,13 @@
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Erlaube ShirtHub den Zugriff auf deine Fotos, um ein Profilbild auszuwählen.",
+          "cameraPermission": "Erlaube ShirtHub den Zugriff auf deine Kamera, um ein Profilbild aufzunehmen."
         }
       ]
     ],

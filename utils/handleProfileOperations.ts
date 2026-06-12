@@ -1,4 +1,5 @@
-import { getProfile, updateProfile } from "@/services/shirthub_user_profile";
+import { getProfile, removeAvatar, updateAvatar, updateProfile } from "@/services/shirthub_user_profile";
+import { removeAvatarImage, uploadAvatarImage } from "@/services/supabase_media";
 import { Session } from "@supabase/supabase-js";
 import convertProfileResponse from "./convertProfileResponse";
 
@@ -20,4 +21,21 @@ export async function handleProfileUpdate(session: Session, updateProfileInStore
   } catch (error) {
     console.error('Error updating profile: ', error);
   }
+}
+
+// Uploads the picked image to Supabase Storage, then persists the avatar URL via
+// the backend and reflects the result in the store. Throws on failure so the UI
+// can surface an error and reset its loading state.
+export async function handleAvatarUpload(session: Session, updateProfileInStore: (profile: Profile) => void, base64: string) {
+  await uploadAvatarImage(session, base64);
+  const response = await updateAvatar(session);
+  const profile = convertProfileResponse(response);
+  updateProfileInStore(profile);
+}
+
+export async function handleAvatarRemove(session: Session, updateProfileInStore: (profile: Profile) => void) {
+  const response = await removeAvatar(session);
+  await removeAvatarImage(session);
+  const profile = convertProfileResponse(response);
+  updateProfileInStore(profile);
 }

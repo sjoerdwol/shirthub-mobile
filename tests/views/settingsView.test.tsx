@@ -9,8 +9,14 @@ jest.mock('@/components/forms/userSettingsForm', () => {
   return () => <View testID="user_settings_form" />;
 });
 
-it('renders the user settings form', () => {
+jest.mock('@/components/profile/avatarPickerContainer', () => {
+  const { View } = require('react-native');
+  return () => <View testID="avatar_picker" />;
+});
+
+it('renders the avatar picker and the user settings form', () => {
   render(<SettingsView profile={mockProfile} />);
 
+  expect(screen.getByTestId('avatar_picker')).toBeVisible();
   expect(screen.getByTestId('user_settings_form')).toBeVisible();
 });
