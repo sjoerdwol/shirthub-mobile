@@ -24,17 +24,16 @@ const Root = () => {
 
   return (
     <Stack screenOptions={{ headerShown: false }}>
-      {session ? (
-        <>
-          <Stack.Screen name="(tabs)" />
-          <Stack.Screen name="shirts/[id]" />
-          <Stack.Screen name="shirts/manage" />
-          <Stack.Screen name="settings" />
-        </>
-      ) : (
+      <Stack.Protected guard={!!session}>
+        <Stack.Screen name="(tabs)" />
+        <Stack.Screen name="shirts/[id]" />
+        <Stack.Screen name="shirts/manage" />
+        <Stack.Screen name="settings" />
+      </Stack.Protected>
+      <Stack.Protected guard={!session}>
         <Stack.Screen name="(authentication)" />
-      )}
-    </Stack >
+      </Stack.Protected>
+    </Stack>
   );
 };
 

@@ -6,7 +6,7 @@ import { act, renderHook, waitFor } from "@testing-library/react-native";
 import { PropsWithChildren } from "react";
 import mockData from '../data.json';
 
-const mockSession: Session = { ...mockData.session, user: {} as User };
+const mockSession: Session = { ...mockData.session, token_type: 'bearer', user: {} as User };
 const mockUser: User = { ...mockData.user, created_at: new Date().toString() };
 
 jest.mock('@/services/supabase_auth', () => ({
