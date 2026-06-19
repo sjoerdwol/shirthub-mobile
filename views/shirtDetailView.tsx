@@ -13,12 +13,12 @@ export default function ShirtDetailView({ handleDelete, handleEdit, shirt }: { h
         type="detailAndManage"
       />
       <View className="px-2 py-6">
-        <Text className="text-white/80 text-3xl font-bold font-Lexend">{shirt.team}</Text>
-        <Text className="text-white/70 text-lg font-Lexend font-medium">{shirt.season} • {shirt.type} Jersey</Text>
+        <Text className="text-white/80 text-3xl font-LexendBold">{shirt.team}</Text>
+        <Text className="text-white/70 text-lg font-LexendMedium">{shirt.season} • {shirt.type} Jersey</Text>
       </View>
       <View className="flex-row items-center py-4 px-6 mx-2 rounded-lg border border-dark-border">
         <Ionicons name="heart" color='rgb(141, 157, 180)' size={24} />
-        <Text className="font-Lexend font-medium text-base text-white/70 ml-4">Geliked von <Text className="font-bold">Jonas</Text> und 127 Anderen</Text>
+        <Text className="font-LexendMedium text-base text-white/70 ml-4">Geliked von <Text className="font-bold">Jonas</Text> und 127 Anderen</Text>
       </View>
       <View className="flex-row flex-wrap items-center justify-start px-4 my-6 gap-x-[5%] gap-y-2">
         {shirt.value && <DetailBox

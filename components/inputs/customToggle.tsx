@@ -10,7 +10,7 @@ export default function CustomToggle({ label, value, onValueChange, description 
   return (
     <View className="flex-row items-center justify-between">
       <View className="flex-1 pr-4">
-        <Text className="font-Lexend font-bold text-white/70 ml-1">{label}</Text>
+        <Text className="font-LexendBold text-white/70 ml-1">{label}</Text>
         {description && (
           <Text className="font-Lexend text-sm text-white/50 ml-1 mt-1">{description}</Text>
         )}

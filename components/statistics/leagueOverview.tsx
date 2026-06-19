@@ -14,8 +14,8 @@ export default function LeagueOverview({ leagueStats }: { leagueStats: UserStati
     return (
       <View className={isLast ? "mb-8" : "mb-4"}>
         <View className="flex-row justify-between items-center">
-          <Text className="font-Lexend font-medium text-white/70">{league.name}</Text>
-          <Text className="font-Lexend font-medium text-white/50 text-sm">{item.distinctTeamsCollected} / {league.teamCount} Teams</Text>
+          <Text className="font-LexendMedium text-white/70">{league.name}</Text>
+          <Text className="font-LexendMedium text-white/50 text-sm">{item.distinctTeamsCollected} / {league.teamCount} Teams</Text>
         </View>
         <View className="bg-dark-secondaryBackground h-2 mt-2 overflow-hidden rounded">
           <View
@@ -36,7 +36,7 @@ export default function LeagueOverview({ leagueStats }: { leagueStats: UserStati
           isLast={index === sortedAndLimited.length - 1}
         />
       ))}
-      <Text className="font-Lexend font-medium ml-1 text-white/50 text-xs">{leagueStats.length} Ligen insgesamt</Text>
+      <Text className="font-LexendMedium ml-1 text-white/50 text-sm">{leagueStats.length} Ligen insgesamt</Text>
     </View>
   );
 }

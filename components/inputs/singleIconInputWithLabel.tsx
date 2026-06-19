@@ -8,7 +8,7 @@ export default function SingleIconInputWithLabel(
     InputProps & { errorMessage: string, isValid: boolean, maxLength?: number, label: string }) {
   return (
     <View className="flex-1 gap-2">
-      <Text className="font-Lexend font-bold text-white/70 ml-1">{label}</Text>
+      <Text className="font-LexendBold text-white/70 ml-1">{label}</Text>
       <View className="relative">
         {
           firstIcon === "hashtag" || firstIcon === 'money-bill'
@@ -26,7 +26,7 @@ export default function SingleIconInputWithLabel(
       </View>
 
       {!isValid && (
-        <Text className='font-Lexendfont-medium ml-1 text-lg text-red-500'>{errorMessage}</Text>
+        <Text className='font-LexendMedium ml-1 text-lg text-red-500'>{errorMessage}</Text>
       )}
     </View>
   );

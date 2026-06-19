@@ -22,19 +22,19 @@ export default function Dropdown({ title, placeholder, value, onSelection, isVal
 
   return (
     <View className="flex-1 gap-2">
-      <Text className="font-Lexend font-bold text-white/70 ml-1">{title}</Text>
+      <Text className="font-LexendBold text-white/70 ml-1">{title}</Text>
       <TouchableOpacity
         onPress={() => setIsModalVisible(true)}
         className="flex-row items-center justify-between border border-dark-border p-3.5 rounded-xl"
       >
-        <Text className={`flex-1 font-Lexend font-semibold text-lg ${value ? 'text-white/70' : 'text-dark-placeholder'}`}>
+        <Text className={`flex-1 font-LexendSemiBold text-lg ${value ? 'text-white/70' : 'text-dark-placeholder'}`}>
           {value || placeholder}
         </Text>
         <Ionicons name="chevron-down" size={20} color="rgb(141, 157, 180)" />
       </TouchableOpacity>
 
       {!isValid && (
-        <Text className='font-Lexend font-medium ml-1 text-lg text-red-500'>{errorMessage}</Text>
+        <Text className='font-LexendMedium ml-1 text-lg text-red-500'>{errorMessage}</Text>
       )}
 
       {

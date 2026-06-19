@@ -1,11 +1,15 @@
 import { AuthContextProvider, useAuth } from "@/contexts/authContext";
+import '@/nativewind-interop';
 import { useFonts } from "expo-font";
 import { Stack, router, useSegments } from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import '@/nativewind-interop';
 import './globals.css';
+
+// Keep the native splash screen visible until the custom fonts have loaded.
+SplashScreen.preventAutoHideAsync();
 
 const Root = () => {
   const { loading, session } = useAuth();
@@ -39,7 +43,7 @@ const Root = () => {
 };
 
 export default function RootLayout() {
-  const [loaded] = useFonts({
+  const [loaded, error] = useFonts({
     "Lexend": require("../assets/fonts/Lexend-Regular.ttf"),
     "Lexend-Medium": require("../assets/fonts/Lexend-Medium.ttf"),
     "Lexend-SemiBold": require("../assets/fonts/Lexend-SemiBold.ttf"),
@@ -51,6 +55,16 @@ export default function RootLayout() {
     "Lexend-ExtraLight": require("../assets/fonts/Lexend-ExtraLight.ttf"),
     "Lexend-Thin": require("../assets/fonts/Lexend-Thin.ttf")
   });
+
+  useEffect(() => {
+    if (loaded || error) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded, error]);
+
+  if (!loaded && !error) {
+    return null;
+  }
 
   return (
     <SafeAreaProvider>

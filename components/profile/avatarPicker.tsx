@@ -17,7 +17,7 @@ export default function AvatarPicker({ loading, profile, showOptions }: { loadin
         )}
       </Pressable>
       <Pressable disabled={loading} onPress={showOptions}>
-        <Text className="text-dark-highlight text-base font-bold font-Lexend mt-3">Profilbild ändern</Text>
+        <Text className="text-dark-highlight text-base font-LexendBold mt-3">Profilbild ändern</Text>
       </Pressable>
     </View>
   );

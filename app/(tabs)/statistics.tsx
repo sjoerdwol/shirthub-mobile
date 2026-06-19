@@ -38,7 +38,7 @@ export default function Statistics() {
   return (
     <SafeAreaView className="flex-1 bg-dark-background pb-24">
       <View className="flex-row items-center backdrop-blur-md px-4 pb-3.5 pt-[1.125rem] justify-center border-b border-dark-border">
-        <Text className="text-white/80 text-3xl font-Lexend font-bold tracking-tight text-center">Meine Statistiken</Text>
+        <Text className="text-white/80 text-3xl font-LexendBold tracking-tight text-center">Meine Statistiken</Text>
       </View>
       {
         loading
