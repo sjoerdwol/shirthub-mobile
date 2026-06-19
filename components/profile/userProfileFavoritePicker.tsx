@@ -1,7 +1,7 @@
 import { useAuth } from "@/contexts/authContext";
 import { useShirtStore } from "@/stores/shirtStore";
 import { handleDeleteFavorite, handleSetFavorite } from "@/utils/handleShirtOperations";
-import { Ionicons } from "@expo/vector-icons";
+import Ionicons from "@react-native-vector-icons/ionicons";
 import { useState } from "react";
 import { Pressable, Text, View } from "react-native";
 import UserFavoriteDisplay from "../shirtDisplay/userFavoriteDisplay";

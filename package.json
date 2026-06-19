@@ -11,12 +11,11 @@
     "lint": "expo lint"
   },
   "dependencies": {
-    "@expo/vector-icons": "^15.0.3",
     "@react-native-async-storage/async-storage": "2.2.0",
     "@react-native-community/slider": "5.2.0",
-    "@react-navigation/bottom-tabs": "^7.3.10",
-    "@react-navigation/elements": "^2.3.8",
-    "@react-navigation/native": "^7.1.6",
+    "@react-native-vector-icons/fontawesome6": "^13.1.2",
+    "@react-native-vector-icons/ionicons": "^13.1.2",
+    "@react-native-vector-icons/material-icons": "^13.1.2",
     "@supabase/supabase-js": "^2.50.3",
     "@tanstack/react-form": "^1.16.0",
     "base64-arraybuffer": "^1.0.2",
@@ -48,6 +47,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",
+    "@react-native/jest-preset": "^0.85.3",
     "@testing-library/react-native": "^13.3.3",
     "@types/jest": "29.5.14",
     "@types/react": "~19.2.14",

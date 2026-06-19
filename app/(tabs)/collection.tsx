@@ -4,7 +4,7 @@ import { useShirtStore } from "@/stores/shirtStore";
 import { handleShirtInitialFetch } from "@/utils/handleShirtOperations";
 import CollectionView from "@/views/collectionView";
 import LoadingView from "@/views/loadingView";
-import { Ionicons } from "@expo/vector-icons";
+import Ionicons from "@react-native-vector-icons/ionicons";
 import { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -23,6 +23,7 @@ export default function Collection() {
     };
 
     initialShirtFetch();*/
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional loading toggle; full fetch pending (see TODO above)
     setLoading(false);
   }, [session, setShirts]);
 

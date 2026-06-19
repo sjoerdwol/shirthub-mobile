@@ -35,6 +35,7 @@ const config: Config = {
     }
   },
   preset: 'jest-expo',
+  setupFiles: ['<rootDir>/jest.setup.js'],
   verbose: true
 }
 

@@ -3,7 +3,7 @@ import { useShirtStore } from "@/stores/shirtStore";
 import { handleShirtInitialFetch } from "@/utils/handleShirtOperations";
 import HomepageView from "@/views/homepageView";
 import LoadingView from "@/views/loadingView";
-import { Ionicons } from "@expo/vector-icons";
+import Ionicons from "@react-native-vector-icons/ionicons";
 import { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";

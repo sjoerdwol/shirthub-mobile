@@ -1,5 +1,5 @@
 import ShirtImage from '@/components/ui/shirtImage';
-import { Ionicons } from '@expo/vector-icons';
+import Ionicons from "@react-native-vector-icons/ionicons";
 import { Text, View } from "react-native";
 
 export default function Notification() {

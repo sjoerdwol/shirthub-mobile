@@ -1,7 +1,8 @@
 import DistributionSwitch from "@/components/statistics/distributionSwitch";
 import StatBox from "@/components/statistics/statBox";
 import { calculateAverageCondition } from "@/utils/handleStatisticsOperations";
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import Ionicons from "@react-native-vector-icons/ionicons";
+import MaterialIcons from "@react-native-vector-icons/material-icons";
 import { View } from "react-native";
 import Animated, { FadeIn } from "react-native-reanimated";
 

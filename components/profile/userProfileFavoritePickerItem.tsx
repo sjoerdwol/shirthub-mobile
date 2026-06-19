@@ -1,4 +1,4 @@
-import { Ionicons } from "@expo/vector-icons";
+import Ionicons from "@react-native-vector-icons/ionicons";
 import { Pressable, Text, View } from "react-native";
 
 export default function UserProfileFavoritePickerItem({ isLast, loading, onPress, shirt }: { isLast: boolean, loading: boolean, onPress: (shirtId: string) => void, shirt: Shirt }) {
