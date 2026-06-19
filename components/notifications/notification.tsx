@@ -1,5 +1,5 @@
 import ShirtImage from '@/components/ui/shirtImage';
-import { Ionicons } from '@expo/vector-icons';
+import Ionicons from "@react-native-vector-icons/ionicons";
 import { Text, View } from "react-native";
 
 export default function Notification() {
@@ -12,10 +12,10 @@ export default function Notification() {
         />
         <View className="flex-1">
           <View className="flex-row items-center justify-between">
-            <Text className="text-base font-bold font-Lexend text-white/80">Lukas</Text>
-            <Text className="text-[10px] uppercase tracking-wider text-white/50 font-medium font-Lexend">Vor 2 min.</Text>
+            <Text className="text-base font-LexendBold text-white/80">Lukas</Text>
+            <Text className="text-[10px] uppercase tracking-wider text-white/50 font-LexendMedium">Vor 2 min.</Text>
           </View>
-          <Text className="text-base text-white/70 mt-1 font-Lexend">hat ein <Text className="font-bold font-Lexend text-dark-highlight">2006 Germany Home Jersey</Text> zu seiner Sammlung hinzugefügt.</Text>
+          <Text className="text-base text-white/70 mt-1 font-Lexend">hat ein <Text className="font-LexendBold text-dark-highlight">2006 Germany Home Jersey</Text> zu seiner Sammlung hinzugefügt.</Text>
           <ShirtImage
             imageSrc={require('../../assets/images/exampleshirt.png')}
             type='notification'

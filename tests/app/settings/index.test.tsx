@@ -10,9 +10,9 @@ const mockBack = jest.fn();
 jest.mock('@/stores/profileStore', () => ({ useProfileStore: jest.fn() }));
 jest.mock('expo-router', () => ({ router: { back: jest.fn() } }));
 
-jest.mock('@expo/vector-icons', () => {
+jest.mock('@react-native-vector-icons/ionicons', () => {
   const { Text } = require('react-native');
-  return { Ionicons: ({ name }: { name: string }) => <Text testID={`icon_${name}`}>{name}</Text> };
+  return { __esModule: true, default: ({ name }: { name: string }) => <Text testID={`icon_${name}`}>{name}</Text> };
 });
 
 jest.mock('@/views/settingsView', () => {

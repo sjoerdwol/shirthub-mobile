@@ -1,5 +1,5 @@
 import ShirtImage from "@/components/ui/shirtImage";
-import { Ionicons } from "@expo/vector-icons";
+import Ionicons from "@react-native-vector-icons/ionicons";
 import { router } from "expo-router";
 import { Pressable, Text, View } from "react-native";
 
@@ -14,22 +14,22 @@ export default function ShirtDisplayVertical({ shirt }: { shirt: Shirt }) {
         <View className="flex-1 justify-between py-0.5">
           <View>
             <View className="flex-row items-center justify-between">
-              <Text className="font-bold text-lg text-white/80 leading-tight font-Lexend">{shirt.team}</Text>
+              <Text className="text-lg text-white/80 leading-tight font-LexendBold">{shirt.team}</Text>
               {
                 shirt.is_favorite &&
                 <Ionicons name="star" color='rgb(15, 115, 255)' size={18} testID="favorite_star" />
               }
             </View>
-            <Text className="text-base font-medium text-white/70 font-Lexend">{shirt.season} • {shirt.type}</Text>
+            <Text className="text-base text-white/70 font-LexendMedium">{shirt.season} • {shirt.type}</Text>
           </View>
           <View className="flex-row items-center justify-between">
             <View className="flex-row items-center gap-1">
               <Ionicons name="heart-outline" color='rgb(141, 157, 180)' size={18} />
-              <Text className="text-sm text-white/50 font-bold font-Lexend">128 Likes</Text>
+              <Text className="text-sm text-white/50 font-LexendBold">128 Likes</Text>
             </View>
             {
               shirt.size &&
-              <Text className="text-xs font-bold font-Lexend bg-dark-highlight text-white px-2.5 py-1 rounded-lg uppercase">Size {shirt.size}</Text>
+              <Text className="text-xs font-LexendBold bg-dark-highlight text-white px-2.5 py-1 rounded-lg uppercase">Size {shirt.size}</Text>
             }
           </View>
         </View>

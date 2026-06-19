@@ -11,7 +11,7 @@ export default function SecondaryButton({ loading, onPress, text }: { loading: b
       {
         loading
           ? <ActivityIndicator color="#fff" size="small" />
-          : <Text className="font-bold font-Lexend text-xl text-white">{text}</Text>
+          : <Text className="font-LexendBold text-xl text-white">{text}</Text>
       }
     </Pressable>
   );

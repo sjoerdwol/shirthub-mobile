@@ -4,7 +4,7 @@ import { useShirtStore } from "@/stores/shirtStore";
 import { handleShirtInitialFetch } from "@/utils/handleShirtOperations";
 import CollectionView from "@/views/collectionView";
 import LoadingView from "@/views/loadingView";
-import { Ionicons } from "@expo/vector-icons";
+import Ionicons from "@react-native-vector-icons/ionicons";
 import { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -23,6 +23,7 @@ export default function Collection() {
     };
 
     initialShirtFetch();*/
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional loading toggle; full fetch pending (see TODO above)
     setLoading(false);
   }, [session, setShirts]);
 
@@ -32,7 +33,7 @@ export default function Collection() {
         <View className="size-12 items-center justify-center">
           <Ionicons name="grid" size={22} color='rgb(141, 157, 180)' />
         </View>
-        <Text className="text-white/80 text-3xl font-Lexend font-bold tracking-tight text-center">Meine Sammlung</Text>
+        <Text className="text-white/80 text-3xl font-LexendBold tracking-tight text-center">Meine Sammlung</Text>
         <View className="items-center justify-center size-12">
           <Ionicons name="settings" size={24} color='rgb(141, 157, 180)' />
         </View>
@@ -48,7 +49,7 @@ export default function Collection() {
           />
           <View className="flex-row gap-2 overflow-x-auto mt-4">
             <View className="items-center gap-1 px-4 py-2 bg-dark-highlight rounded-full shadow-sm">
-              <Text className="text-white font-Lexend text-base font-medium whitespace-nowrap">Alle Trikots</Text>
+              <Text className="text-white font-LexendMedium text-base whitespace-nowrap">Alle Trikots</Text>
             </View>
           </View>
         </View>

@@ -1,4 +1,4 @@
-import { Ionicons } from "@expo/vector-icons";
+import Ionicons from "@react-native-vector-icons/ionicons";
 import { Pressable, Text, View } from "react-native";
 
 export default function UserProfileFavoritePickerItem({ isLast, loading, onPress, shirt }: { isLast: boolean, loading: boolean, onPress: (shirtId: string) => void, shirt: Shirt }) {
@@ -10,8 +10,8 @@ export default function UserProfileFavoritePickerItem({ isLast, loading, onPress
       testID={`favorite_option_${shirt.id}`}
     >
       <View className="flex-1">
-        <Text className="font-bold text-base text-white/70 font-Lexend">{shirt.team}</Text>
-        <Text className="text-sm font-medium text-white/50 font-Lexend">{shirt.season} • {shirt.type}</Text>
+        <Text className="text-base text-white/70 font-LexendBold">{shirt.team}</Text>
+        <Text className="text-sm text-white/50 font-LexendMedium">{shirt.season} • {shirt.type}</Text>
       </View>
       <Ionicons
         name={shirt.is_favorite ? 'star' : 'star-outline'}

@@ -1,6 +1,6 @@
 import LoginView from "@/views/loginView";
 import RegisterView from "@/views/registerView";
-import { Ionicons } from "@expo/vector-icons";
+import Ionicons from "@react-native-vector-icons/ionicons";
 import { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import Animated, { SlideInLeft, SlideInRight, SlideOutLeft, SlideOutRight } from "react-native-reanimated";
@@ -15,7 +15,7 @@ export default function AuthIndex() {
           <Ionicons name="football" color='rgb(255, 255, 255, 0.7)' size={48} />
         </View>
         <Text className="text-white/80 text-4xl font-LexendBold leading-tight tracking-tight">ShirtHub</Text>
-        <Text className="text-white/70 mt-2 font-semibold font-Lexend">Die ultimative Community der Trikotsammler!</Text>
+        <Text className="text-white/70 mt-2 font-LexendSemiBold">Die ultimative Community der Trikotsammler!</Text>
       </View>
       {
         mode === 'login'
@@ -31,7 +31,7 @@ export default function AuthIndex() {
             exiting={SlideOutLeft.duration(500)}
           >
             <TouchableOpacity onPress={() => setMode('register')}>
-              <Text className="text-white/70 text-base font-Lexend">Noch keinen Account? <Text className="text-dark-highlight text-base font-bold font-Lexend">Jetzt registrieren!</Text></Text>
+              <Text className="text-white/70 text-base font-Lexend">Noch keinen Account? <Text className="text-dark-highlight text-base font-LexendBold">Jetzt registrieren!</Text></Text>
             </TouchableOpacity>
           </Animated.View>
           : <Animated.View
@@ -41,7 +41,7 @@ export default function AuthIndex() {
             exiting={SlideOutRight.duration(500)}
           >
             <TouchableOpacity onPress={() => setMode('login')}>
-              <Text className="text-white/70 text-base font-Lexend">Bereits einen Account? <Text className="text-dark-highlight text-base font-bold font-Lexend">Jetzt anmelden!</Text></Text>
+              <Text className="text-white/70 text-base font-Lexend">Bereits einen Account? <Text className="text-dark-highlight text-base font-LexendBold">Jetzt anmelden!</Text></Text>
             </TouchableOpacity>
           </Animated.View>
       }

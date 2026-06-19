@@ -1,5 +1,5 @@
 import ShirtDisplayVertical from "@/components/shirtDisplay/shirtDisplayVertical";
-import { Ionicons } from "@expo/vector-icons";
+import Ionicons from "@react-native-vector-icons/ionicons";
 import { router } from "expo-router";
 import { FlatList, Pressable } from "react-native";
 import Animated, { FadeIn } from "react-native-reanimated";

@@ -5,8 +5,8 @@ export default function CustomSlider({ label, maxValue, minValue, onValueChange,
   return (
     <View className="gap-2">
       <View className="ml-1 flex-row items-center justify-between">
-        <Text className="font-Lexend font-bold text-white/70">{label}</Text>
-        <Text className="font-Lexend font-semibold text-white/50">{value}/{maxValue}</Text>
+        <Text className="font-LexendBold text-white/70">{label}</Text>
+        <Text className="font-LexendSemiBold text-white/50">{value}/{maxValue}</Text>
       </View>
       <Slider
         maximumTrackTintColor="#6F839F"

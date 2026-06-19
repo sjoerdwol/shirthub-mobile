@@ -1,5 +1,5 @@
 import StatBox from "@/components/statistics/statBox";
-import { Ionicons } from "@expo/vector-icons";
+import Ionicons from "@react-native-vector-icons/ionicons";
 import { render, screen } from '@testing-library/react-native';
 
 it('renders correctly with currency, icon and subtitle', () => {

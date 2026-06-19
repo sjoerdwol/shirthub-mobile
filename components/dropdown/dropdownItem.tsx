@@ -6,7 +6,7 @@ export default function DropdownItem({ isActive, option, onSelection }: { isActi
       onPress={() => onSelection(option)}
       className={`py-2 px-2 rounded-lg mb-2 ${isActive ? 'bg-dark-background' : 'bg-transparent'}`}
     >
-      <Text className={`text-lg font-Lexend ${isActive ? 'text-white/70 font-semibold' : 'text-white/40'}`}>
+      <Text className={`text-lg ${isActive ? 'text-white/70 font-LexendSemiBold' : 'text-white/40 font-Lexend'}`}>
         {option}
       </Text>
     </TouchableOpacity>

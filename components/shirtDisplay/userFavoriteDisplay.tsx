@@ -10,8 +10,8 @@ export default function UserFavoriteDisplay({ favorite, onDelete, onEdit }: { fa
         type="favorite"
       />
       <View className="flex-1 w-[50%] items-center">
-        <Text className="font-bold text-lg text-white/80 leading-tight font-Lexend">{favorite.team}</Text>
-        <Text className="text-base font-medium text-white/70 font-Lexend">{favorite.season} • {favorite.type}</Text>
+        <Text className="text-lg text-white/80 leading-tight font-LexendBold">{favorite.team}</Text>
+        <Text className="text-base text-white/70 font-LexendMedium">{favorite.season} • {favorite.type}</Text>
         <View className="flex-row mt-6 gap-3">
           <IconButton
             icon="pencil"

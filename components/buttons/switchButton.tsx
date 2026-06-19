@@ -10,7 +10,7 @@ export default function SwitchButton({ activeIndex, options, setActiveIndex }: {
             key={index}
             onPress={() => setActiveIndex(index as 0 | 1)}
           >
-            <Text className={`font-Lexend font-bold ${activeIndex === index ? 'text-white/80' : 'text-white/50'} text-sm`}>{item}</Text>
+            <Text className={`font-LexendBold ${activeIndex === index ? 'text-white/80' : 'text-white/50'} text-sm`}>{item}</Text>
           </Pressable>
         ))}
     </View>

@@ -14,7 +14,7 @@ it('is a session', () => {
     access_token: 'MOCK-TOKEN',
     refresh_token: 'MOCK-TOKEN',
     expires_in: 9999,
-    token_type: 'MOCK',
+    token_type: 'bearer',
     user: mockuser
   }
 

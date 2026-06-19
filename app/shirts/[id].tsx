@@ -3,7 +3,7 @@ import { useShirtStore } from '@/stores/shirtStore';
 import { useUserStatisticsStore } from '@/stores/statisticsStore';
 import { handleShirtDeletion } from '@/utils/handleShirtOperations';
 import ShirtDetailView from '@/views/shirtDetailView';
-import { Ionicons } from '@expo/vector-icons';
+import Ionicons from "@react-native-vector-icons/ionicons";
 import { router, useLocalSearchParams } from 'expo-router';
 import { Pressable, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -39,7 +39,7 @@ export default function ShirtDetails() {
         <Pressable className="size-12 items-center justify-center" onPress={() => router.back()}>
           <Ionicons name="arrow-back" size={24} color='rgb(141, 157, 180)' />
         </Pressable>
-        <Text className="text-white/80 text-3xl font-Lexend font-bold tracking-tight text-center">Shirt Details</Text>
+        <Text className="text-white/80 text-3xl font-LexendBold tracking-tight text-center">Shirt Details</Text>
         <Pressable className="items-center justify-center size-12" onPress={() => { }}>
           <Ionicons name="heart" size={24} color='rgb(141, 157, 180)' />
         </Pressable>

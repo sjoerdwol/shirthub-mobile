@@ -40,7 +40,7 @@ beforeEach(() => {
   (useShirtStore as unknown as jest.Mock).mockImplementation((selector: (state: ShirtState) => unknown) =>
     selector({ shirts: [mockShirt], setShirts: jest.fn(), addShirt: jest.fn(), updateShirt: jest.fn(), removeShirt: jest.fn() })
   );
-  (useReferenceDataStore as unknown as jest.Mock).mockImplementation((selector: (state: ReferenceDataStore) => unknown) =>
+  (useReferenceDataStore as unknown as jest.Mock).mockImplementation((selector: (state: ReferenceDataState) => unknown) =>
     selector({ data: mockReferenceData, setReferenceData: jest.fn() })
   );
   (useUserStatisticsStore as unknown as jest.Mock).mockImplementation((selector: (state: UserStatisticsStore) => unknown) =>
@@ -72,7 +72,7 @@ it('shows statistics view after data is loaded', async () => {
 });
 
 it('shows error message when data is missing after loading', async () => {
-  (useReferenceDataStore as unknown as jest.Mock).mockImplementation((selector: (state: ReferenceDataStore) => unknown) =>
+  (useReferenceDataStore as unknown as jest.Mock).mockImplementation((selector: (state: ReferenceDataState) => unknown) =>
     selector({ data: null, setReferenceData: jest.fn() })
   );
   (useUserStatisticsStore as unknown as jest.Mock).mockImplementation((selector: (state: UserStatisticsStore) => unknown) =>
@@ -108,7 +108,7 @@ it('fetches statistics when hasChanged is true and session exists', async () => 
 });
 
 it('fetches reference data when data is null and session exists', async () => {
-  (useReferenceDataStore as unknown as jest.Mock).mockImplementation((selector: (state: ReferenceDataStore) => unknown) =>
+  (useReferenceDataStore as unknown as jest.Mock).mockImplementation((selector: (state: ReferenceDataState) => unknown) =>
     selector({ data: null, setReferenceData: jest.fn() })
   );
 

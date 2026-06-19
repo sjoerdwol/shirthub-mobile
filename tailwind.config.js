@@ -1,6 +1,22 @@
 /** @type {import('tailwindcss').Config} */
+
+const lexendFontFamily = {
+  Lexend: ['Lexend-Regular'],
+  LexendMedium: ['Lexend-Medium'],
+  LexendSemiBold: ['Lexend-SemiBold'],
+  LexendBold: ['Lexend-Bold'],
+  LexendExtraBold: ['Lexend-ExtraBold'],
+  LexendBlack: ['Lexend-Black'],
+  LexendExtraLight: ['Lexend-ExtraLight'],
+  LexendLight: ['Lexend-Light'],
+  LexendThin: ['Lexend-Thin'],
+};
+
 module.exports = {
   content: ["./app/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}", "./newComponents/**/*.{js,jsx,ts,tsx}", "./views/**/*.{js,jsx,ts,tsx}"],
+  // Tailwind only generates utility classes it finds in `content`. Safelist every
+  // Lexend weight so unused variants (Thin, Light, ExtraLight, ...) stay available.
+  safelist: Object.keys(lexendFontFamily).map((name) => `font-${name}`),
   presets: [require("nativewind/preset")],
   theme: {
     extend: {
@@ -14,17 +30,7 @@ module.exports = {
           secondaryElements: 'rgb(141, 157, 180)'
         }
       },
-      fontFamily: {
-        Lexend: ['Lexend-Regular'],
-        LexendMedium: ['LexendMedium'],
-        LexendSemiBold: ['LexendSemiBold'],
-        LexendBold: ['Lexend-Bold'],
-        LexendExtraBold: ['LexendExtraBold'],
-        LexendBlack: ['LexendBlack'],
-        LexendExtraLight: ['LexendExtraLight'],
-        LexendLight: ['LexendLight'],
-        LexendThin: ['LexendThin'],
-      },
+      fontFamily: lexendFontFamily,
       scale: {
         98: .98
       }

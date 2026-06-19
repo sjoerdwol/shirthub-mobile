@@ -10,7 +10,7 @@ export default function DistributionSwitch({ userStatistics }: { userStatistics:
   return (
     <View className="my-8 px-1">
       <View className="flex-row items-center justify-between">
-        <Text className="font-Lexend font-bold text-white/80 text-2xl">{activePage === 0 ? `Top Ligen` : 'Top Teams'}</Text>
+        <Text className="font-LexendBold text-white/80 text-2xl">{activePage === 0 ? `Top Ligen` : 'Top Teams'}</Text>
         <SwitchButton activeIndex={activePage} options={['Ligen', 'Teams']} setActiveIndex={setActivePage} />
       </View>
       {

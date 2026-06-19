@@ -3,7 +3,7 @@ import { useShirtStore } from "@/stores/shirtStore";
 import { handleShirtInitialFetch } from "@/utils/handleShirtOperations";
 import HomepageView from "@/views/homepageView";
 import LoadingView from "@/views/loadingView";
-import { Ionicons } from "@expo/vector-icons";
+import Ionicons from "@react-native-vector-icons/ionicons";
 import { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -30,14 +30,14 @@ export default function Index() {
         <View className="size-12 items-center justify-center">
           <Ionicons name="menu" size={24} color='rgb(141, 157, 180)' />
         </View>
-        <Text className="text-white/80 text-3xl font-Lexend font-bold tracking-tight text-center italic">ShirtHub</Text>
+        <Text className="text-white/80 text-3xl font-LexendBold tracking-tight text-center italic">ShirtHub</Text>
         <View className="items-center justify-center size-12">
           <Ionicons name="notifications" size={24} color='rgb(141, 157, 180)' />
         </View>
       </View>
       <View className="flex-1">
         <View className="px-5 py-5">
-          <Text className="text-white/80 text-2xl font-bold font-Lexend">Activity Feed</Text>
+          <Text className="text-white/80 text-2xl font-LexendBold">Activity Feed</Text>
           <Text className="text-white/70 text-base font-Lexend">Entdecke was deine Freunde so gemacht haben</Text>
         </View>
         {
