@@ -38,6 +38,6 @@ it('renders only the avatar and username if profile is private', () => {
 
   expect(screen.getByTestId('shirt_image')).toBeVisible();
   expect(screen.getByText('TestUser')).toBeVisible();
-  expect(screen.queryByText(/Mitglied seit 2024/)).toBeNull;
-  expect(screen.queryByText(/7 Trikots/)).toBeNull;
+  expect(screen.queryByText(/Mitglied seit 2024/)).toBeNull();
+  expect(screen.queryByText(/7 Trikots/)).toBeNull();
 });

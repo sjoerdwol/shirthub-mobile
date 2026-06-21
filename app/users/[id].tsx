@@ -19,7 +19,10 @@ export default function UserProfile() {
   else if (Array.isArray(id) && id.length > 0) userId = id[0];
 
   useEffect(() => {
-    if (!session || !userId) { return; }
+    if (!session || !userId) {
+      if (!userId) setLoading(false);
+      return;
+    }
 
     let active = true;
     const fetchProfile = async () => {
