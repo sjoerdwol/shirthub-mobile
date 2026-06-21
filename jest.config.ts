@@ -13,6 +13,7 @@ const config: Config = {
     "!**/eslint.config.js",
     "!**/metro.config.js",
     "!**/nativewind-env.d.ts",
+    "!**/nativewind-interop.ts",
     "!**/tailwind.config.js",
     "!**/_layout.tsx",
     "!**/stores/**",
@@ -27,7 +28,7 @@ const config: Config = {
     "!**/handleShirtOperations.ts",
     "!**/handleStatisticsOperations.ts",
     "!**/handleSubmits.ts",
-    "!**/setReferenceData.ts"
+    "!**/setReferenceData.ts",
   ],
   coverageThreshold: {
     global: {
