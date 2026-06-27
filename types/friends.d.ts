@@ -1,7 +1,20 @@
 type FriendStatus = 'none' | 'friends' | 'requestSent' | 'requestReceived';
 
-// Raw friendship row as serialized by the backend (camelCase, like every other
-// backend response). Returned when a request is sent or accepted.
+type IncomingProps = {
+  request: FriendRequest;
+  variant: 'incoming';
+  onAccept: () => void;
+  onDecline: () => void;
+  onNavigate?: () => void;
+};
+
+type OutgoingProps = {
+  request: FriendRequest;
+  variant: 'outgoing';
+  onCancel: () => void;
+  onNavigate?: () => void;
+};
+
 interface FriendshipResponse {
   id: string;
   requesterId: string;
