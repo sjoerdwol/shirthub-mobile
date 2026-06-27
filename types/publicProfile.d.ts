@@ -11,4 +11,5 @@ interface PublicProfile {
   isPublic: boolean;
   createdAt: string;
   shirtCount: number;
+  friendStatus: FriendStatus;
 }
