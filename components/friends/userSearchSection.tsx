@@ -43,7 +43,7 @@ export default function UserSearchSection({ onResultPress }: { onResultPress?: (
   }, [session, debouncedQuery]);
 
   return (
-    <View className="flex-1">
+    <View>
       <SingleIconInput
         firstIcon='search'
         keyboardType='default'
@@ -51,7 +51,7 @@ export default function UserSearchSection({ onResultPress }: { onResultPress?: (
         placeholder="Nutzer suchen ..."
         value={query}
       />
-      <View className="flex-1 mt-4">
+      <View className="mt-4">
         {
           loading
             ? <Text className="text-white/50 font-Lexend text-center mt-4">Suche ...</Text>
