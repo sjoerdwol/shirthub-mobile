@@ -13,6 +13,7 @@ const mockProfilePublic: PublicProfile = {
   isPublic: true,
   createdAt: '2024-01-01T00:00:00Z',
   shirtCount: 7,
+  friendStatus: 'none',
 };
 
 const mockProfilePrivate: PublicProfile = {
@@ -22,6 +23,7 @@ const mockProfilePrivate: PublicProfile = {
   isPublic: false,
   createdAt: '2024-01-01T00:00:00Z',
   shirtCount: 7,
+  friendStatus: 'none',
 };
 
 it('renders the avatar, username, membership year and shirt count if profile is public', () => {
