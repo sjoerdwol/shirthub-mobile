@@ -14,6 +14,7 @@ const mockProfile: PublicProfile = {
   isPublic: true,
   createdAt: '2024-01-01T00:00:00Z',
   shirtCount: 3,
+  friendStatus: 'none',
 };
 
 jest.mock('@/contexts/authContext', () => ({ useAuth: jest.fn() }));

@@ -1,3 +1,4 @@
+import FriendButton from "@/components/friends/friendButton";
 import ShirtImage from "@/components/ui/shirtImage";
 import { getAvatarSourceFromParts } from "@/utils/getAvatarSource";
 import { Text, View } from "react-native";
@@ -21,6 +22,14 @@ export default function OtherUserProfileView({ profile }: { profile: PublicProfi
             Mitglied seit {new Date(profile.createdAt).getFullYear()}  •  {profile.shirtCount} Trikots
           </Text>
         }
+        <View className="w-full mt-8">
+          <FriendButton
+            avatarUrl={profile.avatarUrl}
+            initialStatus={profile.friendStatus}
+            ownerId={profile.ownerId}
+            username={profile.username}
+          />
+        </View>
       </View>
     </Animated.View>
   );

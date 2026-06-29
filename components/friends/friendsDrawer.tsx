@@ -1,7 +1,13 @@
+import FriendsListSection from "@/components/friends/friendsListSection";
+import ReceivedRequestsSection from "@/components/friends/receivedRequestsSection";
+import SentRequestsSection from "@/components/friends/sentRequestsSection";
 import UserSearchSection from "@/components/friends/userSearchSection";
+import { useAuth } from "@/contexts/authContext";
+import { useFriendsStore } from "@/stores/friendsStore";
+import { handleFriendsInitialFetch } from "@/utils/handleFriendOperations";
 import Ionicons from "@react-native-vector-icons/ionicons";
 import { useEffect } from "react";
-import { Dimensions, Modal, Pressable, Text, View } from "react-native";
+import { Dimensions, Modal, Pressable, ScrollView, Text, View } from "react-native";
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -9,11 +15,18 @@ const DRAWER_WIDTH = Dimensions.get('window').width * 0.85;
 
 export default function FriendsDrawer({ visible, onClose }: { visible: boolean, onClose: () => void }) {
   const insets = useSafeAreaInsets();
+  const { session } = useAuth();
+  const { setFriends, setIncoming, setOutgoing } = useFriendsStore((state) => state);
   const translateX = useSharedValue(-DRAWER_WIDTH);
 
   useEffect(() => {
     translateX.value = withTiming(visible ? 0 : -DRAWER_WIDTH, { duration: 250 });
   }, [visible, translateX]);
+
+  // Refresh friends and pending requests from the backend whenever the drawer opens.
+  useEffect(() => {
+    if (visible && session) { handleFriendsInitialFetch(session, setFriends, setIncoming, setOutgoing) };
+  }, [visible, session, setFriends, setIncoming, setOutgoing]);
 
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ translateX: translateX.value }],
@@ -33,8 +46,18 @@ export default function FriendsDrawer({ visible, onClose }: { visible: boolean, 
             </Pressable>
           </View>
           <View className="flex-1 pt-4">
-            <UserSearchSection onResultPress={onClose} />
-            {/* TODO: Freundesliste folgt hier unterhalb der Suche */}
+            <View className="mb-6">
+              <UserSearchSection onResultPress={onClose} />
+            </View>
+            <ScrollView
+              className=""
+              keyboardShouldPersistTaps="handled"
+              showsVerticalScrollIndicator={false}
+            >
+              <ReceivedRequestsSection onItemPress={onClose} />
+              <SentRequestsSection onItemPress={onClose} />
+              <FriendsListSection onItemPress={onClose} />
+            </ScrollView>
           </View>
         </Animated.View>
         <Pressable className="flex-1 bg-black/50" onPress={onClose} testID="friends_drawer_backdrop" />
