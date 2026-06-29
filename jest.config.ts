@@ -24,9 +24,7 @@ const config: Config = {
 
     // utils
     "!**/createSupabaseClient.ts",
-    "!**/handleProfileOperations.ts",
-    "!**/handleShirtOperations.ts",
-    "!**/handleStatisticsOperations.ts",
+    "!**/handle*Operations.ts",
     "!**/handleSubmits.ts",
     "!**/setReferenceData.ts",
   ],
