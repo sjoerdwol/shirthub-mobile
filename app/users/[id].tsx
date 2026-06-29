@@ -20,7 +20,10 @@ export default function UserProfile() {
 
   useEffect(() => {
     if (!session || !userId) {
-      if (!userId) setLoading(false);
+      if (!userId) {
+        const setLoadingFalse = async () => setLoading(false);
+        setLoadingFalse();
+      }
       return;
     }
 
