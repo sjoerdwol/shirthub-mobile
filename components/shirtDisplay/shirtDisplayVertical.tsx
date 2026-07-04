@@ -3,9 +3,13 @@ import Ionicons from "@react-native-vector-icons/ionicons";
 import { router } from "expo-router";
 import { Pressable, Text, View } from "react-native";
 
-export default function ShirtDisplayVertical({ shirt }: { shirt: Shirt }) {
+export default function ShirtDisplayVertical({ shirt, readOnly = false }: { shirt: Shirt, readOnly?: boolean }) {
   return (
-    <Pressable className="active:scale-98 transition-transform" onPress={() => router.navigate(`/shirts/${shirt.id}`)}>
+    <Pressable
+      className={readOnly ? "" : "active:scale-98 transition-transform"}
+      disabled={readOnly}
+      onPress={readOnly ? undefined : () => router.navigate(`/shirts/${shirt.id}`)}
+    >
       <View className="rounded-2xl p-4 gap-5 flex-row shadow-sm border border-dark-border">
         <ShirtImage
           imageSrc={require('../../assets/images/exampleshirt.png')}
