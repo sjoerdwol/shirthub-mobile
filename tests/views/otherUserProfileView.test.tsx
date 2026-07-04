@@ -87,7 +87,7 @@ it('hides membership line, core stats and jump rows for a private non-friend pro
   expect(screen.getByTestId('shirt_image')).toBeVisible();
   expect(screen.getByText('TestUser')).toBeVisible();
   expect(screen.queryByText(/Mitglied seit 2024/)).toBeNull();
-  expect(screen.queryByText('Vereine')).toBeNull();
+  expect(screen.queryByText(/Vereine/)).toBeNull();
   expect(screen.queryByTestId('jump_collection')).toBeNull();
   expect(screen.queryByTestId('jump_statistics')).toBeNull();
 });
