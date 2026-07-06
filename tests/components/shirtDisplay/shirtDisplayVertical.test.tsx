@@ -60,3 +60,11 @@ it('navigates to the shirt detail screen on press', () => {
 
   expect(mockNavigate).toHaveBeenCalledWith(`/shirts/${mockShirt.id}`);
 });
+
+it('does not navigate on press when readOnly', () => {
+  render(<ShirtDisplayVertical readOnly shirt={mockShirt} />);
+
+  fireEvent.press(screen.getByText('FC Bayern München'));
+
+  expect(mockNavigate).not.toHaveBeenCalled();
+});

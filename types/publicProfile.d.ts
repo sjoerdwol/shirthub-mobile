@@ -12,4 +12,7 @@ interface PublicProfile {
   createdAt: string;
   shirtCount: number;
   friendStatus: FriendStatus;
+  // Core statistics, only present when the profile is viewable (public or friends)
+  distinctTeamsCount?: number;
+  totalValue?: number;
 }
