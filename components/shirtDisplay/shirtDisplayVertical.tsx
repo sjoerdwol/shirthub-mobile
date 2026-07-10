@@ -1,14 +1,19 @@
 import ShirtImage from "@/components/ui/shirtImage";
 import Ionicons from "@react-native-vector-icons/ionicons";
-import { router } from "expo-router";
+import { router, type Href } from "expo-router";
 import { Pressable, Text, View } from "react-native";
 
-export default function ShirtDisplayVertical({ shirt, readOnly = false }: { shirt: Shirt, readOnly?: boolean }) {
+export default function ShirtDisplayVertical({ shirt, readOnly = false, friendOwnerId }: { shirt: Shirt, readOnly?: boolean, friendOwnerId?: string }) {
+  // A friend's shirt opens the friend-facing detail view; the user's own shirt
+  // opens the owner detail view. Read-only cards without a friend owner are inert.
+  const target: Href = friendOwnerId ? `/users/${friendOwnerId}/shirts/${shirt.id}` : `/shirts/${shirt.id}`;
+  const disabled = readOnly && !friendOwnerId;
+
   return (
     <Pressable
-      className={readOnly ? "" : "active:scale-98 transition-transform"}
-      disabled={readOnly}
-      onPress={readOnly ? undefined : () => router.navigate(`/shirts/${shirt.id}`)}
+      className={disabled ? "" : "active:scale-98 transition-transform"}
+      disabled={disabled}
+      onPress={disabled ? undefined : () => router.navigate(target)}
     >
       <View className="rounded-2xl p-4 gap-5 flex-row shadow-sm border border-dark-border">
         <ShirtImage

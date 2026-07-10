@@ -2,7 +2,7 @@ import ShirtDisplayVertical from "@/components/shirtDisplay/shirtDisplayVertical
 import { FlatList, Text } from "react-native";
 import Animated, { FadeIn } from "react-native-reanimated";
 
-export default function OtherUserCollectionView({ shirts }: { shirts: Shirt[] }) {
+export default function OtherUserCollectionView({ shirts, ownerId }: { shirts: Shirt[], ownerId: string }) {
   return (
     <Animated.View
       className="flex-1 p-4"
@@ -13,7 +13,7 @@ export default function OtherUserCollectionView({ shirts }: { shirts: Shirt[] })
         data={shirts}
         keyExtractor={(_, index) => index.toString()}
         renderItem={({ item }) => (
-          <ShirtDisplayVertical readOnly shirt={item} />
+          <ShirtDisplayVertical readOnly friendOwnerId={ownerId} shirt={item} />
         )}
         showsVerticalScrollIndicator={true}
         contentContainerStyle={{ gap: 14 }}
