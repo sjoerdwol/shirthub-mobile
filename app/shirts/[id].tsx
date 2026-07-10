@@ -1,10 +1,12 @@
 import { useAuth } from '@/contexts/authContext';
+import { getOwnShirtDetail } from '@/services/shirthub_crud';
 import { useShirtStore } from '@/stores/shirtStore';
 import { useUserStatisticsStore } from '@/stores/statisticsStore';
 import { handleShirtDeletion } from '@/utils/handleShirtOperations';
 import ShirtDetailView from '@/views/shirtDetailView';
 import Ionicons from "@react-native-vector-icons/ionicons";
 import { router, useLocalSearchParams } from 'expo-router';
+import { useEffect, useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -19,6 +21,24 @@ export default function ShirtDetails() {
   const { shirts, removeShirt } = useShirtStore((state) => state);
   const { setHasChanged } = useUserStatisticsStore((state) => state);
   const shirt = shirts.find((currShirt) => currShirt.id === shirtId);
+
+  const [likeCount, setLikeCount] = useState(0);
+  const [likers, setLikers] = useState<Liker[]>([]);
+
+  useEffect(() => {
+    if (!session || !shirtId) { return; }
+
+    let active = true;
+    getOwnShirtDetail(session, shirtId)
+      .then((detail) => {
+        if (!active) { return; }
+        setLikeCount(detail.likeCount);
+        setLikers(detail.likers);
+      })
+      .catch(() => { });
+
+    return () => { active = false; };
+  }, [session, shirtId]);
 
   const handleEdit = () => {
     router.navigate({
@@ -40,13 +60,11 @@ export default function ShirtDetails() {
           <Ionicons name="arrow-back" size={24} color='rgb(141, 157, 180)' />
         </Pressable>
         <Text className="text-white/80 text-3xl font-LexendBold tracking-tight text-center">Shirt Details</Text>
-        <Pressable className="items-center justify-center size-12" onPress={() => { }}>
-          <Ionicons name="heart" size={24} color='rgb(141, 157, 180)' />
-        </Pressable>
+        <View className="size-12" />
       </View>
       {
         shirt
-          ? <ShirtDetailView handleDelete={handleDelete} handleEdit={handleEdit} shirt={shirt} />
+          ? <ShirtDetailView handleDelete={handleDelete} handleEdit={handleEdit} shirt={shirt} likeCount={likeCount} likers={likers} />
           : <></>
       }
     </SafeAreaView>

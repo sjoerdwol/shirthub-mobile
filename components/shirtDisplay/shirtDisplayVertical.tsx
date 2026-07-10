@@ -1,14 +1,17 @@
 import ShirtImage from "@/components/ui/shirtImage";
 import Ionicons from "@react-native-vector-icons/ionicons";
-import { router } from "expo-router";
+import { router, type Href } from "expo-router";
 import { Pressable, Text, View } from "react-native";
 
-export default function ShirtDisplayVertical({ shirt, readOnly = false }: { shirt: Shirt, readOnly?: boolean }) {
+export default function ShirtDisplayVertical({ shirt, friendOwnerId }: { shirt: Shirt, friendOwnerId?: string }) {
+  // A friend's shirt opens the friend-facing detail view; the user's own shirt
+  // opens the owner detail view. Both routes share the same visibility gate.
+  const target: Href = friendOwnerId ? `/users/${friendOwnerId}/shirts/${shirt.id}` : `/shirts/${shirt.id}`;
+
   return (
     <Pressable
-      className={readOnly ? "" : "active:scale-98 transition-transform"}
-      disabled={readOnly}
-      onPress={readOnly ? undefined : () => router.navigate(`/shirts/${shirt.id}`)}
+      className="active:scale-98 transition-transform"
+      onPress={() => router.navigate(target)}
     >
       <View className="rounded-2xl p-4 gap-5 flex-row shadow-sm border border-dark-border">
         <ShirtImage
@@ -26,11 +29,7 @@ export default function ShirtDisplayVertical({ shirt, readOnly = false }: { shir
             </View>
             <Text className="text-base text-white/70 font-LexendMedium">{shirt.season} • {shirt.type}</Text>
           </View>
-          <View className="flex-row items-center justify-between">
-            <View className="flex-row items-center gap-1">
-              <Ionicons name="heart-outline" color='rgb(141, 157, 180)' size={18} />
-              <Text className="text-sm text-white/50 font-LexendBold">128 Likes</Text>
-            </View>
+          <View className="flex-row items-center justify-end">
             {
               shirt.size &&
               <Text className="text-xs font-LexendBold bg-dark-highlight text-white px-2.5 py-1 rounded-lg uppercase">Size {shirt.size}</Text>

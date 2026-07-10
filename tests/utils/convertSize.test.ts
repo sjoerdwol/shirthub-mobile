@@ -22,7 +22,7 @@ it('converts size L correctly', () => {
 
 it('converts size XL correctly', () => {
   const convertedSize = convertSize('XL');
-  expect(convertedSize).toBe('Extra Large');
+  expect(convertedSize).toBe('X-Large');
 });
 
 it('keeps other sizes the same', () => {

@@ -1,11 +1,10 @@
-import IconButton from "@/components/buttons/iconButton";
 import DetailBox from "@/components/details/detailBox";
 import ShirtImage from "@/components/ui/shirtImage";
 import convertSize from "@/utils/convertSize";
 import Ionicons from "@react-native-vector-icons/ionicons";
 import { Text, View } from "react-native";
 
-export default function ShirtDetailView({ handleDelete, handleEdit, shirt, likeCount = 0, likers = [] }: { handleDelete: () => void, handleEdit: () => void, shirt: Shirt, likeCount?: number, likers?: Liker[] }) {
+export default function OtherUserShirtDetailView({ shirt }: { shirt: FriendShirtDetail }) {
   return (
     <View className="flex-1 p-4 mt-2">
       <ShirtImage
@@ -18,15 +17,7 @@ export default function ShirtDetailView({ handleDelete, handleEdit, shirt, likeC
       </View>
       <View className="flex-row items-center py-4 px-6 mx-2 rounded-lg border border-dark-border">
         <Ionicons name="heart" color='rgb(141, 157, 180)' size={24} />
-        <Text className="font-LexendMedium text-base text-white/70 ml-4">
-          {
-            likeCount === 0
-              ? 'Noch keine Likes'
-              : likers.length > 0
-                ? <>Geliked von <Text className="font-bold">{likers[0].username}</Text>{likeCount > 1 ? ` und ${likeCount - 1} Anderen` : ''}</>
-                : `${likeCount} Likes`
-          }
-        </Text>
+        <Text className="font-LexendMedium text-base text-white/70 ml-4">{shirt.likeCount} {shirt.likeCount === 1 ? 'Like' : 'Likes'}</Text>
       </View>
       <View className="flex-row flex-wrap items-center justify-start px-4 my-6 gap-x-[5%] gap-y-2">
         {shirt.value && <DetailBox
@@ -39,26 +30,21 @@ export default function ShirtDetailView({ handleDelete, handleEdit, shirt, likeC
           tag="Größe"
           value={convertSize(shirt.size)}
         />}
-        {shirt.print_name && <DetailBox
+        {shirt.printName && <DetailBox
           icon="person"
           tag="Name"
-          value={shirt.print_name}
+          value={shirt.printName}
         />}
-        {shirt.print_number && <DetailBox
+        {shirt.printNumber && <DetailBox
           icon="hashtag"
           tag="Nummer"
-          value={shirt.print_number.toString()}
+          value={shirt.printNumber.toString()}
         />}
         {shirt.condition && <DetailBox
           icon="star"
           tag="Zustand"
           value={`${String(shirt.condition)}/10`}
         />}
-      </View>
-      <View className="flex-row gap-3 justify-end px-2 py-3">
-        <IconButton icon="share-nodes" onPress={() => { }} />
-        <IconButton icon="pencil" onPress={handleEdit} />
-        <IconButton deleteButton icon="trash-can" onPress={handleDelete} />
       </View>
     </View>
   );

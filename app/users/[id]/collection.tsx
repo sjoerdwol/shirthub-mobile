@@ -57,7 +57,7 @@ export default function UserCollection() {
         loading
           ? <LoadingView />
           : shirts
-            ? <OtherUserCollectionView shirts={shirts} />
+            ? <OtherUserCollectionView shirts={shirts} ownerId={userId ?? ''} />
             : <Text className="text-red-500 text-lg font-medium text-center mt-8">Leider ist es aktuell nicht möglich, diese Sammlung zu laden. Bitte versuche es später nochmal.</Text>
       }
     </SafeAreaView>
