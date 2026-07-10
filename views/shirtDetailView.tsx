@@ -5,7 +5,7 @@ import convertSize from "@/utils/convertSize";
 import Ionicons from "@react-native-vector-icons/ionicons";
 import { Text, View } from "react-native";
 
-export default function ShirtDetailView({ handleDelete, handleEdit, shirt }: { handleDelete: () => void, handleEdit: () => void, shirt: Shirt }) {
+export default function ShirtDetailView({ handleDelete, handleEdit, shirt, likeCount = 0, likers = [] }: { handleDelete: () => void, handleEdit: () => void, shirt: Shirt, likeCount?: number, likers?: Liker[] }) {
   return (
     <View className="flex-1 p-4 mt-2">
       <ShirtImage
@@ -18,7 +18,15 @@ export default function ShirtDetailView({ handleDelete, handleEdit, shirt }: { h
       </View>
       <View className="flex-row items-center py-4 px-6 mx-2 rounded-lg border border-dark-border">
         <Ionicons name="heart" color='rgb(141, 157, 180)' size={24} />
-        <Text className="font-LexendMedium text-base text-white/70 ml-4">Geliked von <Text className="font-bold">Jonas</Text> und 127 Anderen</Text>
+        <Text className="font-LexendMedium text-base text-white/70 ml-4">
+          {
+            likeCount === 0
+              ? 'Noch keine Likes'
+              : likers.length > 0
+                ? <>Geliked von <Text className="font-bold">{likers[0].username}</Text>{likeCount > 1 ? ` und ${likeCount - 1} ${likeCount - 1 === 1 ? 'Anderem' : 'Anderen'}` : ''}</>
+                : `${likeCount} Likes`
+          }
+        </Text>
       </View>
       <View className="flex-row flex-wrap items-center justify-start px-4 my-6 gap-x-[5%] gap-y-2">
         {shirt.value && <DetailBox
