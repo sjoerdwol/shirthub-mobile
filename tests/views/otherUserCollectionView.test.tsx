@@ -7,29 +7,36 @@ const mockShirtWithoutSize = mockData.shirtWithoutSize as unknown as Shirt;
 
 jest.mock('@/components/shirtDisplay/shirtDisplayVertical', () => {
   const { Text, View } = require('react-native');
-  return ({ shirt, readOnly }: { shirt: Shirt; readOnly?: boolean }) => (
+  return ({ shirt, readOnly, friendOwnerId }: { shirt: Shirt; readOnly?: boolean; friendOwnerId?: string }) => (
     <View>
       <Text testID={`shirt_item_${shirt.id}`}>{shirt.team}</Text>
       <Text testID={`read_only_${shirt.id}`}>{String(!!readOnly)}</Text>
+      <Text testID={`owner_${shirt.id}`}>{friendOwnerId}</Text>
     </View>
   );
 });
 
 it('renders all shirts in the list', () => {
-  render(<OtherUserCollectionView shirts={[mockShirt, mockShirtWithoutSize]} />);
+  render(<OtherUserCollectionView shirts={[mockShirt, mockShirtWithoutSize]} ownerId="user-1" />);
 
   expect(screen.getByText('FC Bayern München')).toBeVisible();
   expect(screen.getByText('Borussia Dortmund')).toBeVisible();
 });
 
 it('renders the shirt cards in read-only mode', () => {
-  render(<OtherUserCollectionView shirts={[mockShirt]} />);
+  render(<OtherUserCollectionView shirts={[mockShirt]} ownerId="user-1" />);
 
   expect(screen.getByTestId(`read_only_${mockShirt.id}`)).toHaveTextContent('true');
 });
 
+it('passes the owner id to each shirt card so it can open the friend detail view', () => {
+  render(<OtherUserCollectionView shirts={[mockShirt]} ownerId="user-1" />);
+
+  expect(screen.getByTestId(`owner_${mockShirt.id}`)).toHaveTextContent('user-1');
+});
+
 it('renders an empty-state message when there are no shirts', () => {
-  render(<OtherUserCollectionView shirts={[]} />);
+  render(<OtherUserCollectionView shirts={[]} ownerId="user-1" />);
 
   expect(screen.getByText(/noch keine Trikots/)).toBeVisible();
 });

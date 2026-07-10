@@ -69,6 +69,41 @@ it('does not render optional detail boxes when fields are null', () => {
   expect(screen.queryByText('Nummer')).toBeNull();
 });
 
+it('shows a no-likes message when the shirt has no likes', () => {
+  render(<ShirtDetailView handleDelete={jest.fn()} handleEdit={jest.fn()} shirt={mockShirt} />);
+
+  expect(screen.getByText('Noch keine Likes')).toBeVisible();
+});
+
+it('shows the first liker and the remaining count when there are multiple likes', () => {
+  const likers = [{ ownerId: 'u1', username: 'Jonas', avatarUrl: null }];
+  render(
+    <ShirtDetailView handleDelete={jest.fn()} handleEdit={jest.fn()} shirt={mockShirt} likeCount={128} likers={likers} />
+  );
+
+  expect(screen.getByText(/Geliked von/)).toBeVisible();
+  expect(screen.getByText('Jonas')).toBeVisible();
+  expect(screen.getByText(/und 127 Anderen/)).toBeVisible();
+});
+
+it('shows only the liker name when there is exactly one like', () => {
+  const likers = [{ ownerId: 'u1', username: 'Jonas', avatarUrl: null }];
+  render(
+    <ShirtDetailView handleDelete={jest.fn()} handleEdit={jest.fn()} shirt={mockShirt} likeCount={1} likers={likers} />
+  );
+
+  expect(screen.getByText('Jonas')).toBeVisible();
+  expect(screen.queryByText(/Anderen/)).toBeNull();
+});
+
+it('falls back to a like count when no liker profiles are available', () => {
+  render(
+    <ShirtDetailView handleDelete={jest.fn()} handleEdit={jest.fn()} shirt={mockShirt} likeCount={5} likers={[]} />
+  );
+
+  expect(screen.getByText('5 Likes')).toBeVisible();
+});
+
 it('calls handleEdit when pencil button is pressed', () => {
   const mockHandleEdit = jest.fn();
   render(<ShirtDetailView handleDelete={jest.fn()} handleEdit={mockHandleEdit} shirt={mockShirt} />);

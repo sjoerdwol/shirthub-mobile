@@ -1,5 +1,6 @@
 import ShirtDetails from "@/app/shirts/[id]";
 import { useAuth } from "@/contexts/authContext";
+import { getOwnShirtDetail } from "@/services/shirthub_crud";
 import { useShirtStore } from "@/stores/shirtStore";
 import { useUserStatisticsStore } from "@/stores/statisticsStore";
 import { handleShirtDeletion } from "@/utils/handleShirtOperations";
@@ -15,6 +16,7 @@ const mockBack = jest.fn();
 const mockNavigate = jest.fn();
 
 jest.mock('@/contexts/authContext', () => ({ useAuth: jest.fn() }));
+jest.mock('@/services/shirthub_crud', () => ({ getOwnShirtDetail: jest.fn() }));
 jest.mock('@/stores/shirtStore', () => ({ useShirtStore: jest.fn() }));
 jest.mock('@/stores/statisticsStore', () => ({ useUserStatisticsStore: jest.fn() }));
 jest.mock('@/utils/handleShirtOperations', () => ({ handleShirtDeletion: jest.fn() }));
@@ -37,6 +39,7 @@ jest.mock('@/views/shirtDetailView', () => {
 beforeEach(() => {
   jest.clearAllMocks();
   (handleShirtDeletion as jest.Mock).mockResolvedValue(undefined);
+  (getOwnShirtDetail as jest.Mock).mockResolvedValue({ likeCount: 0, likers: [] });
 
   const { router, useLocalSearchParams } = require('expo-router');
   router.back = mockBack;

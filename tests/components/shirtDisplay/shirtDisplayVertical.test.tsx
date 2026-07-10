@@ -68,3 +68,11 @@ it('does not navigate on press when readOnly', () => {
 
   expect(mockNavigate).not.toHaveBeenCalled();
 });
+
+it('navigates to the friend shirt detail when a friendOwnerId is given', () => {
+  render(<ShirtDisplayVertical readOnly friendOwnerId="user-1" shirt={mockShirt} />);
+
+  fireEvent.press(screen.getByText('FC Bayern München'));
+
+  expect(mockNavigate).toHaveBeenCalledWith(`/users/user-1/shirts/${mockShirt.id}`);
+});
