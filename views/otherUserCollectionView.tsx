@@ -13,7 +13,7 @@ export default function OtherUserCollectionView({ shirts, ownerId }: { shirts: S
         data={shirts}
         keyExtractor={(_, index) => index.toString()}
         renderItem={({ item }) => (
-          <ShirtDisplayVertical readOnly friendOwnerId={ownerId} shirt={item} />
+          <ShirtDisplayVertical friendOwnerId={ownerId} shirt={item} />
         )}
         showsVerticalScrollIndicator={true}
         contentContainerStyle={{ gap: 14 }}
