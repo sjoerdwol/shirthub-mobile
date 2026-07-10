@@ -36,6 +36,7 @@ const Root = () => {
         <Stack.Screen name="settings" />
         <Stack.Screen name="users/[id]/index" />
         <Stack.Screen name="users/[id]/collection" />
+        <Stack.Screen name="users/[id]/shirts/[shirtId]" />
         <Stack.Screen name="users/[id]/statistics" />
       </Stack.Protected>
       <Stack.Protected guard={!session}>
