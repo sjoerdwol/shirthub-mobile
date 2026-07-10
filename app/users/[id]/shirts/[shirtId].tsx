@@ -6,7 +6,7 @@ import OtherUserShirtDetailView from "@/views/otherUserShirtDetailView";
 import Ionicons from "@react-native-vector-icons/ionicons";
 import { router, useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
-import { Pressable, Text, View } from "react-native";
+import { Alert, Pressable, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function FriendShirtDetails() {
@@ -26,7 +26,8 @@ export default function FriendShirtDetails() {
 
   useEffect(() => {
     if (!session || !userId || !currentShirtId) {
-      setLoading(false);
+      const setLoadingFalse = async () => setLoading(false);
+      setLoadingFalse();
       return;
     }
 
@@ -54,7 +55,7 @@ export default function FriendShirtDetails() {
       const likeState = await setShirtLike(session, currentShirtId, !shirt.likedByMe);
       setShirt({ ...shirt, ...likeState });
     } catch {
-      // Keep the previous like state when the request fails.
+      Alert.alert("Fehler", "Der Like konnte nicht gespeichert werden. Bitte versuche es erneut.");
     } finally {
       setLiking(false);
     }

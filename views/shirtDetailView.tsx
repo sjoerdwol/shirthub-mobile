@@ -23,7 +23,7 @@ export default function ShirtDetailView({ handleDelete, handleEdit, shirt, likeC
             likeCount === 0
               ? 'Noch keine Likes'
               : likers.length > 0
-                ? <>Geliked von <Text className="font-bold">{likers[0].username}</Text>{likeCount > 1 ? ` und ${likeCount - 1} ${likeCount - 1 === 1 ? 'Anderem' : 'Anderen'}` : ''}</>
+                ? <>Geliked von <Text className="font-bold">{likers[0].username}</Text>{likeCount > 1 ? ` und ${likeCount - 1} Anderen` : ''}</>
                 : `${likeCount} Likes`
           }
         </Text>

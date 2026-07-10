@@ -15,7 +15,7 @@ export default function convertSize(sizeShort: string): string {
       sizeLong = 'Large';
       break;
     case 'XL':
-      sizeLong = 'Extra Large';
+      sizeLong = 'X-Large';
       break;
     default:
       sizeLong = sizeShort;
