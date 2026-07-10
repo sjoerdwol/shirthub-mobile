@@ -1,19 +1,19 @@
 interface Shirt {
   id: string;
   team: string;
-  teamKey: string;
-  leagueKey: string;
+  team_key: string;
+  league_key: string;
   season: string;
   type: string;
   condition: number;
-  printName: string | null;
-  printNumber: number | null;
+  print_name: string | null;
+  print_number: number | null;
   size: string | null;
   value: number | null;
   imageSrc: string;
-  isFavorite: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  is_favorite: boolean;
+  created_at: Date;
+  updated_at: Date;
 }
 
 interface ShirtState {
